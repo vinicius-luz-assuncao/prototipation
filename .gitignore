@@ -1,0 +1,14 @@
+# artefatos de build e QA locais
+_build/
+
+# PDF gerado a partir de index.html + print.css
+vem-apresentacao.pdf
+
+# python
+__pycache__/
+*.pyc
+
+# sistema
+.DS_Store
+Thumbs.db
+desktop.ini

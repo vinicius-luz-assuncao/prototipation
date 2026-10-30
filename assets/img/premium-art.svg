@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" fill="none" role="img" aria-label="Coroa do plano vem+">
+  <circle cx="160" cy="160" r="140" stroke="#F1E9DB" stroke-opacity=".16" stroke-width="2"/>
+  <circle cx="160" cy="160" r="104" stroke="#F1E9DB" stroke-opacity=".12" stroke-width="2"/>
+  <path d="M62 168l44-54 54 42 54-42 44 54-18 78H80l-18-78Z" stroke="#F5A23F" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M80 272h160" stroke="#F1E9DB" stroke-opacity=".5" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="106" cy="114" r="8" fill="#F1E9DB"/>
+  <circle cx="160" cy="156" r="8" fill="#E8542B"/>
+  <circle cx="214" cy="114" r="8" fill="#F1E9DB"/>
+  <path d="M252 78l4 12 12 4-12 4-4 12-4-12-12-4 12-4 4-12Z" fill="#F1E9DB" opacity=".8"/>
+  <path d="M54 236l3 9 9 3-9 3-3 9-3-9-9-3 9-3 3-9Z" fill="#F5A23F"/>
+</svg>

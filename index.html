@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>vem — protótipo, sistema e apresentação</title>
+  <meta name="description" content="vem: treino que encontra companhia. Protótipo navegável de 20 telas, design system editorial e GenUI com LUI.">
+  <meta name="theme-color" content="#f1e9db">
+  <link rel="icon" href="assets/img/logo.svg">
+  <link rel="stylesheet" href="assets/fonts/fonts.css?v=1">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=1">
+  <link rel="stylesheet" href="assets/css/base.css?v=1">
+  <link rel="stylesheet" href="assets/css/components.css?v=1">
+  <link rel="stylesheet" href="assets/css/site.css?v=7">
+  <link rel="stylesheet" href="assets/css/print.css?v=6" media="print">
+</head>
+<body class="site-page">
+
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header" id="topo">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="index.html" aria-label="vem — página inicial">
+        <img class="brand__logo" src="assets/img/logo.svg" alt="" width="40" height="40">
+        <span class="brand__text">
+          <strong>vem</strong>
+          <small>fitness + comunidade</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Seções da apresentação">
+        <a href="#conceito">Conceito</a>
+        <a href="#sistema">Sistema</a>
+        <a href="#jornada">Jornada</a>
+        <a href="#genui">GenUI</a>
+        <a href="#fluxo">Fluxo</a>
+        <a href="#telas">Telas</a>
+      </nav>
+
+      <a class="site-header__cta" href="app.html?tela=01">
+        Abrir protótipo
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- =====================================================================
+         Hero
+         ===================================================================== -->
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">
+            <span class="eyebrow__dot" aria-hidden="true"></span>
+            Produto digital · 2026
+          </p>
+
+          <h1 class="hero__title">Treino que <em>encontra</em> companhia.</h1>
+
+          <p class="hero__lead">
+            O vem conecta quem quer começar, voltar ou continuar a se mover.
+            Treinos que caibam na vida real e pessoas por perto — sem julgamento,
+            sem feed infinito, sem mais uma assinatura que não se usa.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="app.html?tela=01">
+              Explorar as 20 telas
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn--secondary btn--lg" href="#sistema">Ver o sistema</a>
+          </div>
+
+          <dl class="hero__stats">
+            <div>
+              <dt>Telas navegáveis</dt>
+              <dd>20</dd>
+            </div>
+            <div>
+              <dt>Abas fixas</dt>
+              <dd>05</dd>
+            </div>
+            <div>
+              <dt>Jornadas adaptativas</dt>
+              <dd>03</dd>
+            </div>
+            <div>
+              <dt>Alvo mínimo</dt>
+              <dd>48<small>px</small></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <span class="hero__halo"></span>
+          <span class="hero__arc"></span>
+
+          <div class="device device--hero">
+            <img src="assets/screens/s10.png" width="390" height="844" alt="">
+          </div>
+
+          <div class="float-card float-card--match">
+            <img class="float-card__avatar" src="assets/img/avatar.jpg" alt="" width="40" height="40">
+            <span class="float-card__body">
+              <strong>Marina, 28</strong>
+              <span>82% combinam · Pinheiros</span>
+            </span>
+          </div>
+
+          <div class="float-card float-card--ai">
+            <span class="float-card__label"><span class="float-card__spark"></span> LUI sugeriu</span>
+            <strong>Yoga para desacelerar</strong>
+            <span>20 min · em casa · nível leve</span>
+          </div>
+
+          <div class="float-card float-card--tag">
+            <span class="float-card__check">✓</span>
+            <span>Sugestão salva com seu ok</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__ticker" aria-hidden="true">
+        <div class="hero__ticker-track">
+          <span>treino</span><span>·</span><span>companhia</span><span>·</span><span>perto de você</span><span>·</span>
+          <span>treino</span><span>·</span><span>companhia</span><span>·</span><span>perto de você</span><span>·</span>
+          <span>treino</span><span>·</span><span>companhia</span><span>·</span><span>perto de você</span><span>·</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Conceito
+         ===================================================================== -->
+    <section class="section" id="conceito">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow">01 — Conceito</p>
+          <h2 class="section__title">Começar é fácil.<br>Continuar sozinho é que não.</h2>
+          <p class="section__lead">
+            O vem não é um app de treino com uma aba de amigos. É um app de companhia
+            em que o treino é o pretexto. A comunidade aparece no momento em que ela
+            resolve algo: a vontade de desistir.
+          </p>
+        </header>
+
+        <div class="concept">
+          <article class="concept__card concept__card--problem">
+            <span class="concept__num">01</span>
+            <h3>O problema</h3>
+            <p>
+              Academias lotadas no dia 2 e vazias no dia 30. Não é falta de informação:
+              é falta de vínculo, de tempo e de um lugar onde não se sinta observado.
+            </p>
+            <span class="concept__foot">Barreira de entrada</span>
+          </article>
+
+          <article class="concept__card concept__card--insight">
+            <span class="concept__num">02</span>
+            <h3>A virada</h3>
+            <p>
+              Companhia muda a relação com o treino. Quando alguém espera por você,
+              o compromisso deixa de ser uma meta distante e vira um encontro próximo.
+            </p>
+            <span class="concept__foot">Vínculo antes de performance</span>
+          </article>
+
+          <article class="concept__card concept__card--solution">
+            <span class="concept__num">03</span>
+            <h3>A proposta</h3>
+            <p>
+              Um app leve, editorial e caloroso. Sugere um treino, mostra quem está por
+              perto e deixa você decidir. O algoritmo propõe; a pessoa confirma.
+            </p>
+            <span class="concept__foot">Humano no controle</span>
+          </article>
+        </div>
+
+        <div class="principles">
+          <div class="principles__item">
+            <span class="principles__mark" aria-hidden="true">A</span>
+            <div>
+              <h4>Leve antes de completo</h4>
+              <p>Poucos campos, uma decisão por tela. O onboarding cabe em menos de dois minutos.</p>
+            </div>
+          </div>
+          <div class="principles__item">
+            <span class="principles__mark" aria-hidden="true">B</span>
+            <div>
+              <h4>Perto antes de perfeito</h4>
+              <p>Compatibilidade por rotina, nível e bairro — não por aparência ou performance.</p>
+            </div>
+          </div>
+          <div class="principles__item">
+            <span class="principles__mark" aria-hidden="true">C</span>
+            <div>
+              <h4>Humano antes de algoritmo</h4>
+              <p>Nenhuma sugestão é salva sem confirmação. Toda ação importante tem desfazer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Sistema
+         ===================================================================== -->
+    <section class="section section--paper" id="sistema">
+      <div class="wrap">
+        <header class="section__head section__head--split">
+          <div>
+            <p class="eyebrow">02 — Design system</p>
+            <h2 class="section__title">Papel quente,<br>tinta e energia.</h2>
+          </div>
+          <p class="section__lead section__lead--right">
+            A identidade nasce do design system editorial “Esporte como direito”:
+            fundo de papel, tipografia de revista e cor usada com intenção. No mobile,
+            a mesma linguagem ganha escala, toque e ritmo de 8 px.
+          </p>
+        </header>
+
+        <div class="system">
+          <article class="system__block">
+            <div class="system__label">
+              <span>Cor</span>
+              <small>8 cores nomeadas · tints para fundo · versões AA para texto</small>
+            </div>
+            <ul class="palette">
+              <li class="swatch" style="--swatch: #f1e9db; --swatch-ink: #1c2b44;">
+                <span class="swatch__chip"></span>
+                <span class="swatch__meta"><strong>Papel</strong><small>#F1E9DB</small></span>
+              </li>
+              <li class="swatch" style="--swatch: #1c2b44; --swatch-ink: #f1e9db;">
+                <span class="swatch__chip"></span>
+                <span class="swatch__meta"><strong>Tinta</strong><small>#1C2B44</small></span>
+              </li>
+              <li class="swatch" style="--swatch: #e8542b; --swatch-ink: #1c2b44;">
+                <span class="swatch__chip"></span>
+                <span class="swatch__meta"><strong>Vermelhão</strong><small>#E8542B</small></span>
+              </li>
+              <li class="swatch" style="--swatch: #f5a23f; --swatch-ink: #1c2b44;">
+                <span class="swatch__chip"></span>
+                <span class="swatch__meta"><strong>Âmbar</strong><small>#F5A23F</small></span>
+              </li>
+              <li class="swatch" style="--swatch: #4aa8d8; --swatch-ink: #1c2b44;">
+                <span class="swatch__chip"></span>
+                <span class="swatch__meta"><strong>Céu</strong><small>#4AA8D8</small></span>
+              </li>
+              <li class="swatch" style="--swatch: #8fc9b4; --swatch-ink: #1c2b44;">
+                <span class="swatch__chip"></span>
+                <span class="swatch__meta"><strong>Sálvia</strong><small>#8FC9B4</small></span>
+              </li>
+              <li class="swatch" style="--swatch: #c44e7c; --swatch-ink: #fcf8ef;">
+                <span class="swatch__chip"></span>
+                <span class="swatch__meta"><strong>Ameixa</strong><small>#C44E7C</small></span>
+              </li>
+              <li class="swatch" style="--swatch: #7a5994; --swatch-ink: #fcf8ef;">
+                <span class="swatch__chip"></span>
+                <span class="swatch__meta"><strong>Roxo</strong><small>#7A5994</small></span>
+              </li>
+            </ul>
+            <p class="system__note">
+              <strong>Regra:</strong> vermelhão só para energia e ação. Ameixa para exclusão e cuidado.
+              Roxo é do vem+. Nenhuma cor pura carrega texto pequeno sobre papel.
+            </p>
+          </article>
+
+          <article class="system__block">
+            <div class="system__label">
+              <span>Tipografia</span>
+              <small>4 famílias · 4 papéis · hierarquia fixa</small>
+            </div>
+            <div class="type">
+              <div class="type__row">
+                <div class="type__meta"><strong>Abril Fatface</strong><span>Display · títulos e números</span></div>
+                <p class="type__sample type__sample--display">Treino que encontra companhia.</p>
+              </div>
+              <div class="type__row">
+                <div class="type__meta"><strong>Oswald</strong><span>Rótulos · olho, seção, dados</span></div>
+                <p class="type__sample type__sample--label">INTENSIDADE · RITMO · PERTO DE VOCÊ</p>
+              </div>
+              <div class="type__row">
+                <div class="type__meta"><strong>Jost</strong><span>Interface · botões, abas, chips</span></div>
+                <p class="type__sample type__sample--ui">Encontrar companhia para treinar</p>
+              </div>
+              <div class="type__row">
+                <div class="type__meta"><strong>Nunito Sans</strong><span>Leitura · corpo, apoio, formulários</span></div>
+                <p class="type__sample type__sample--body">
+                  Um treino leve, perto de casa e com alguém que também está começando.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="system__block system__block--wide">
+            <div class="system__label">
+              <span>Espaçamento</span>
+              <small>Grade de 8 px · margem de 24 px · gutter de 16 px</small>
+            </div>
+            <ul class="spacing" aria-label="Escala de espaçamento em pixels">
+              <li style="--bar: 8px;"><span>8</span></li>
+              <li style="--bar: 16px;"><span>16</span></li>
+              <li style="--bar: 24px;"><span>24</span></li>
+              <li style="--bar: 32px;"><span>32</span></li>
+              <li style="--bar: 48px;"><span>48</span></li>
+              <li style="--bar: 64px;"><span>64</span></li>
+              <li style="--bar: 80px;"><span>80</span></li>
+            </ul>
+          </article>
+
+          <article class="system__block system__block--wide">
+            <div class="system__label">
+              <span>Componentes</span>
+              <small>Alvos de 48 px · estados visíveis · foco de teclado</small>
+            </div>
+            <div class="components">
+              <div class="components__group">
+                <span class="components__caption">Ações</span>
+                <div class="components__row">
+                  <button class="btn btn--primary" type="button">Ver treino</button>
+                  <button class="btn btn--secondary" type="button">Descartar</button>
+                  <button class="btn btn--ghost" type="button">Agora não</button>
+                </div>
+              </div>
+              <div class="components__group">
+                <span class="components__caption">Escolhas</span>
+                <div class="components__row">
+                  <button class="chip is-selected" type="button" aria-pressed="true">
+                    <span class="chip__glyph" aria-hidden="true">◉</span>
+                    Corrida
+                  </button>
+                  <button class="chip" type="button" aria-pressed="false">
+                    <span class="chip__glyph" aria-hidden="true">◯</span>
+                    Yoga
+                  </button>
+                  <button class="chip" type="button" aria-pressed="false">
+                    <span class="chip__glyph" aria-hidden="true">◯</span>
+                    Força
+                  </button>
+                </div>
+              </div>
+              <div class="components__group">
+                <span class="components__caption">Entrada</span>
+                <label class="input input--icon components__input">
+                  <span class="input__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" width="20" height="20" aria-hidden="true">
+                      <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"/>
+                      <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <input class="input__control" type="search" placeholder="Buscar atividade ou bairro" aria-label="Exemplo de busca">
+                </label>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Leis de UX
+         ===================================================================== -->
+    <section class="section" id="leis">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow">03 — Decisões</p>
+          <h2 class="section__title">Seis leis,<br>nenhuma decoração.</h2>
+          <p class="section__lead">
+            Cada escolha de interface responde a um comportamento real. As leis não
+            aparecem na tela — aparecem no tempo que a pessoa leva para agir.
+          </p>
+        </header>
+
+        <div class="laws">
+          <article class="law">
+            <span class="law__num">01</span>
+            <h3>Lei de Hick</h3>
+            <p>Poucas opções por tela. O onboarding pede o objetivo, depois os interesses — nunca tudo de uma vez.</p>
+            <span class="law__tag">Onboarding 05 · 06</span>
+          </article>
+          <article class="law">
+            <span class="law__num">02</span>
+            <h3>Lei de Fitts</h3>
+            <p>CTAs de 56 px na metade inferior, ao alcance do polegar. A ação primária nunca mora no topo.</p>
+            <span class="law__tag">Todas as telas</span>
+          </article>
+          <article class="law">
+            <span class="law__num">03</span>
+            <h3>Lei de Miller</h3>
+            <p>Cinco abas fixas, agrupadas por intenção: Início, Match, Social, Feed, Perfil.</p>
+            <span class="law__tag">Navegação 10–15</span>
+          </article>
+          <article class="law">
+            <span class="law__num">04</span>
+            <h3>Von Restorff</h3>
+            <p>O vermelhão é reservado a energia e ação. O resto do sistema vive no papel e na tinta.</p>
+            <span class="law__tag">Cor semântica</span>
+          </article>
+          <article class="law">
+            <span class="law__num">05</span>
+            <h3>Lei de Jakob</h3>
+            <p>Padrões que a pessoa já conhece: tabbar, voltar no topo, toasts com desfazer, folhas de ação.</p>
+            <span class="law__tag">Componentes</span>
+          </article>
+          <article class="law">
+            <span class="law__num">06</span>
+            <h3>Pico-fim</h3>
+            <p>O fim de cada fluxo celebra e devolve controle: confirmação clara, feedback e a opção de voltar atrás.</p>
+            <span class="law__tag">08 · 17 · GenUI</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Jornada adaptativa
+         ===================================================================== -->
+    <section class="section section--paper" id="jornada">
+      <div class="wrap">
+        <header class="section__head section__head--split">
+          <div>
+            <p class="eyebrow">04 — Jornada</p>
+            <h2 class="section__title">Três começos,<br>uma promessa.</h2>
+          </div>
+          <p class="section__lead section__lead--right">
+            A pergunta da tela 05 não é um formulário: é o ponto de ramificação.
+            O objetivo escolhido define a primeira tela depois do onboarding e o
+            card que a Home gera. A pessoa escolhe; o app se adapta.
+          </p>
+        </header>
+
+        <div class="journey">
+          <div class="journey__root">
+            <span class="journey__root-num">05</span>
+            <div class="journey__root-copy">
+              <strong>Qual o seu objetivo?</strong>
+              <span>Mesma tela, três primeiras telas possíveis.</span>
+            </div>
+            <span class="journey__root-split" aria-hidden="true">↳</span>
+          </div>
+
+          <div class="journey__paths">
+            <article class="jpath jpath--social">
+              <header class="jpath__head">
+                <span class="jpath__letter">A</span>
+                <h3>Se conectar</h3>
+              </header>
+              <p class="jpath__intent">Conhecer pessoas que treinam no mesmo ritmo.</p>
+              <ol class="jpath__flow" aria-label="Fluxo do caminho A">
+                <li>Objetivo</li>
+                <li>Match</li>
+                <li>Categorias</li>
+                <li>Feed</li>
+              </ol>
+              <p class="jpath__card">
+                <span class="jpath__label">Card da Home</span>
+                “Encontramos 3 pessoas com o mesmo interesse em Yoga. Quer ver?”
+              </p>
+              <a class="jpath__link" href="app.html?tela=05">Abrir no protótipo <span aria-hidden="true">→</span></a>
+            </article>
+
+            <article class="jpath jpath--self">
+              <header class="jpath__head">
+                <span class="jpath__letter">B</span>
+                <h3>Autocuidado</h3>
+              </header>
+              <p class="jpath__intent">Focar na própria evolução e na rotina.</p>
+              <ol class="jpath__flow" aria-label="Fluxo do caminho B">
+                <li>Objetivo</li>
+                <li>Perfil e métricas</li>
+                <li>Match</li>
+              </ol>
+              <p class="jpath__card">
+                <span class="jpath__label">Card da Home</span>
+                “Sua meta está em 60%. Sugerimos um treino rápido de 15 min.”
+              </p>
+              <a class="jpath__link" href="app.html?tela=05">Abrir no protótipo <span aria-hidden="true">→</span></a>
+            </article>
+
+            <article class="jpath jpath--events">
+              <header class="jpath__head">
+                <span class="jpath__letter">C</span>
+                <h3>Eventos e comunidade</h3>
+              </header>
+              <p class="jpath__intent">Participar de aulas, grupos e encontros.</p>
+              <ol class="jpath__flow" aria-label="Fluxo do caminho C">
+                <li>Objetivo</li>
+                <li>Feed de atividades</li>
+              </ol>
+              <p class="jpath__card">
+                <span class="jpath__label">Card da Home</span>
+                “Há um evento de corrida no seu bairro neste sábado. Quer se inscrever?”
+              </p>
+              <a class="jpath__link" href="app.html?tela=05">Abrir no protótipo <span aria-hidden="true">→</span></a>
+            </article>
+          </div>
+
+          <p class="journey__note">
+            <strong>Mesmo componente, outro conteúdo.</strong> O card da Home muda com a
+            jornada e continua editável pela LUI — a pessoa pode descartar e desfazer.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         GenUI
+         ===================================================================== -->
+    <section class="section section--ink" id="genui">
+      <div class="wrap genui">
+        <div class="genui__copy">
+          <p class="eyebrow eyebrow--light">05 — GenUI + LUI</p>
+          <h2 class="section__title section__title--light">Uma interface<br>que escuta antes<br>de mostrar.</h2>
+          <p class="genui__lead">
+            O card que abre a Home nasce da jornada escolhida na tela 05. Se a pessoa
+            escreve ou fala o que quer, o LUI refina a sugestão — e devolve um card
+            pronto para decidir. Nada é salvo sem confirmação.
+          </p>
+
+          <ol class="genui__steps">
+            <li>
+              <span class="genui__step-num">1</span>
+              <div>
+                <h3>Você fala</h3>
+                <p>“Quero yoga para aliviar o estresse.”</p>
+              </div>
+            </li>
+            <li>
+              <span class="genui__step-num">2</span>
+              <div>
+                <h3>O LUI rascunha</h3>
+                <p>Intenção, duração, lugar e intensidade viram uma sugestão editável.</p>
+              </div>
+            </li>
+            <li>
+              <span class="genui__step-num">3</span>
+              <div>
+                <h3>Você decide</h3>
+                <p>“Ver treino” ou “Descartar”. Se descartar, o desfazer fica disponível.</p>
+              </div>
+            </li>
+          </ol>
+
+          <p class="genui__note">
+            <strong>Pessoa no controle:</strong> o card gerado é uma proposta, não um compromisso.
+            Toda geração pode ser refeita, descartada ou desfeita.
+          </p>
+        </div>
+
+        <div class="genui__visual" aria-hidden="true">
+          <div class="device device--genui">
+            <img src="assets/screens/s10.png" width="390" height="844" alt="">
+          </div>
+
+          <div class="genui__bubble">
+            <span class="genui__bubble-label">Você</span>
+            <p>Quero yoga para aliviar o estresse</p>
+          </div>
+
+          <div class="genui__bubble genui__bubble--lui">
+            <span class="genui__bubble-label"><span class="float-card__spark"></span> LUI</span>
+            <p>Separei 20 minutos de yoga leve, em casa, para o fim do dia.</p>
+            <span class="genui__bubble-actions">
+              <span class="mini-btn mini-btn--solid">Ver treino</span>
+              <span class="mini-btn">Descartar</span>
+            </span>
+          </div>
+
+          <div class="genui__undo">
+            <span>Sugestão descartada</span>
+            <strong>Desfazer</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Fluxo
+         ===================================================================== -->
+    <section class="section section--paper" id="fluxo">
+      <div class="wrap">
+        <header class="section__head section__head--split">
+          <div>
+            <p class="eyebrow">06 — Arquitetura</p>
+            <h2 class="section__title">Do primeiro<br>“oi” ao hábito.</h2>
+          </div>
+          <p class="section__lead section__lead--right">
+            Três blocos, uma promessa. O onboarding reduz atrito, o app entrega o
+            ciclo principal e a conta sustenta confiança e continuidade.
+          </p>
+        </header>
+
+        <div class="flow">
+          <article class="flow__col flow__col--onboarding">
+            <header class="flow__head">
+              <span class="flow__kicker">Entrada</span>
+              <h3>Onboarding</h3>
+              <p>9 telas · sem cadastro longo</p>
+            </header>
+            <ol class="flow__list">
+              <li><a href="app.html?tela=01"><span>01</span> Boas-vindas</a></li>
+              <li><a href="app.html?tela=02"><span>02</span> Verificação</a></li>
+              <li><a href="app.html?tela=03"><span>03</span> Verificado</a></li>
+              <li><a href="app.html?tela=04"><span>04</span> Criar perfil</a></li>
+              <li><a href="app.html?tela=05"><span>05</span> Objetivo</a></li>
+              <li><a href="app.html?tela=06"><span>06</span> Interesses</a></li>
+              <li><a href="app.html?tela=07"><span>07</span> Senha</a></li>
+              <li><a href="app.html?tela=08"><span>08</span> Pronto</a></li>
+              <li><a href="app.html?tela=09"><span>09</span> Login</a></li>
+            </ol>
+          </article>
+
+          <span class="flow__arrow" aria-hidden="true">→</span>
+
+          <article class="flow__col flow__col--app">
+            <header class="flow__head">
+              <span class="flow__kicker">Ciclo principal</span>
+              <h3>App</h3>
+              <p>6 telas · 5 abas fixas</p>
+            </header>
+            <ol class="flow__list">
+              <li><a href="app.html?tela=10"><span>10</span> Início</a></li>
+              <li><a href="app.html?tela=12"><span>12</span> Match</a></li>
+              <li><a href="app.html?tela=13"><span>13</span> Atividades</a></li>
+              <li><a href="app.html?tela=14"><span>14</span> Social</a></li>
+              <li><a href="app.html?tela=15"><span>15</span> Feed</a></li>
+              <li><a href="app.html?tela=11"><span>11</span> Perfil</a></li>
+            </ol>
+          </article>
+
+          <span class="flow__arrow" aria-hidden="true">→</span>
+
+          <article class="flow__col flow__col--conta">
+            <header class="flow__head">
+              <span class="flow__kicker">Confiança</span>
+              <h3>Conta</h3>
+              <p>5 telas · controle e cuidado</p>
+            </header>
+            <ol class="flow__list">
+              <li><a href="app.html?tela=16"><span>16</span> vem+</a></li>
+              <li><a href="app.html?tela=17"><span>17</span> Feedback</a></li>
+              <li><a href="app.html?tela=18"><span>18</span> Sobre</a></li>
+              <li><a href="app.html?tela=19"><span>19</span> Configurações</a></li>
+              <li><a href="app.html?tela=20"><span>20</span> Notificações</a></li>
+            </ol>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Galeria
+         ===================================================================== -->
+    <section class="section" id="telas">
+      <div class="wrap">
+        <header class="section__head section__head--split">
+          <div>
+            <p class="eyebrow">07 — As 20 telas</p>
+            <h2 class="section__title">Cada tela,<br>um passo.</h2>
+          </div>
+          <p class="section__lead section__lead--right">
+            Capturas em 390 × 844. Clique em qualquer tela para abrir o protótipo
+            navegável naquele ponto do fluxo.
+          </p>
+        </header>
+
+        <div class="gallery__filters" role="group" aria-label="Filtrar telas">
+          <button class="filter is-active" type="button" data-gallery-filter="all" aria-pressed="true">
+            Todas <span>20</span>
+          </button>
+          <button class="filter" type="button" data-gallery-filter="onboarding" aria-pressed="false">
+            Onboarding <span>9</span>
+          </button>
+          <button class="filter" type="button" data-gallery-filter="app" aria-pressed="false">
+            App <span>6</span>
+          </button>
+          <button class="filter" type="button" data-gallery-filter="conta" aria-pressed="false">
+            Conta <span>5</span>
+          </button>
+        </div>
+
+        <div class="gallery">
+          <a class="shot" href="app.html?tela=01" data-group="onboarding">
+            <span class="shot__frame">
+              <img src="assets/screens/s01.png" width="390" height="844" alt="Tela 01 — Boas-vindas">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">01</span><span class="shot__title">Boas-vindas</span></span>
+            <span class="shot__desc">A promessa em uma tela: treino + companhia.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=02" data-group="onboarding">
+            <span class="shot__frame">
+              <img src="assets/screens/s02.png" width="390" height="844" alt="Tela 02 — Verificação">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">02</span><span class="shot__title">Verificação</span></span>
+            <span class="shot__desc">Código de 6 dígitos, sem cadastro longo.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=03" data-group="onboarding">
+            <span class="shot__frame">
+              <img src="assets/screens/s03.png" width="390" height="844" alt="Tela 03 — Verificado">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">03</span><span class="shot__title">Verificado</span></span>
+            <span class="shot__desc">Confirmação clara e próximo passo.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=04" data-group="onboarding">
+            <span class="shot__frame">
+              <img src="assets/screens/s04.png" width="390" height="844" alt="Tela 04 — Criar perfil">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">04</span><span class="shot__title">Criar perfil</span></span>
+            <span class="shot__desc">Três campos e uma foto. Só o essencial.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=05" data-group="onboarding">
+            <span class="shot__frame">
+              <img src="assets/screens/s05.png" width="390" height="844" alt="Tela 05 — Objetivo">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">05</span><span class="shot__title">Objetivo</span></span>
+            <span class="shot__desc">A decisão que ramifica jornada, card e próxima tela.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=06" data-group="onboarding">
+            <span class="shot__frame">
+              <img src="assets/screens/s06.png" width="390" height="844" alt="Tela 06 — Interesses">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">06</span><span class="shot__title">Interesses</span></span>
+            <span class="shot__desc">O que combina com o seu corpo e sua rotina.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=07" data-group="onboarding">
+            <span class="shot__frame">
+              <img src="assets/screens/s07.png" width="390" height="844" alt="Tela 07 — Senha">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">07</span><span class="shot__title">Senha</span></span>
+            <span class="shot__desc">Força e requisitos em tempo real.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=08" data-group="onboarding">
+            <span class="shot__frame">
+              <img src="assets/screens/s08.png" width="390" height="844" alt="Tela 08 — Pronto">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">08</span><span class="shot__title">Pronto</span></span>
+            <span class="shot__desc">Celebração e entrada no app.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=09" data-group="onboarding">
+            <span class="shot__frame">
+              <img src="assets/screens/s09.png" width="390" height="844" alt="Tela 09 — Login">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">09</span><span class="shot__title">Login</span></span>
+            <span class="shot__desc">Volta rápida para quem já tem conta.</span>
+          </a>
+
+          <a class="shot shot--feature" href="app.html?tela=10" data-group="app">
+            <span class="shot__frame">
+              <img src="assets/screens/s10.png" width="390" height="844" alt="Tela 10 — Início com card gerado pelo LUI">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">10</span><span class="shot__title">Início</span></span>
+            <span class="shot__desc">Card contextual + LUI + treino do dia.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=11" data-group="app">
+            <span class="shot__frame">
+              <img src="assets/screens/s11.png" width="390" height="844" alt="Tela 11 — Perfil">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">11</span><span class="shot__title">Perfil</span></span>
+            <span class="shot__desc">Progresso, constância e preferências.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=12" data-group="app">
+            <span class="shot__frame">
+              <img src="assets/screens/s12.png" width="390" height="844" alt="Tela 12 — Match">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">12</span><span class="shot__title">Match</span></span>
+            <span class="shot__desc">Pessoas por perto, com compatibilidade explicada.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=13" data-group="app">
+            <span class="shot__frame">
+              <img src="assets/screens/s13.png" width="390" height="844" alt="Tela 13 — Atividades">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">13</span><span class="shot__title">Atividades</span></span>
+            <span class="shot__desc">Busca, filtros e companhia para treinar.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=14" data-group="app">
+            <span class="shot__frame">
+              <img src="assets/screens/s14.png" width="390" height="844" alt="Tela 14 — Social">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">14</span><span class="shot__title">Social</span></span>
+            <span class="shot__desc">Conexões e grupos com contexto.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=15" data-group="app">
+            <span class="shot__frame">
+              <img src="assets/screens/s15.png" width="390" height="844" alt="Tela 15 — Feed">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">15</span><span class="shot__title">Feed</span></span>
+            <span class="shot__desc">Histórias reais, sem métricas vazias.</span>
+          </a>
+
+          <a class="shot shot--premium" href="app.html?tela=16" data-group="conta">
+            <span class="shot__frame">
+              <img src="assets/screens/s16.png" width="390" height="844" alt="Tela 16 — vem+">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">16</span><span class="shot__title">vem+</span></span>
+            <span class="shot__desc">Premium com preço claro e âncora anual.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=17" data-group="conta">
+            <span class="shot__frame">
+              <img src="assets/screens/s17.png" width="390" height="844" alt="Tela 17 — Feedback">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">17</span><span class="shot__title">Feedback</span></span>
+            <span class="shot__desc">Uma pergunta, cinco respostas, obrigado.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=18" data-group="conta">
+            <span class="shot__frame">
+              <img src="assets/screens/s18.png" width="390" height="844" alt="Tela 18 — Sobre">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">18</span><span class="shot__title">Sobre</span></span>
+            <span class="shot__desc">O que é o vem e no que acredita.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=19" data-group="conta">
+            <span class="shot__frame">
+              <img src="assets/screens/s19.png" width="390" height="844" alt="Tela 19 — Configurações">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">19</span><span class="shot__title">Configurações</span></span>
+            <span class="shot__desc">Conta, privacidade e acessibilidade.</span>
+          </a>
+
+          <a class="shot" href="app.html?tela=20" data-group="conta">
+            <span class="shot__frame">
+              <img src="assets/screens/s20.png" width="390" height="844" alt="Tela 20 — Notificações">
+              <span class="shot__open">Abrir tela ↗</span>
+            </span>
+            <span class="shot__meta"><span class="shot__num">20</span><span class="shot__title">Notificações</span></span>
+            <span class="shot__desc">Controle granular, sem sequestrar atenção.</span>
+          </a>
+        </div>
+
+        <p class="gallery__empty" hidden>Nenhuma tela neste grupo.</p>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Craft / acessibilidade
+         ===================================================================== -->
+    <section class="section section--craft" id="craft">
+      <div class="wrap">
+        <header class="section__head section__head--split">
+          <div>
+            <p class="eyebrow">08 — Acabamento</p>
+            <h2 class="section__title">O detalhe<br>que não se vê.</h2>
+          </div>
+          <p class="section__lead section__lead--right">
+            Um protótipo de alta fidelidade também precisa se comportar como produto.
+            Estas são as regras que sustentam a sensação de cuidado.
+          </p>
+        </header>
+
+        <div class="craft">
+          <article class="craft__item">
+            <span class="craft__figure">8<small>px</small></span>
+            <h3>Grade de ritmo</h3>
+            <p>Todo espaçamento é múltiplo de 8. O respiro é consistente em todas as 20 telas.</p>
+          </article>
+          <article class="craft__item">
+            <span class="craft__figure">48<small>px</small></span>
+            <h3>Toque sem erro</h3>
+            <p>Nenhum alvo interativo abaixo de 48 × 48 px. Botões principais têm 56 px.</p>
+          </article>
+          <article class="craft__item">
+            <span class="craft__figure">AA</span>
+            <h3>Contraste real</h3>
+            <p>Texto pequeno usa versões escuras das cores. Cor pura nunca carrega leitura.</p>
+          </article>
+          <article class="craft__item">
+            <span class="craft__figure">0</span>
+            <h3>Zero internet</h3>
+            <p>Fontes, ícones, capas e ilustrações são locais. O protótipo abre offline.</p>
+          </article>
+          <article class="craft__item">
+            <span class="craft__figure">↺</span>
+            <h3>Movimento discreto</h3>
+            <p>Transições curtas e respeito a <code>prefers-reduced-motion</code>.</p>
+          </article>
+          <article class="craft__item">
+            <span class="craft__figure">PT</span>
+            <h3>Voz em português</h3>
+            <p>Copy real, sem lorem ipsum. Tom direto, acolhedor e sem promessa milagrosa.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         CTA final
+         ===================================================================== -->
+    <section class="closing">
+      <div class="wrap closing__inner">
+        <div>
+          <p class="eyebrow">Protótipo navegável</p>
+          <h2 class="closing__title">O treino pode<br>começar agora.</h2>
+          <p class="closing__text">
+            Abra o app, percorra o onboarding, gere uma sugestão com o LUI e encontre
+            alguém para treinar. Tudo funciona no navegador, sem build.
+          </p>
+        </div>
+        <div class="closing__actions">
+          <a class="btn btn--premium btn--lg" href="app.html?tela=01">
+            Entrar no protótipo
+            <span aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn--light btn--lg" href="#telas">Rever as telas</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <div class="site-footer__brand">
+        <img src="assets/img/logo.svg" alt="" width="32" height="32">
+        <div>
+          <strong>vem</strong>
+          <span>Treino que encontra companhia.</span>
+        </div>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Links do projeto">
+        <a href="app.html?tela=01">Protótipo</a>
+        <a href="#sistema">Sistema</a>
+        <a href="DESIGN_SYSTEM.md">Documento</a>
+        <a href="#topo">Voltar ao topo ↑</a>
+      </nav>
+
+      <p class="site-footer__note">
+        Protótipo de alta fidelidade · HTML, CSS e JS puro · 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* Filtro da galeria -------------------------------------------------- */
+      var filters = Array.prototype.slice.call(document.querySelectorAll("[data-gallery-filter]"));
+      var shots = Array.prototype.slice.call(document.querySelectorAll(".shot"));
+      var empty = document.querySelector(".gallery__empty");
+
+      filters.forEach(function (button) {
+        button.addEventListener("click", function () {
+          var group = button.getAttribute("data-gallery-filter");
+
+          filters.forEach(function (other) {
+            var active = other === button;
+            other.classList.toggle("is-active", active);
+            other.setAttribute("aria-pressed", active ? "true" : "false");
+          });
+
+          var visible = 0;
+          shots.forEach(function (shot) {
+            var show = group === "all" || shot.getAttribute("data-group") === group;
+            shot.hidden = !show;
+            if (show) visible += 1;
+          });
+
+          if (empty) empty.hidden = visible > 0;
+        });
+      });
+
+      /* Seção ativa no menu ------------------------------------------------ */
+      var links = Array.prototype.slice.call(document.querySelectorAll(".site-nav a"));
+      var sections = links
+        .map(function (link) {
+          return document.querySelector(link.getAttribute("href"));
+        })
+        .filter(Boolean);
+
+      if ("IntersectionObserver" in window && sections.length) {
+        var spy = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              links.forEach(function (link) {
+                var match = link.getAttribute("href") === "#" + entry.target.id;
+                link.classList.toggle("is-active", match);
+                if (match) link.setAttribute("aria-current", "true");
+                else link.removeAttribute("aria-current");
+              });
+            });
+          },
+          { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+        );
+        sections.forEach(function (section) {
+          spy.observe(section);
+        });
+      }
+
+      /* Header condensado -------------------------------------------------- */
+      var header = document.querySelector(".site-header");
+      function onScroll() {
+        if (header) header.classList.toggle("is-scrolled", window.scrollY > 24);
+        if (window.scrollY < 240) {
+          links.forEach(function (link) {
+            link.classList.remove("is-active");
+            link.removeAttribute("aria-current");
+          });
+        }
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>

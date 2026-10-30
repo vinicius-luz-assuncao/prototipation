@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>vem — protótipo navegável</title>
+  <meta name="description" content="Protótipo de alta fidelidade do vem, app de fitness e conexões. 20 telas, GenUI e design system editorial.">
+  <link rel="icon" href="assets/img/logo.svg">
+  <link rel="stylesheet" href="assets/fonts/fonts.css?v=2">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=2">
+  <link rel="stylesheet" href="assets/css/base.css?v=2">
+  <link rel="stylesheet" href="assets/css/components.css?v=2">
+  <link rel="stylesheet" href="assets/css/screens.css?v=3">
+</head>
+<body class="app-page">
+
+  <div class="stage">
+    <aside class="rail" aria-label="Mapa de telas">
+      <a class="rail__brand" href="index.html">
+        <img src="assets/img/logo.svg" alt="" class="rail__logo">
+        <span class="rail__brand-text">
+          <strong>vem</strong>
+          <small>protótipo · 20 telas</small>
+        </span>
+      </a>
+
+      <nav class="rail__nav" aria-label="Ir para tela">
+        <div class="rail__group">
+          <p class="rail__label">Onboarding</p>
+          <button class="rail__item" data-nav="01"><span class="rail__num">01</span>Boas-vindas</button>
+          <button class="rail__item" data-nav="02"><span class="rail__num">02</span>Verificação</button>
+          <button class="rail__item" data-nav="03"><span class="rail__num">03</span>Verificado</button>
+          <button class="rail__item" data-nav="04"><span class="rail__num">04</span>Criar perfil</button>
+          <button class="rail__item" data-nav="05"><span class="rail__num">05</span>Objetivo</button>
+          <button class="rail__item" data-nav="06"><span class="rail__num">06</span>Interesses</button>
+          <button class="rail__item" data-nav="07"><span class="rail__num">07</span>Senha</button>
+          <button class="rail__item" data-nav="08"><span class="rail__num">08</span>Pronto</button>
+          <button class="rail__item" data-nav="09"><span class="rail__num">09</span>Login</button>
+        </div>
+        <div class="rail__group">
+          <p class="rail__label">App</p>
+          <button class="rail__item" data-nav="10"><span class="rail__num">10</span>Início</button>
+          <button class="rail__item" data-nav="11"><span class="rail__num">11</span>Perfil</button>
+          <button class="rail__item" data-nav="12"><span class="rail__num">12</span>Match</button>
+          <button class="rail__item" data-nav="13"><span class="rail__num">13</span>Atividades</button>
+          <button class="rail__item" data-nav="14"><span class="rail__num">14</span>Social</button>
+          <button class="rail__item" data-nav="15"><span class="rail__num">15</span>Feed</button>
+        </div>
+        <div class="rail__group">
+          <p class="rail__label">Sistema</p>
+          <button class="rail__item" data-nav="16"><span class="rail__num">16</span>vem+</button>
+          <button class="rail__item" data-nav="17"><span class="rail__num">17</span>Feedback</button>
+          <button class="rail__item" data-nav="18"><span class="rail__num">18</span>Sobre</button>
+          <button class="rail__item" data-nav="19"><span class="rail__num">19</span>Configurações</button>
+          <button class="rail__item" data-nav="20"><span class="rail__num">20</span>Notificações</button>
+        </div>
+      </nav>
+
+      <div class="rail__foot">
+        <p class="rail__hint">Grid de 8px · botões de 48px · toque na metade inferior</p>
+        <a class="rail__link" href="index.html">Apresentação do projeto <span aria-hidden="true">→</span></a>
+      </div>
+    </aside>
+
+    <main class="stage__device">
+      <div class="device" id="device">
+        <div class="device__screen" id="app">
+
+          <div class="statusbar" aria-hidden="true">
+            <span>9:41</span>
+            <div class="statusbar__right">
+              <span class="sb-signal"><i></i><i></i><i></i><i></i></span>
+              <span data-icon="wifi"></span>
+              <span class="sb-battery"></span>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               01 · SPLASH / BOAS-VINDAS
+               ============================================================ -->
+          <section class="screen screen--splash is-active" data-screen="01" data-title="Boas-vindas">
+            <div class="screen__scroll">
+              <div class="splash">
+                <div class="splash__brand">
+                  <img class="splash__mark" src="assets/img/logo.svg" alt="">
+                  <span class="eyebrow">Para quem se move</span>
+                </div>
+
+                <div class="splash__hero">
+                  <img src="assets/img/illustration-splash.svg" alt="Ilustração editorial de duas pessoas se encontrando para treinar">
+                </div>
+
+                <div class="splash__copy">
+                  <h1 class="splash__wordmark">vem<i aria-hidden="true"></i></h1>
+                  <p class="splash__tagline">Treino que encontra companhia.</p>
+                </div>
+
+                <div class="splash__actions">
+                  <button class="btn btn--primary btn--lg btn--block" data-nav="02">Começar</button>
+                  <button class="btn btn--text btn--block" data-nav="09">Já tem conta? Entrar</button>
+                </div>
+
+                <p class="splash__legal">
+                  Ao continuar, você concorda com os <a href="#" data-toast="Termos de uso — documento da versão final.">Termos</a>
+                  e a <a href="#" data-toast="Política de Privacidade — documento da versão final.">Política de Privacidade</a>.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               02 · VERIFICAÇÃO SOCIAL
+               ============================================================ -->
+          <section class="screen" data-screen="02" data-title="Verificação">
+            <header class="topbar">
+              <button class="iconbtn" data-back="01" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Verificação</span>
+            </header>
+
+            <div class="screen__scroll">
+              <p class="eyebrow">Comunidade segura</p>
+              <h1 class="h1 mt-1">Confirme que é você</h1>
+
+              <div class="verify__visual">
+                <div class="verify__ring" aria-hidden="true"></div>
+                <div class="verify__ring verify__ring--inner" aria-hidden="true"></div>
+                <div class="verify__scan">
+                  <img src="assets/img/illustration-scan.svg" alt="Retrato abstrato sendo escaneado">
+                  <span class="verify__line" aria-hidden="true"></span>
+                </div>
+                <div class="verify__corners" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                <span class="verify__seal"><span data-icon="shield-check"></span></span>
+              </div>
+
+              <p class="lede">Uma selfie rápida mantém o vem seguro para todo mundo. Sua foto é usada só na verificação e nunca aparece no seu perfil.</p>
+
+              <div class="note mt-2">
+                <span data-icon="lock"></span>
+                <span>A verificação acontece no seu celular. Nenhuma imagem é compartilhada com outras pessoas.</span>
+              </div>
+            </div>
+
+            <footer class="foot">
+              <button class="btn btn--primary btn--lg btn--block" data-nav="03">Iniciar verificação</button>
+              <button class="btn btn--text btn--block" data-nav="04">Fazer depois</button>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               03 · VERIFICAÇÃO CONCLUÍDA
+               ============================================================ -->
+          <section class="screen" data-screen="03" data-title="Verificado">
+            <div class="screen__scroll pad-status">
+              <div class="success">
+                <div class="success__art" aria-hidden="true">
+                  <span class="success__disc"></span>
+                  <span class="success__disc success__disc--ring"></span>
+                  <span class="success__check"><span data-icon="check"></span></span>
+                  <span class="confetti confetti--1"></span>
+                  <span class="confetti confetti--2"></span>
+                  <span class="confetti confetti--3"></span>
+                  <span class="confetti confetti--4"></span>
+                </div>
+
+                <h1 class="h1 success__title">Verificação concluída</h1>
+                <p class="lede success__text">Tudo certo, Ana. Agora a comunidade sabe que você é você — e você pode focar no que importa.</p>
+
+                <div class="success__card">
+                  <span class="circle circle--sage"><span data-icon="verified"></span></span>
+                  <div>
+                    <p class="h3">Selo verificado</p>
+                    <p class="tiny">Visível no seu perfil e nos seus matches.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <footer class="foot">
+              <button class="btn btn--primary btn--lg btn--block" data-nav="04">Continuar</button>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               04 · CRIAR PERFIL
+               ============================================================ -->
+          <section class="screen" data-screen="04" data-title="Criar perfil">
+            <header class="topbar">
+              <button class="iconbtn" data-back="03" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Criar perfil</span>
+            </header>
+
+            <div class="screen__scroll">
+              <div class="steps">
+                <span class="steps__label">Etapa 1 de 4</span>
+                <span class="steps__count">Dados pessoais</span>
+              </div>
+              <div class="progress"><div class="progress__bar" style="width:25%"></div></div>
+
+              <div class="avatar-upload">
+                <div class="avatar">
+                  <img id="pf-avatar" src="assets/img/avatar.jpg" alt="Sua foto de perfil">
+                </div>
+                <button class="avatar-upload__btn" id="avatar-btn" type="button" aria-label="Escolher foto de perfil">
+                  <span data-icon="camera"></span>
+                </button>
+                <input type="file" id="avatar-input" accept="image/*" hidden>
+              </div>
+
+              <h1 class="h1">Vamos nos conhecer</h1>
+              <p class="lede mt-1">Como podemos te chamar no app? Você pode mudar isso depois.</p>
+
+              <form class="form-stack" id="profile-form" novalidate>
+                <div class="field">
+                  <label class="field__label" for="pf-name">Nome completo</label>
+                  <div class="input input--icon">
+                    <span class="input__icon"><span data-icon="user"></span></span>
+                    <input class="input__control" id="pf-name" name="name" type="text" placeholder="Ana Beatriz Luz" autocomplete="name">
+                  </div>
+                  <span class="field__error"><span data-icon="x"></span> Digite seu nome completo.</span>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="pf-email">E-mail</label>
+                  <div class="input input--icon">
+                    <span class="input__icon"><span data-icon="mail"></span></span>
+                    <input class="input__control" id="pf-email" name="email" type="email" placeholder="voce@email.com" autocomplete="email" inputmode="email">
+                  </div>
+                  <span class="field__error"><span data-icon="x"></span> Digite um e-mail válido.</span>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="pf-birth">Data de nascimento</label>
+                  <div class="input input--icon">
+                    <span class="input__icon"><span data-icon="calendar"></span></span>
+                    <input class="input__control" id="pf-birth" name="birth" type="text" placeholder="dd/mm/aaaa" inputmode="numeric" autocomplete="bday">
+                  </div>
+                  <span class="field__hint">Usamos sua idade para sugerir treinos e pessoas na sua faixa.</span>
+                  <span class="field__error"><span data-icon="x"></span> Use uma data válida para maiores de 13 anos.</span>
+                </div>
+              </form>
+            </div>
+
+            <footer class="foot">
+              <button class="btn btn--primary btn--lg btn--block" id="profile-continue" data-nav="05" disabled>Continuar</button>
+              <p class="foot__note">Leva menos de 1 minuto.</p>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               05 · OBJETIVO
+               ============================================================ -->
+          <section class="screen" data-screen="05" data-title="Objetivo">
+            <header class="topbar">
+              <button class="iconbtn" data-back="04" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Objetivo</span>
+            </header>
+
+            <div class="screen__scroll">
+              <div class="steps">
+                <span class="steps__label">Etapa 2 de 4</span>
+                <span class="steps__count">Objetivo</span>
+              </div>
+              <div class="progress"><div class="progress__bar" style="width:50%"></div></div>
+
+              <div class="choice__head mt-3">
+                <h1 class="h1">Qual o seu objetivo?</h1>
+                <p class="lede mt-1">Escolha o que mais combina com este momento. A partir daqui, o app adapta a ordem das telas e as sugestões.</p>
+              </div>
+
+              <div class="path-list" role="group" aria-label="Objetivo">
+                <button class="path-card" type="button" aria-pressed="false" data-path="social">
+                  <span class="path-card__icon circle circle--plum"><span data-icon="users"></span></span>
+                  <span class="path-card__body">
+                    <span class="path-card__title">Se conectar</span>
+                    <span class="path-card__text">Conhecer pessoas que treinam no mesmo ritmo e lugar que você.</span>
+                  </span>
+                  <span class="path-card__check"><span data-icon="check"></span></span>
+                </button>
+
+                <button class="path-card" type="button" aria-pressed="false" data-path="self">
+                  <span class="path-card__icon circle circle--sage"><span data-icon="activity"></span></span>
+                  <span class="path-card__body">
+                    <span class="path-card__title">Autocuidado</span>
+                    <span class="path-card__text">Focar na sua evolução, com treinos e métricas no seu ritmo.</span>
+                  </span>
+                  <span class="path-card__check"><span data-icon="check"></span></span>
+                </button>
+
+                <button class="path-card" type="button" aria-pressed="false" data-path="events">
+                  <span class="path-card__icon circle circle--amber"><span data-icon="calendar"></span></span>
+                  <span class="path-card__body">
+                    <span class="path-card__title">Eventos e comunidade</span>
+                    <span class="path-card__text">Descobrir aulas, grupos e encontros perto de você.</span>
+                  </span>
+                  <span class="path-card__check"><span data-icon="check"></span></span>
+                </button>
+              </div>
+
+              <p class="choice__counter"><span data-path-counter>Nenhum selecionado</span></p>
+            </div>
+
+            <footer class="foot">
+              <button class="btn btn--primary btn--lg btn--block" id="objective-continue" data-nav="06" disabled>Continuar</button>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               06 · INTERESSES / PREFERÊNCIAS
+               ============================================================ -->
+          <section class="screen" data-screen="06" data-title="Interesses">
+            <header class="topbar">
+              <button class="iconbtn" data-back="05" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Interesses</span>
+            </header>
+
+            <div class="screen__scroll">
+              <div class="steps">
+                <span class="steps__label">Etapa 3 de 4</span>
+                <span class="steps__count">Preferências</span>
+              </div>
+              <div class="progress"><div class="progress__bar" style="width:75%"></div></div>
+
+              <div class="choice__head mt-3">
+                <h1 class="h1">Conte-nos mais sobre você</h1>
+                <p class="lede mt-1">Que atividades te dão vontade de sair de casa?</p>
+              </div>
+
+              <div class="chip-grid" role="group" aria-label="Interesses">
+                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Musculação">
+                  <span data-icon="dumbbell"></span><span>Musculação</span><span class="chip__check" data-icon="check"></span>
+                </button>
+                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Corrida">
+                  <span data-icon="run"></span><span>Corrida</span><span class="chip__check" data-icon="check"></span>
+                </button>
+                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Yoga">
+                  <span data-icon="lotus"></span><span>Yoga</span><span class="chip__check" data-icon="check"></span>
+                </button>
+                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Dança">
+                  <span data-icon="music"></span><span>Dança</span><span class="chip__check" data-icon="check"></span>
+                </button>
+                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Natação">
+                  <span data-icon="swim"></span><span>Natação</span><span class="chip__check" data-icon="check"></span>
+                </button>
+                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Lutas">
+                  <span data-icon="glove"></span><span>Lutas</span><span class="chip__check" data-icon="check"></span>
+                </button>
+                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Ciclismo">
+                  <span data-icon="bike"></span><span>Ciclismo</span><span class="chip__check" data-icon="check"></span>
+                </button>
+                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Vôlei">
+                  <span data-icon="ball"></span><span>Vôlei</span><span class="chip__check" data-icon="check"></span>
+                </button>
+              </div>
+
+              <p class="choice__counter"><span data-chip-counter="interest">Nenhum selecionado</span></p>
+
+              <div class="note note--sage mt-3">
+                <span data-icon="sparkle"></span>
+                <span>Essas escolhas alimentam o card inteligente e as conexões sugeridas na Home.</span>
+              </div>
+            </div>
+
+            <footer class="foot">
+              <button class="btn btn--primary btn--lg btn--block" id="interest-continue" data-nav="07" disabled>Continuar</button>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               07 · CRIAR SENHA
+               ============================================================ -->
+          <section class="screen" data-screen="07" data-title="Senha">
+            <header class="topbar">
+              <button class="iconbtn" data-back="06" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Senha</span>
+            </header>
+
+            <div class="screen__scroll">
+              <div class="steps">
+                <span class="steps__label">Etapa 4 de 4</span>
+                <span class="steps__count">Segurança</span>
+              </div>
+              <div class="progress"><div class="progress__bar" style="width:100%"></div></div>
+
+              <h1 class="h1 mt-3">Crie uma senha</h1>
+              <p class="lede mt-1">Use pelo menos 8 caracteres, com uma letra e um número.</p>
+
+              <form class="form-stack" id="password-form" novalidate>
+                <div class="field">
+                  <label class="field__label" for="pw">Senha</label>
+                  <div class="input input--action">
+                    <input class="input__control" id="pw" type="password" placeholder="Mínimo de 8 caracteres" autocomplete="new-password">
+                    <button class="input__action" type="button" data-toggle-pw="pw" aria-label="Mostrar senha"><span data-icon="eye"></span></button>
+                  </div>
+                  <div class="pw-meter" aria-hidden="true">
+                    <span class="pw-meter__seg"></span><span class="pw-meter__seg"></span><span class="pw-meter__seg"></span><span class="pw-meter__seg"></span>
+                  </div>
+                  <span class="field__hint" id="pw-strength">Ainda não preenchida.</span>
+                </div>
+
+                <div class="field" id="pw-confirm-field">
+                  <label class="field__label" for="pw2">Confirmar senha</label>
+                  <div class="input input--action">
+                    <input class="input__control" id="pw2" type="password" placeholder="Digite a senha de novo" autocomplete="new-password">
+                    <button class="input__action" type="button" data-toggle-pw="pw2" aria-label="Mostrar senha"><span data-icon="eye"></span></button>
+                  </div>
+                  <span class="field__error"><span data-icon="x"></span> As senhas não são iguais.</span>
+                </div>
+
+                <div class="pw-rules" aria-label="Requisitos da senha">
+                  <span class="pw-rule" data-pw-rule="length"><span data-icon="check-circle"></span> 8 caracteres ou mais</span>
+                  <span class="pw-rule" data-pw-rule="letter"><span data-icon="check-circle"></span> Pelo menos uma letra</span>
+                  <span class="pw-rule" data-pw-rule="number"><span data-icon="check-circle"></span> Pelo menos um número</span>
+                </div>
+              </form>
+
+              <p class="foot__note mt-3">Ao cadastrar, você aceita os <a href="#" data-toast="Termos de uso — documento da versão final.">Termos</a>.</p>
+            </div>
+
+            <footer class="foot">
+              <button class="btn btn--primary btn--lg btn--block" id="password-submit" data-nav="08" disabled>Cadastrar</button>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               08 · SUCESSO / BOAS-VINDAS
+               ============================================================ -->
+          <section class="screen" data-screen="08" data-title="Pronto">
+            <div class="screen__scroll pad-status">
+              <div class="success">
+                <img class="welcome__art" src="assets/img/illustration-welcome.svg" alt="Três pessoas comemorando juntas depois do treino">
+
+                <h1 class="h1 success__title">Pronto, agora é só começar</h1>
+                <p class="lede success__text">Você já faz parte do vem. Seu primeiro treino pode encontrar companhia hoje mesmo.</p>
+
+                <div class="success__card">
+                  <div class="avatar-stack" aria-hidden="true">
+                    <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                    <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                    <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                    <span class="avatar-stack__more">+9</span>
+                  </div>
+                  <div>
+                    <p class="h3">12 pessoas perto de você</p>
+                    <p class="tiny">Treinando esta semana em Pinheiros.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <footer class="foot">
+              <button class="btn btn--primary btn--lg btn--block" type="button" id="enter-app">Acessar o app</button>
+              <button class="btn btn--text btn--block" data-nav="11">Ver meu perfil</button>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               09 · LOGIN
+               ============================================================ -->
+          <section class="screen" data-screen="09" data-title="Login">
+            <div class="screen__scroll pad-status">
+              <div class="login__brand">
+                <img class="login__mark" src="assets/img/logo.svg" alt="">
+                <span class="login__wordmark">vem</span>
+                <span class="tag">versão 1.0</span>
+              </div>
+
+              <h1 class="h1">Que bom te ver de novo</h1>
+              <p class="lede mt-1">Entre para continuar seus treinos e encontrar sua turma.</p>
+
+              <form class="login__form" id="login-form" novalidate>
+                <div class="field">
+                  <label class="field__label" for="login-email">E-mail</label>
+                  <div class="input input--icon">
+                    <span class="input__icon"><span data-icon="mail"></span></span>
+                    <input class="input__control" id="login-email" type="email" placeholder="voce@email.com" autocomplete="email" inputmode="email">
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="login-pw">Senha</label>
+                  <div class="input input--action">
+                    <input class="input__control" id="login-pw" type="password" placeholder="Sua senha" autocomplete="current-password">
+                    <button class="input__action" type="button" data-toggle-pw="login-pw" aria-label="Mostrar senha"><span data-icon="eye"></span></button>
+                  </div>
+                </div>
+
+                <button class="login__forgot" type="button" data-toast="Enviamos um link de recuperação para o seu e-mail.">Esqueceu a senha?</button>
+              </form>
+            </div>
+
+            <footer class="foot">
+              <button class="btn btn--primary btn--lg btn--block" type="button" data-nav="10" data-toast="Bem-vindo de volta, Ana.">Entrar</button>
+              <button class="btn btn--text btn--block" type="button" data-nav="01">Ainda não tem conta? Começar</button>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               10 · HOME + CARD INTELIGENTE (GenUI)
+               ============================================================ -->
+          <section class="screen screen--home screen--nav" data-screen="10" data-title="Início">
+            <div class="screen__scroll">
+              <div class="home">
+
+                <header class="home__head">
+                  <div>
+                    <p class="eyebrow">Quinta, 29 de outubro</p>
+                    <h1 class="home__hello">Bom dia, Ana</h1>
+                    <button class="journey-chip" type="button" data-nav="05" aria-label="Jornada atual. Trocar objetivo">
+                      <span data-icon="sparkle"></span>
+                      <span>Jornada: <strong id="journey-chip-text">Autocuidado</strong></span>
+                      <span class="journey-chip__swap">trocar</span>
+                    </button>
+                  </div>
+                  <div class="home__actions">
+                    <button class="iconbtn" data-nav="20" aria-label="Notificações">
+                      <span data-icon="bell"></span>
+                      <span class="iconbtn__badge" aria-hidden="true"></span>
+                    </button>
+                    <button class="avatar avatar--md avatar--ring" data-nav="11" aria-label="Abrir meu perfil" style="--ring: var(--amber)">
+                      <img src="assets/img/avatar.jpg" alt="">
+                    </button>
+                  </div>
+                </header>
+
+                <form class="lui" id="lui-form" role="search">
+                  <span class="lui__spark"><span data-icon="sparkle"></span></span>
+                  <label class="sr-only" for="lui-input">O que você quer treinar hoje?</label>
+                  <input class="lui__input" id="lui-input" type="text" placeholder="O que você quer treinar hoje?" autocomplete="off">
+                  <button class="lui__mic" type="button" id="lui-mic" aria-label="Falar em vez de digitar">
+                    <span data-icon="mic"></span>
+                  </button>
+                </form>
+
+                <article class="ai-card" id="ai-card" aria-live="polite" aria-atomic="true">
+                  <div class="ai-card__skeleton" id="ai-skeleton" hidden>
+                    <div class="skeleton-line" style="width: 32%"></div>
+                    <div class="skeleton-line mt-3" style="width: 78%"></div>
+                    <div class="skeleton-line mt-1" style="width: 94%"></div>
+                    <div class="skeleton-line mt-1" style="width: 56%"></div>
+                    <div class="skeleton-line mt-3" style="width: 40%"></div>
+                  </div>
+
+                  <div class="ai-card__content" id="ai-content">
+                    <div class="ai-card__head">
+                      <span class="ai-card__badge"><span data-icon="sparkle"></span> <span id="ai-badge-text">Gerado agora</span></span>
+                      <span class="ai-card__time" id="ai-time">com base no seu objetivo</span>
+                    </div>
+                    <h2 class="ai-card__title" id="ai-title">Sua meta está em 60%</h2>
+                    <p class="ai-card__text" id="ai-text">Você treinou <strong>3 de 5 vezes</strong> esta semana. Que tal um treino rápido de 15 min para fechar o dia?</p>
+                    <div class="ai-card__meta" id="ai-meta">
+                      <span class="tag">15 min</span>
+                      <span class="tag">em casa</span>
+                      <span class="tag">leve</span>
+                    </div>
+                    <div class="ai-card__actions">
+                      <button class="btn btn--primary" type="button" id="ai-cta" data-nav="13">Ver treino</button>
+                      <button class="btn btn--ghost" type="button" data-dismiss-ai>Descartar</button>
+                    </div>
+                  </div>
+                </article>
+
+                <div class="ai-dismissed" id="ai-dismissed" hidden>
+                  <span>Sugestão descartada.</span>
+                  <button class="btn btn--text btn--sm" type="button" id="ai-undo">Desfazer</button>
+                </div>
+
+                <section aria-labelledby="home-cats">
+                  <div class="section-head">
+                    <h2 class="h3" id="home-cats">Categorias</h2>
+                    <button class="section-head__link" data-nav="13">Ver tudo <span data-icon="chevron-right"></span></button>
+                  </div>
+                  <div class="cat-row">
+                    <button class="cat" data-nav="13"><span class="cat__icon"><span data-icon="lotus"></span></span><span>Yoga</span></button>
+                    <button class="cat cat--sky" data-nav="13"><span class="cat__icon"><span data-icon="run"></span></span><span>Corrida</span></button>
+                    <button class="cat" data-nav="13"><span class="cat__icon"><span data-icon="dumbbell"></span></span><span>Força</span></button>
+                    <button class="cat cat--plum" data-nav="13"><span class="cat__icon"><span data-icon="music"></span></span><span>Dança</span></button>
+                    <button class="cat cat--sage" data-nav="13"><span class="cat__icon"><span data-icon="swim"></span></span><span>Natação</span></button>
+                  </div>
+                </section>
+
+                <section aria-labelledby="home-events">
+                  <div class="section-head">
+                    <h2 class="h3" id="home-events">Próximos eventos</h2>
+                    <button class="section-head__link" data-nav="13">Ver agenda <span data-icon="chevron-right"></span></button>
+                  </div>
+                  <div class="event-row no-scrollbar">
+                    <article class="event-card">
+                      <div class="event-card__media">
+                        <img src="assets/img/cover-run.svg" alt="">
+                        <span class="badge event-card__date">Sáb · 07h</span>
+                      </div>
+                      <h3 class="event-card__title">Corrida no Ibirapuera</h3>
+                      <p class="event-card__meta"><span data-icon="pin"></span> Portão 7 · 5 km</p>
+                      <div class="event-card__people">
+                        <div class="avatar-stack" aria-hidden="true">
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar-stack__more">+9</span>
+                        </div>
+                        <span class="tiny">12 confirmados</span>
+                      </div>
+                    </article>
+
+                    <article class="event-card">
+                      <div class="event-card__media">
+                        <img src="assets/img/cover-yoga.svg" alt="">
+                        <span class="badge event-card__date">Dom · 08h</span>
+                      </div>
+                      <h3 class="event-card__title">Yoga ao nascer do sol</h3>
+                      <p class="event-card__meta"><span data-icon="pin"></span> Terraço do Centro · 60 min</p>
+                      <div class="event-card__people">
+                        <div class="avatar-stack" aria-hidden="true">
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar-stack__more">+6</span>
+                        </div>
+                        <span class="tiny">8 confirmados</span>
+                      </div>
+                    </article>
+
+                    <article class="event-card">
+                      <div class="event-card__media">
+                        <img src="assets/img/cover-gym.svg" alt="">
+                        <span class="badge event-card__date">Ter · 19h</span>
+                      </div>
+                      <h3 class="event-card__title">Força para iniciantes</h3>
+                      <p class="event-card__meta"><span data-icon="pin"></span> Academia Vem · 45 min</p>
+                      <div class="event-card__people">
+                        <div class="avatar-stack" aria-hidden="true">
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar-stack__more">+4</span>
+                        </div>
+                        <span class="tiny">6 confirmados</span>
+                      </div>
+                    </article>
+                  </div>
+                </section>
+
+                <section class="card week" aria-labelledby="week-title">
+                  <div class="week__top">
+                    <div>
+                      <p class="eyebrow" id="week-title">Minha semana</p>
+                      <div class="week__label"><span class="stat">3</span><span>de 5 treinos</span></div>
+                      <p class="small">Faltam 2 treinos para a meta.</p>
+                    </div>
+                    <div class="ring" role="img" aria-label="60% da meta semanal concluída">
+                      <svg viewBox="0 0 72 72" aria-hidden="true">
+                        <circle class="ring__track" cx="36" cy="36" r="32"></circle>
+                        <circle class="ring__value" cx="36" cy="36" r="32" stroke-dasharray="201" stroke-dashoffset="80"></circle>
+                      </svg>
+                      <span class="ring__label">60<small>%</small></span>
+                    </div>
+                  </div>
+
+                  <div class="week__bars" aria-hidden="true">
+                    <div class="week__bar is-done"><i style="--h: 32px"></i><span>S</span></div>
+                    <div class="week__bar is-done"><i style="--h: 40px"></i><span>T</span></div>
+                    <div class="week__bar is-today"><i style="--h: 24px"></i><span>Q</span></div>
+                    <div class="week__bar"><i style="--h: 8px"></i><span>Q</span></div>
+                    <div class="week__bar"><i style="--h: 8px"></i><span>S</span></div>
+                    <div class="week__bar"><i style="--h: 8px"></i><span>S</span></div>
+                    <div class="week__bar"><i style="--h: 8px"></i><span>D</span></div>
+                  </div>
+
+                  <div class="week__streak">
+                    <span data-icon="flame"></span>
+                    <span>3 semanas seguidas treinando</span>
+                  </div>
+                </section>
+
+                <button class="premium-strip" type="button" data-nav="16">
+                  <span class="circle circle--purple"><span data-icon="crown"></span></span>
+                  <span class="premium-strip__body">
+                    <span class="premium-strip__title">vem+</span>
+                    <span class="premium-strip__sub">Treinos com IA, match sem limites e grupos privados.</span>
+                  </span>
+                  <span data-icon="chevron-right"></span>
+                </button>
+
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               11 · PERFIL
+               ============================================================ -->
+          <section class="screen screen--profile screen--nav" data-screen="11" data-title="Perfil">
+            <div class="screen__scroll">
+              <div class="profile__cover">
+                <img src="assets/img/cover-profile.svg" alt="">
+                <button class="iconbtn" data-nav="19" aria-label="Configurações"><span data-icon="settings"></span></button>
+              </div>
+
+              <div class="profile__body">
+                <div class="profile__identity">
+                  <div class="avatar avatar--xl">
+                    <img src="assets/img/avatar.jpg" alt="Foto de Ana Beatriz">
+                  </div>
+                  <button class="profile__share" data-toast="Link do perfil copiado." aria-label="Compartilhar perfil">
+                    <span data-icon="share"></span>
+                  </button>
+                </div>
+
+                <div class="profile__name">
+                  <h1 class="h1">Ana Beatriz</h1>
+                  <span data-icon="verified" aria-label="Perfil verificado"></span>
+                </div>
+
+                <div class="profile__level">
+                  <b>Nível 7</b> · Corredora
+                  <span class="progress progress--amber profile__levelbar" aria-hidden="true"><span class="progress__bar" style="width: 64%"></span></span>
+                </div>
+
+                <div class="profile__stats">
+                  <button class="profile__stat" data-toast="248 pessoas seguem você.">
+                    <span class="stat">248</span><span>Seguidores</span>
+                  </button>
+                  <button class="profile__stat" data-toast="Você segue 132 pessoas.">
+                    <span class="stat">132</span><span>Seguindo</span>
+                  </button>
+                  <button class="profile__stat" data-toast="36 amigos treinam com você.">
+                    <span class="stat">36</span><span>Amigos</span>
+                  </button>
+                </div>
+
+                <p class="profile__bio">Corro para organizar a cabeça. Yoga nos dias de descanso. Sempre procurando gente para treinar às 6h.</p>
+
+                <div class="profile__tags">
+                  <span class="tag tag--amber">5 km</span>
+                  <span class="tag tag--sage">Yoga</span>
+                  <span class="tag">Força</span>
+                  <span class="tag">Iniciante</span>
+                </div>
+
+                <div class="profile__buttons">
+                  <button class="btn btn--secondary" data-nav="04"><span data-icon="edit"></span> Editar perfil</button>
+                </div>
+
+                <div class="section-head mt-4">
+                  <h2 class="h3">Conquistas</h2>
+                  <span class="tiny">3 de 12</span>
+                </div>
+                <div class="achievements">
+                  <div class="achievement"><span data-icon="flame"></span><span>7 dias<br>seguidos</span></div>
+                  <div class="achievement"><span data-icon="run"></span><span>Primeiro<br>5 km</span></div>
+                  <div class="achievement"><span data-icon="trophy"></span><span>10 treinos<br>no mês</span></div>
+                </div>
+
+                <button class="premium-strip mt-3" type="button" data-nav="16">
+                  <span class="circle circle--purple"><span data-icon="crown"></span></span>
+                  <span class="premium-strip__body">
+                    <span class="premium-strip__title">vem+</span>
+                    <span class="premium-strip__sub">30 dias grátis para testar tudo.</span>
+                  </span>
+                  <span data-icon="chevron-right"></span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               12 · MATCH
+               ============================================================ -->
+          <section class="screen screen--match screen--nav" data-screen="12" data-title="Match">
+            <div class="screen__scroll">
+              <header class="match__head">
+                <div>
+                  <p class="eyebrow">Pessoas perto de você</p>
+                  <h1 class="h1">Matches</h1>
+                </div>
+                <button class="iconbtn iconbtn--surface" data-toast="Filtros de match: distância, objetivo e nível." aria-label="Filtrar matches">
+                  <span data-icon="filter"></span>
+                </button>
+              </header>
+
+              <div class="match__stage">
+                <article class="match-card" id="match-card">
+                  <div class="match-card__photo" id="match-photo">
+                    <img id="match-img" src="assets/img/avatar.jpg" alt="Foto de Marina">
+                    <span class="badge badge--glass match-card__compat" id="match-compat">87% combinam</span>
+                    <div class="match-card__info">
+                      <h2 class="match-card__name">
+                        <span><span id="match-name">Marina</span>, <span id="match-age">28</span></span>
+                        <span data-icon="verified" aria-label="Perfil verificado"></span>
+                      </h2>
+                      <p class="match-card__meta">
+                        <span data-icon="pin"></span>
+                        <span id="match-dist">2,4 km</span>
+                        <span aria-hidden="true">·</span>
+                        <span id="match-area">Vila Madalena</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="match-card__body">
+                    <p class="match-card__bio" id="match-bio">Corro de manhã e cozinho à noite. Procuro companhia para os treinos de terça e quinta.</p>
+                    <div class="match-card__tags" id="match-tags">
+                      <span class="tag">Corrida</span><span class="tag">5 km</span><span class="tag">Yoga</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <div class="match__actions">
+                <button class="match-action match-action--pass" id="match-pass" aria-label="Passar" title="Passar">
+                  <span data-icon="x"></span>
+                </button>
+                <button class="match-action match-action--like" id="match-like" aria-label="Curtir" title="Curtir">
+                  <span data-icon="heart" data-icon-class="icon--fill"></span>
+                </button>
+                <button class="match-action match-action--star" id="match-star" aria-label="Favoritar" title="Favoritar">
+                  <span data-icon="star"></span>
+                </button>
+              </div>
+
+              <p class="match__hint">Use os botões ou arraste o card</p>
+
+              <div class="match__footer">
+                <button class="btn btn--text" data-toast="Perfil completo disponível na versão final.">Ver perfil completo</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               13 · ATIVIDADES
+               ============================================================ -->
+          <section class="screen screen--nav" data-screen="13" data-title="Atividades">
+            <header class="topbar">
+              <button class="iconbtn" data-back="10" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Atividades</span>
+            </header>
+
+            <div class="screen__scroll">
+              <div class="activities__search">
+                <div class="input input--icon">
+                  <span class="input__icon"><span data-icon="search"></span></span>
+                  <input class="input__control" id="activity-search" type="search" placeholder="Buscar atividade ou bairro" aria-label="Buscar atividade">
+                </div>
+                <button class="iconbtn" data-toast="Filtros avançados: distância, nível e horário." aria-label="Filtros avançados">
+                  <span data-icon="filter"></span>
+                </button>
+              </div>
+
+              <div class="chip-row activities__filters" role="group" aria-label="Filtrar por modalidade">
+                <button class="chip" aria-pressed="true" data-filter="all">Todos</button>
+                <button class="chip" aria-pressed="false" data-filter="forca">Academia</button>
+                <button class="chip" aria-pressed="false" data-filter="yoga">Yoga</button>
+                <button class="chip" aria-pressed="false" data-filter="corrida">Corrida</button>
+                <button class="chip" aria-pressed="false" data-filter="natacao">Natação</button>
+              </div>
+
+              <div class="section-head">
+                <h2 class="h3">Hoje, 29 de outubro</h2>
+                <span class="tiny">4 atividades</span>
+              </div>
+
+              <div class="stack" id="activity-list">
+                <article class="activity" data-cat="corrida">
+                  <div class="activity__media">
+                    <img src="assets/img/cover-run.svg" alt="">
+                    <span class="tag">Hoje · 07h</span>
+                  </div>
+                  <div class="activity__body">
+                    <div class="activity__kicker">
+                      <span class="eyebrow">Corrida · 5 km</span>
+                      <span class="tag tag--sage">Iniciante</span>
+                    </div>
+                    <h3 class="activity__title">Corrida no Parque Ibirapuera</h3>
+                    <p class="activity__meta"><span data-icon="pin"></span> Portão 7 · 12 vagas</p>
+                    <div class="activity__foot">
+                      <div class="activity__people">
+                        <div class="avatar-stack" aria-hidden="true">
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar-stack__more">+9</span>
+                        </div>
+                      </div>
+                      <button class="btn btn--primary btn--sm" data-toast="Inscrição confirmada. Te esperamos às 7h!">Participar</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="activity" data-cat="yoga">
+                  <div class="activity__media">
+                    <img src="assets/img/cover-yoga.svg" alt="">
+                    <span class="tag">Hoje · 08h</span>
+                  </div>
+                  <div class="activity__body">
+                    <div class="activity__kicker">
+                      <span class="eyebrow">Yoga · 60 min</span>
+                      <span class="tag tag--sage">Todos os níveis</span>
+                    </div>
+                    <h3 class="activity__title">Yoga ao nascer do sol</h3>
+                    <p class="activity__meta"><span data-icon="pin"></span> Terraço do Centro · 8 vagas</p>
+                    <div class="activity__foot">
+                      <div class="activity__people">
+                        <div class="avatar-stack" aria-hidden="true">
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar-stack__more">+6</span>
+                        </div>
+                      </div>
+                      <button class="btn btn--primary btn--sm" data-toast="Inscrição confirmada. Leve sua canga!">Participar</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="activity" data-cat="forca">
+                  <div class="activity__media">
+                    <img src="assets/img/cover-gym.svg" alt="">
+                    <span class="tag">Hoje · 19h</span>
+                  </div>
+                  <div class="activity__body">
+                    <div class="activity__kicker">
+                      <span class="eyebrow">Força · 45 min</span>
+                      <span class="tag tag--sage">Iniciante</span>
+                    </div>
+                    <h3 class="activity__title">Força para começar bem</h3>
+                    <p class="activity__meta"><span data-icon="pin"></span> Academia Vem · Pinheiros · 5 vagas</p>
+                    <div class="activity__foot">
+                      <div class="activity__people">
+                        <div class="avatar-stack" aria-hidden="true">
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar-stack__more">+3</span>
+                        </div>
+                      </div>
+                      <button class="btn btn--primary btn--sm" data-toast="Inscrição confirmada. O treino tem 45 min.">Participar</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="activity" data-cat="natacao">
+                  <div class="activity__media">
+                    <img src="assets/img/cover-swim.svg" alt="">
+                    <span class="tag">Amanhã · 06h30</span>
+                  </div>
+                  <div class="activity__body">
+                    <div class="activity__kicker">
+                      <span class="eyebrow">Natação · 40 min</span>
+                      <span class="tag tag--sage">Iniciante</span>
+                    </div>
+                    <h3 class="activity__title">Natação livre, sem cronômetro</h3>
+                    <p class="activity__meta"><span data-icon="pin"></span> Piscina do Clube · 10 vagas</p>
+                    <div class="activity__foot">
+                      <div class="activity__people">
+                        <div class="avatar-stack" aria-hidden="true">
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar"><img src="assets/img/avatar.jpg" alt=""></span>
+                          <span class="avatar-stack__more">+8</span>
+                        </div>
+                      </div>
+                      <button class="btn btn--primary btn--sm" data-toast="Inscrição confirmada. Não esqueça o touca.">Participar</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <p class="foot__note mt-3">Atividades criadas por pessoas e grupos da sua região.</p>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               14 · SOCIAL
+               ============================================================ -->
+          <section class="screen screen--social screen--nav" data-screen="14" data-title="Social">
+            <div class="screen__scroll">
+              <header class="social__head">
+                <div>
+                  <p class="eyebrow">Sua turma</p>
+                  <h1 class="h1">Social</h1>
+                </div>
+                <span class="badge badge--light">24 conexões</span>
+              </header>
+
+              <div class="segmented" role="tablist" aria-label="Conexões ou grupos" data-segmented="social">
+                <button class="segmented__btn" role="tab" aria-selected="true" data-seg-value="connections">Conexões <span class="segmented__count">24</span></button>
+                <button class="segmented__btn" role="tab" aria-selected="false" data-seg-value="groups">Grupos <span class="segmented__count">5</span></button>
+              </div>
+
+              <div data-seg-panel="social:connections">
+                <p class="eyebrow social__section-label">Treinaram com você</p>
+                <ul class="social__list list">
+                  <li class="list-row">
+                    <div class="avatar avatar--ring" style="--ring: var(--vermilion)"><img src="assets/img/avatar.jpg" alt=""></div>
+                    <div class="list-row__body">
+                      <span class="list-row__title">Marina Costa</span>
+                      <span class="list-row__sub">Treinou com você 2× · Corrida</span>
+                    </div>
+                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Marina aberta (demonstração)." aria-label="Enviar mensagem para Marina">
+                      <span data-icon="message"></span>
+                    </button>
+                  </li>
+                  <li class="list-row">
+                    <div class="avatar avatar--ring" style="--ring: var(--sky)"><img src="assets/img/avatar.jpg" alt=""></div>
+                    <div class="list-row__body">
+                      <span class="list-row__title">Camila Reis</span>
+                      <span class="list-row__sub">Academia Vem · seg e qua</span>
+                    </div>
+                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Camila aberta (demonstração)." aria-label="Enviar mensagem para Camila">
+                      <span data-icon="message"></span>
+                    </button>
+                  </li>
+                  <li class="list-row">
+                    <div class="avatar avatar--ring" style="--ring: var(--sage)"><img src="assets/img/avatar.jpg" alt=""></div>
+                    <div class="list-row__body">
+                      <span class="list-row__title">Rafael Nunes</span>
+                      <span class="list-row__sub">Yoga no parque · domingos</span>
+                    </div>
+                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Rafael aberta (demonstração)." aria-label="Enviar mensagem para Rafael">
+                      <span data-icon="message"></span>
+                    </button>
+                  </li>
+                  <li class="list-row">
+                    <div class="avatar avatar--ring" style="--ring: var(--plum)"><img src="assets/img/avatar.jpg" alt=""></div>
+                    <div class="list-row__body">
+                      <span class="list-row__title">Luiza Prado</span>
+                      <span class="list-row__sub">Amiga desde março · Dança</span>
+                    </div>
+                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Luiza aberta (demonstração)." aria-label="Enviar mensagem para Luiza">
+                      <span data-icon="message"></span>
+                    </button>
+                  </li>
+                  <li class="list-row">
+                    <div class="avatar avatar--ring" style="--ring: var(--amber)"><img src="assets/img/avatar.jpg" alt=""></div>
+                    <div class="list-row__body">
+                      <span class="list-row__title">Bruna Alves</span>
+                      <span class="list-row__sub">Corrida no Ibirapuera · sábados</span>
+                    </div>
+                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Bruna aberta (demonstração)." aria-label="Enviar mensagem para Bruna">
+                      <span data-icon="message"></span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <div data-seg-panel="social:groups" hidden>
+                <p class="eyebrow social__section-label">Grupos que você participa</p>
+                <div class="list">
+                  <button class="social__group" data-toast="Grupo Corrida às 6h aberto (demonstração).">
+                    <span class="circle circle--vermilion"><span data-icon="run"></span></span>
+                    <span class="list-row__body">
+                      <span class="list-row__title">Corrida às 6h</span>
+                      <span class="list-row__sub">24 membros · Ibirapuera</span>
+                    </span>
+                    <span data-icon="chevron-right" class="list-row__action"></span>
+                  </button>
+                  <button class="social__group" data-toast="Grupo Yoga para começar aberto (demonstração).">
+                    <span class="circle circle--sage"><span data-icon="lotus"></span></span>
+                    <span class="list-row__body">
+                      <span class="list-row__title">Yoga para começar</span>
+                      <span class="list-row__sub">18 membros · encontros online</span>
+                    </span>
+                    <span data-icon="chevron-right" class="list-row__action"></span>
+                  </button>
+                  <button class="social__group" data-toast="Grupo Força sem julgamento aberto (demonstração).">
+                    <span class="circle circle--amber"><span data-icon="dumbbell"></span></span>
+                    <span class="list-row__body">
+                      <span class="list-row__title">Força sem julgamento</span>
+                      <span class="list-row__sub">31 membros · Pinheiros</span>
+                    </span>
+                    <span data-icon="chevron-right" class="list-row__action"></span>
+                  </button>
+                  <button class="social__group" data-toast="Grupo Natação livre aberto (demonstração).">
+                    <span class="circle circle--sky"><span data-icon="swim"></span></span>
+                    <span class="list-row__body">
+                      <span class="list-row__title">Natação livre</span>
+                      <span class="list-row__sub">12 membros · Clube Paulista</span>
+                    </span>
+                    <span data-icon="chevron-right" class="list-row__action"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button class="fab" data-toast="Convide alguém para treinar com você." aria-label="Adicionar conexão">
+              <span data-icon="plus"></span>
+            </button>
+          </section>
+
+          <!-- ============================================================
+               15 · FEED
+               ============================================================ -->
+          <section class="screen screen--feed screen--nav" data-screen="15" data-title="Feed">
+            <div class="screen__scroll">
+              <header class="feed__head">
+                <div>
+                  <p class="eyebrow">Comunidade</p>
+                  <h1 class="h1">Feed</h1>
+                </div>
+                <button class="iconbtn" data-nav="20" aria-label="Notificações"><span data-icon="bell"></span></button>
+              </header>
+
+              <div class="segmented" role="tablist" aria-label="Feed seguindo ou explorar" data-segmented="feed">
+                <button class="segmented__btn" role="tab" aria-selected="true" data-seg-value="following">Seguindo</button>
+                <button class="segmented__btn" role="tab" aria-selected="false" data-seg-value="explore">Explorar</button>
+              </div>
+
+              <div class="mt-3" data-seg-panel="feed:following">
+                <article class="post">
+                  <header class="post__head">
+                    <div class="avatar avatar--ring" style="--ring: var(--vermilion)"><img src="assets/img/avatar.jpg" alt=""></div>
+                    <div class="post__author">
+                      <p class="post__name">Marina Costa <span data-icon="verified" aria-label="Verificada"></span></p>
+                      <p class="post__meta">2 h · Corrida no Ibirapuera</p>
+                    </div>
+                    <button class="iconbtn" data-toast="Opções do post" aria-label="Mais opções"><span data-icon="more"></span></button>
+                  </header>
+
+                  <div class="post__media">
+                    <img src="assets/img/cover-run.svg" alt="Ilustração de uma pista de corrida ao amanhecer">
+                    <span class="tag">5 km</span>
+                  </div>
+
+                  <div class="post__actions">
+                    <button class="post__action" data-like aria-pressed="false" aria-label="Curtir post de Marina">
+                      <span data-icon="heart"></span>
+                      <span data-like-count>128</span>
+                    </button>
+                    <button class="post__action" data-toast="Comentários estarão disponíveis na versão final." aria-label="Comentar">
+                      <span data-icon="message"></span>
+                      <span>12</span>
+                    </button>
+                    <button class="post__action" data-toast="Link do post copiado." aria-label="Compartilhar">
+                      <span data-icon="share"></span>
+                    </button>
+                    <span class="post__spacer"></span>
+                    <button class="post__action" data-save aria-pressed="false" aria-label="Salvar post">
+                      <span data-icon="bookmark"></span>
+                    </button>
+                  </div>
+
+                  <p class="post__caption"><strong>Marina Costa</strong> 5 km hoje antes do trabalho. Quem vem amanhã às 6h?</p>
+                  <button class="post__comments" data-toast="Comentários estarão disponíveis na versão final.">Ver os 12 comentários</button>
+                </article>
+
+                <article class="post">
+                  <header class="post__head">
+                    <div class="avatar avatar--ring" style="--ring: var(--sage)"><img src="assets/img/avatar.jpg" alt=""></div>
+                    <div class="post__author">
+                      <p class="post__name">Rafael Nunes <span data-icon="verified" aria-label="Verificado"></span></p>
+                      <p class="post__meta">5 h · Yoga no parque</p>
+                    </div>
+                    <button class="iconbtn" data-toast="Opções do post" aria-label="Mais opções"><span data-icon="more"></span></button>
+                  </header>
+
+                  <div class="post__media">
+                    <img src="assets/img/cover-yoga.svg" alt="Ilustração de uma postura de yoga diante do sol">
+                    <span class="tag">Yoga</span>
+                  </div>
+
+                  <div class="post__actions">
+                    <button class="post__action" data-like aria-pressed="false" aria-label="Curtir post de Rafael">
+                      <span data-icon="heart"></span>
+                      <span data-like-count>84</span>
+                    </button>
+                    <button class="post__action" data-toast="Comentários estarão disponíveis na versão final." aria-label="Comentar">
+                      <span data-icon="message"></span>
+                      <span>9</span>
+                    </button>
+                    <button class="post__action" data-toast="Link do post copiado." aria-label="Compartilhar">
+                      <span data-icon="share"></span>
+                    </button>
+                    <span class="post__spacer"></span>
+                    <button class="post__action" data-save aria-pressed="false" aria-label="Salvar post">
+                      <span data-icon="bookmark"></span>
+                    </button>
+                  </div>
+
+                  <p class="post__caption"><strong>Rafael Nunes</strong> Primeira aula de yoga. Achei que fosse fácil. Não foi — mas voltei.</p>
+                  <button class="post__comments" data-toast="Comentários estarão disponíveis na versão final.">Ver os 9 comentários</button>
+                </article>
+              </div>
+
+              <div class="mt-3" data-seg-panel="feed:explore" hidden>
+                <article class="post">
+                  <header class="post__head">
+                    <div class="avatar avatar--ring" style="--ring: var(--sky)"><img src="assets/img/avatar.jpg" alt=""></div>
+                    <div class="post__author">
+                      <p class="post__name">Camila Reis <span data-icon="verified" aria-label="Verificada"></span></p>
+                      <p class="post__meta">Sugestão · Força</p>
+                    </div>
+                    <button class="iconbtn" data-toast="Opções do post" aria-label="Mais opções"><span data-icon="more"></span></button>
+                  </header>
+
+                  <div class="post__media">
+                    <img src="assets/img/cover-gym.svg" alt="Ilustração de um halter">
+                    <span class="tag">Força</span>
+                  </div>
+
+                  <div class="post__actions">
+                    <button class="post__action" data-like aria-pressed="false" aria-label="Curtir post de Camila">
+                      <span data-icon="heart"></span>
+                      <span data-like-count>56</span>
+                    </button>
+                    <button class="post__action" data-toast="Comentários estarão disponíveis na versão final." aria-label="Comentar">
+                      <span data-icon="message"></span>
+                      <span>4</span>
+                    </button>
+                    <button class="post__action" data-toast="Link do post copiado." aria-label="Compartilhar">
+                      <span data-icon="share"></span>
+                    </button>
+                    <span class="post__spacer"></span>
+                    <button class="post__action" data-save aria-pressed="false" aria-label="Salvar post">
+                      <span data-icon="bookmark"></span>
+                    </button>
+                  </div>
+
+                  <p class="post__caption"><strong>Camila Reis</strong> Comecei com 10 kg e hoje levantei 30. Ninguém precisa começar pronto.</p>
+                  <button class="post__comments" data-toast="Comentários estarão disponíveis na versão final.">Ver os 4 comentários</button>
+                </article>
+
+                <article class="post">
+                  <header class="post__head">
+                    <div class="avatar avatar--ring" style="--ring: var(--plum)"><img src="assets/img/avatar.jpg" alt=""></div>
+                    <div class="post__author">
+                      <p class="post__name">Luiza Prado <span data-icon="verified" aria-label="Verificada"></span></p>
+                      <p class="post__meta">Sugestão · Dança</p>
+                    </div>
+                    <button class="iconbtn" data-toast="Opções do post" aria-label="Mais opções"><span data-icon="more"></span></button>
+                  </header>
+
+                  <div class="post__media">
+                    <img src="assets/img/cover-dance.svg" alt="Ilustração de fitas em movimento">
+                    <span class="tag">Dança</span>
+                  </div>
+
+                  <div class="post__actions">
+                    <button class="post__action" data-like aria-pressed="false" aria-label="Curtir post de Luiza">
+                      <span data-icon="heart"></span>
+                      <span data-like-count>71</span>
+                    </button>
+                    <button class="post__action" data-toast="Comentários estarão disponíveis na versão final." aria-label="Comentar">
+                      <span data-icon="message"></span>
+                      <span>7</span>
+                    </button>
+                    <button class="post__action" data-toast="Link do post copiado." aria-label="Compartilhar">
+                      <span data-icon="share"></span>
+                    </button>
+                    <span class="post__spacer"></span>
+                    <button class="post__action" data-save aria-pressed="false" aria-label="Salvar post">
+                      <span data-icon="bookmark"></span>
+                    </button>
+                  </div>
+
+                  <p class="post__caption"><strong>Luiza Prado</strong> Aula de ritmos ontem. Rir também conta como treino, certo?</p>
+                  <button class="post__comments" data-toast="Comentários estarão disponíveis na versão final.">Ver os 7 comentários</button>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               16 · VEM+ (PREMIUM)
+               ============================================================ -->
+          <section class="screen screen--premium" data-screen="16" data-title="vem+" data-dark="true">
+            <div class="screen__scroll">
+              <div class="premium__hero">
+                <div class="premium__top">
+                  <button class="premium__close" data-nav="10" aria-label="Fechar"><span data-icon="x"></span></button>
+                  <span class="badge">30 dias grátis</span>
+                </div>
+
+                <span class="premium__wordmark">vem<i aria-hidden="true"></i></span>
+                <h1 class="premium__title">Treine mais.<br>Pague menos.</h1>
+                <img class="premium__art" src="assets/img/premium-art.svg" alt="">
+              </div>
+
+              <div class="premium__body">
+                <ul class="premium__benefits">
+                  <li class="benefit"><span data-icon="check-circle"></span> Treinos ilimitados com IA</li>
+                  <li class="benefit"><span data-icon="check-circle"></span> Match e filtros avançados</li>
+                  <li class="benefit"><span data-icon="check-circle"></span> Grupos privados da sua turma</li>
+                  <li class="benefit"><span data-icon="check-circle"></span> Plano adaptado ao seu sono e rotina</li>
+                  <li class="benefit"><span data-icon="check-circle"></span> Sem anúncios, sem interrupção</li>
+                </ul>
+
+                <div class="billing">
+                  <div class="segmented" role="tablist" aria-label="Forma de pagamento" data-billing>
+                    <button class="segmented__btn" role="tab" aria-selected="false" data-billing-value="monthly">Mensal</button>
+                    <button class="segmented__btn" role="tab" aria-selected="true" data-billing-value="annual">Anual <span class="billing__save">−30%</span></button>
+                  </div>
+
+                  <div>
+                    <div class="price">
+                      <span class="stat" id="price-value">R$ 13,90</span>
+                      <span class="price__per">/mês</span>
+                    </div>
+                    <p class="price__sub" id="price-sub">R$ 166,80 por ano · economize 30%</p>
+                  </div>
+                </div>
+
+                <div class="premium__cta">
+                  <button class="btn btn--premium btn--lg btn--block" data-toast="Assinatura iniciada (demonstração).">Assinar agora</button>
+                  <p class="premium__guarantee"><span data-icon="shield-check"></span> Cancele quando quiser. Sem letras miúdas.</p>
+                  <button class="btn btn--ghost btn--block" data-nav="10">Continuar com o gratuito</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               17 · FEEDBACK
+               ============================================================ -->
+          <section class="screen" data-screen="17" data-title="Feedback">
+            <header class="topbar">
+              <button class="iconbtn" data-back="10" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Feedback</span>
+            </header>
+
+            <div class="screen__scroll" id="feedback-wrap">
+              <div id="feedback-form-wrap">
+                <p class="eyebrow">Sua opinião</p>
+                <h1 class="h1 mt-1">Como foi seu treino hoje?</h1>
+                <p class="lede mt-1">Uma resposta rápida ajuda o vem a sugerir treinos melhores para você.</p>
+
+                <div class="faces" role="group" aria-label="Nota de 1 a 5 para o treino">
+                  <button class="face" aria-pressed="false" data-face="1" aria-label="Nota 1: muito ruim">
+                    <span class="face__circle"><span data-icon="face-1"></span></span><span>Muito ruim</span>
+                  </button>
+                  <button class="face" aria-pressed="false" data-face="2" aria-label="Nota 2: ruim">
+                    <span class="face__circle"><span data-icon="face-2"></span></span><span>Ruim</span>
+                  </button>
+                  <button class="face" aria-pressed="false" data-face="3" aria-label="Nota 3: ok">
+                    <span class="face__circle"><span data-icon="face-3"></span></span><span>Ok</span>
+                  </button>
+                  <button class="face" aria-pressed="false" data-face="4" aria-label="Nota 4: bom">
+                    <span class="face__circle"><span data-icon="face-4"></span></span><span>Bom</span>
+                  </button>
+                  <button class="face" aria-pressed="false" data-face="5" aria-label="Nota 5: incrível">
+                    <span class="face__circle"><span data-icon="face-5"></span></span><span>Incrível</span>
+                  </button>
+                </div>
+
+                <div class="field mt-4">
+                  <label class="field__label" for="feedback-text">Quer contar mais? <span class="muted">(opcional)</span></label>
+                  <div class="input">
+                    <textarea class="input__control" id="feedback-text" maxlength="280" placeholder="O que funcionou bem? O que pode melhorar?"></textarea>
+                  </div>
+                  <span class="field__hint">Até 280 caracteres.</span>
+                </div>
+
+                <div class="note note--sage mt-3">
+                  <span data-icon="lock"></span>
+                  <span>Seu feedback é anônimo para as outras pessoas da comunidade.</span>
+                </div>
+              </div>
+
+              <div class="feedback__success" id="feedback-success">
+                <div class="success__art" aria-hidden="true" style="width: 160px; height: 160px; margin: 0 auto 24px">
+                  <span class="success__disc"></span>
+                  <span class="success__disc success__disc--ring"></span>
+                  <span class="success__check" style="width: 88px; height: 88px"><span data-icon="check"></span></span>
+                </div>
+                <h2 class="h1">Valeu pelo retorno</h2>
+                <p class="lede mt-2">Seu feedback já foi para o time e vai ajudar nas próximas sugestões.</p>
+              </div>
+            </div>
+
+            <footer class="foot" id="feedback-foot">
+              <button class="btn btn--primary btn--lg btn--block" id="feedback-submit" disabled>Enviar</button>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               18 · SOBRE
+               ============================================================ -->
+          <section class="screen" data-screen="18" data-title="Sobre">
+            <header class="topbar">
+              <button class="iconbtn" data-back="19" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Sobre</span>
+            </header>
+
+            <div class="screen__scroll">
+              <div class="about__brand">
+                <img class="about__mark" src="assets/img/logo.svg" alt="">
+                <span class="about__wordmark">vem</span>
+                <span class="about__tagline">Treino que encontra companhia.</span>
+                <span class="tag mt-1">versão 1.0.0</span>
+              </div>
+
+              <div class="about__text">
+                <p>O vem nasceu de uma ideia simples: treinar é mais fácil quando tem alguém esperando por você. Aqui você encontra pessoas, grupos e atividades perto de casa — no seu ritmo, sem julgamento.</p>
+                <p>Acreditamos que movimento é para todo mundo: quem corre há anos, quem está voltando e quem ainda está pensando em começar. O app é um ponto de encontro, não uma competição.</p>
+              </div>
+
+              <div class="about__list">
+                <div class="about__row"><span>Versão</span><span>1.0.0 (build 48)</span></div>
+                <button class="about__row" data-toast="Termos de uso — documento da versão final."><span>Termos de uso</span><span><span data-icon="chevron-right"></span></span></button>
+                <button class="about__row" data-toast="Política de Privacidade — documento da versão final."><span>Política de Privacidade</span><span><span data-icon="chevron-right"></span></span></button>
+                <button class="about__row" data-toast="Licenças de fontes e ícones — documento da versão final."><span>Licenças</span><span><span data-icon="chevron-right"></span></span></button>
+                <div class="about__row"><span>Contato</span><span>oi@vem.app</span></div>
+              </div>
+
+              <p class="about__credits">Projeto conceito de UI Design · 2026<br>Feito para quem se move — e para quem quer começar.</p>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               19 · CONFIGURAÇÕES
+               ============================================================ -->
+          <section class="screen" data-screen="19" data-title="Configurações">
+            <header class="topbar">
+              <button class="iconbtn" data-back="11" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Configurações</span>
+            </header>
+
+            <div class="screen__scroll">
+              <button class="settings__account" data-nav="11">
+                <div class="avatar avatar--ring" style="--ring: var(--amber)"><img src="assets/img/avatar.jpg" alt=""></div>
+                <span class="settings__account-body">
+                  <span class="settings__account-name">Ana Beatriz</span>
+                  <span class="settings__account-mail">ana.beatriz@email.com</span>
+                </span>
+                <span data-icon="chevron-right" class="list-row__action"></span>
+              </button>
+
+              <div class="settings__group">
+                <p class="eyebrow settings__label">Conta</p>
+                <button class="settings__row" data-nav="04">
+                  <span class="circle circle--amber"><span data-icon="user"></span></span>
+                  <span class="settings__row-body">Dados pessoais</span>
+                  <span data-icon="chevron-right" class="chev"></span>
+                </button>
+                <button class="settings__row" data-toast="Segurança: senha e dispositivos conectados.">
+                  <span class="circle circle--sage"><span data-icon="lock"></span></span>
+                  <span class="settings__row-body">Segurança</span>
+                  <span data-icon="chevron-right" class="chev"></span>
+                </button>
+                <button class="settings__row" data-toast="Seu perfil já está verificado.">
+                  <span class="circle circle--sky"><span data-icon="verified"></span></span>
+                  <span class="settings__row-body">Verificação</span>
+                  <span class="settings__row-value">Verificado</span>
+                </button>
+              </div>
+
+              <div class="settings__group">
+                <p class="eyebrow settings__label">Preferências</p>
+                <button class="settings__row" data-nav="20">
+                  <span class="circle circle--vermilion"><span data-icon="bell"></span></span>
+                  <span class="settings__row-body">Notificações</span>
+                  <span data-icon="chevron-right" class="chev"></span>
+                </button>
+                <button class="settings__row" data-toast="Privacidade: quem vê seu perfil e seus treinos.">
+                  <span class="circle circle--plum"><span data-icon="shield"></span></span>
+                  <span class="settings__row-body">Privacidade</span>
+                  <span data-icon="chevron-right" class="chev"></span>
+                </button>
+                <button class="settings__row" data-toast="Idioma: Português (Brasil).">
+                  <span class="circle circle--purple"><span data-icon="globe"></span></span>
+                  <span class="settings__row-body">Idiomas</span>
+                  <span class="settings__row-value">Português (BR)</span>
+                  <span data-icon="chevron-right" class="chev"></span>
+                </button>
+              </div>
+
+              <div class="settings__group">
+                <p class="eyebrow settings__label">Suporte</p>
+                <button class="settings__row" data-toast="Central de ajuda em breve.">
+                  <span class="circle circle--sky"><span data-icon="help"></span></span>
+                  <span class="settings__row-body">Ajuda</span>
+                  <span data-icon="chevron-right" class="chev"></span>
+                </button>
+                <button class="settings__row" data-nav="17">
+                  <span class="circle circle--sage"><span data-icon="message"></span></span>
+                  <span class="settings__row-body">Enviar feedback</span>
+                  <span data-icon="chevron-right" class="chev"></span>
+                </button>
+                <button class="settings__row" data-nav="18">
+                  <span class="circle circle--amber"><span data-icon="info"></span></span>
+                  <span class="settings__row-body">Sobre o vem</span>
+                  <span data-icon="chevron-right" class="chev"></span>
+                </button>
+              </div>
+
+              <div class="settings__group">
+                <button class="settings__row settings__danger" data-logout>
+                  <span class="circle"><span data-icon="logout"></span></span>
+                  <span class="settings__row-body">Sair da conta</span>
+                </button>
+              </div>
+
+              <p class="foot__note mt-3">vem · versão 1.0.0</p>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               20 · NOTIFICAÇÕES
+               ============================================================ -->
+          <section class="screen" data-screen="20" data-title="Notificações">
+            <header class="topbar">
+              <button class="iconbtn" data-back="19" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Notificações</span>
+            </header>
+
+            <div class="screen__scroll">
+              <p class="eyebrow">No seu tempo</p>
+              <h1 class="h1 notif__intro mt-1">Escolha o que você quer receber</h1>
+              <p class="lede">Nada de notificação demais. Você pode mudar isso quando quiser.</p>
+
+              <div class="card notif__card mt-3">
+                <div class="switch-row">
+                  <div class="switch-row__body">
+                    <span class="switch-row__title">Novos matches</span>
+                    <span class="switch-row__sub">Quando alguém com interesses parecidos aparecer por perto.</span>
+                  </div>
+                  <button class="switch" role="switch" aria-checked="true" aria-label="Novos matches"></button>
+                </div>
+
+                <div class="switch-row">
+                  <div class="switch-row__body">
+                    <span class="switch-row__title">Mensagens</span>
+                    <span class="switch-row__sub">Conversas com conexões e grupos que você participa.</span>
+                  </div>
+                  <button class="switch" role="switch" aria-checked="true" aria-label="Mensagens"></button>
+                </div>
+
+                <div class="switch-row">
+                  <div class="switch-row__body">
+                    <span class="switch-row__title">Eventos e atividades</span>
+                    <span class="switch-row__sub">Lembretes de treinos que você confirmou.</span>
+                  </div>
+                  <button class="switch" role="switch" aria-checked="false" aria-label="Eventos e atividades"></button>
+                </div>
+
+                <div class="switch-row">
+                  <div class="switch-row__body">
+                    <span class="switch-row__title">Lembretes de treino</span>
+                    <span class="switch-row__sub">Um empurrãozinho nos dias que você costuma treinar.</span>
+                  </div>
+                  <button class="switch" role="switch" aria-checked="false" aria-label="Lembretes de treino"></button>
+                </div>
+              </div>
+
+              <div class="note note--amber mt-3">
+                <span data-icon="moon"></span>
+                <span>Entre 22h e 7h o vem fica em silêncio, mesmo com as notificações ligadas.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               NAVEGAÇÃO PRINCIPAL
+               ============================================================ -->
+          <nav class="tabbar is-hidden" id="tabbar" aria-label="Navegação principal">
+            <button class="tab" data-tab="10" aria-label="Início">
+              <span data-icon="home"></span><span>Início</span><i class="tab__dot"></i>
+            </button>
+            <button class="tab" data-tab="12" aria-label="Match">
+              <span data-icon="heart"></span><span>Match</span><i class="tab__dot"></i>
+            </button>
+            <button class="tab" data-tab="14" aria-label="Social">
+              <span data-icon="users"></span><span>Social</span><i class="tab__dot"></i>
+            </button>
+            <button class="tab" data-tab="15" aria-label="Feed">
+              <span data-icon="grid"></span><span>Feed</span><i class="tab__dot"></i>
+            </button>
+            <button class="tab" data-tab="11" aria-label="Perfil">
+              <span data-icon="user"></span><span>Perfil</span><i class="tab__dot"></i>
+            </button>
+          </nav>
+
+          <div class="toast" id="toast" role="status" aria-live="polite">
+            <span class="toast__text" id="toast-text"></span>
+            <button class="toast__action" id="toast-action" hidden>Desfazer</button>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/icons.js?v=2"></script>
+  <script src="assets/js/data.js?v=3"></script>
+  <script src="assets/js/ui.js?v=3"></script>
+  <script src="assets/js/app.js?v=2"></script>
+</body>
+</html>

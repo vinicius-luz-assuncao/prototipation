@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 640 480" role="img" aria-label="Piscina com ondas ao sol">
+  <rect width="640" height="480" fill="#E1F0F8"/>
+  <circle cx="502" cy="106" r="70" fill="#F5A23F"/>
+  <path d="M0 250c54-34 108-34 162 0s108 34 162 0 108-34 162 0 108 34 154 0" stroke="#4AA8D8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M0 306c54-34 108-34 162 0s108 34 162 0 108-34 162 0 108 34 154 0" stroke="#1C2B44" stroke-opacity=".35" stroke-width="6" stroke-linecap="round"/>
+  <path d="M0 362c54-34 108-34 162 0s108 34 162 0 108-34 162 0 108 34 154 0" stroke="#4AA8D8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M0 418c54-34 108-34 162 0s108 34 162 0 108-34 162 0 108 34 154 0" stroke="#1C2B44" stroke-opacity=".22" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="258" cy="292" r="17" fill="#E8542B"/>
+  <path d="M274 300c34-26 66-32 96-18" stroke="#1C2B44" stroke-width="9" stroke-linecap="round"/>
+  <path d="M258 310c-18 6-32 6-46 0" stroke="#1C2B44" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="330" cy="246" r="5" fill="#F1E9DB" opacity=".8"/>
+  <circle cx="356" cy="230" r="3.5" fill="#F1E9DB" opacity=".8"/>
+  <circle cx="112" cy="150" r="4" fill="#C44E7C"/>
+  <path d="M64 176c10-12 26-12 36 0" stroke="#8FC9B4" stroke-width="4" stroke-linecap="round"/>
+</svg>

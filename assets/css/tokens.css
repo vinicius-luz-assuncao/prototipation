@@ -1,0 +1,116 @@
+/* =========================================================================
+   VEM — Design tokens
+   Adaptação mobile do design system "Esporte como direito".
+   Regra de espaçamento: apenas múltiplos de 8 (8 · 16 · 24 · 32 · 48 · 64 · 80)
+   ========================================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Superfícies (papel quente) ---- */
+  --paper: #f1e9db;
+  --paper-soft: #f7f1e4;
+  --surface: #fcf8ef;
+  --surface-2: #fffdf8;
+  --paper-deep: #e4d8c1;
+
+  /* ---- Tinta ---- */
+  --ink: #1c2b44;
+  --ink-2: #2e405e;
+  --ink-muted: #4e5a73;
+  --ink-ghost: #5e6a80;
+
+  /* ---- Cores nomeadas ---- */
+  --vermilion: #e8542b;
+  --amber: #f5a23f;
+  --sky: #4aa8d8;
+  --sage: #8fc9b4;
+  --plum: #c44e7c;
+  --purple: #7a5994;
+  --pink: #e8557e;
+  --slate: #8fb0ae;
+
+  /* ---- Versões com contraste AA sobre papel (texto pequeno) ---- */
+  --vermilion-ink: #b03d1b;
+  --amber-ink: #8a5a12;
+  --sky-ink: #1f5e80;
+  --sage-ink: #2f6e54;
+  --plum-ink: #9a335f;
+  --purple-ink: #654780;
+
+  /* ---- Tints (fundos coloridos) ---- */
+  --tint-vermilion: #fbe5dd;
+  --tint-amber: #fcefd9;
+  --tint-sky: #e1f0f8;
+  --tint-sage: #e6f3ec;
+  --tint-plum: #f7e4eb;
+  --tint-purple: #eee8f3;
+  --tint-slate: #edf3f2;
+
+  /* ---- Linhas ---- */
+  --line: rgba(28, 43, 68, 0.14);
+  --line-strong: rgba(28, 43, 68, 0.28);
+  --line-hair: rgba(28, 43, 68, 0.09);
+
+  /* ---- Gradientes editoriais ---- */
+  --grad-warm: linear-gradient(150deg, #fcefd9 0%, #fbe5dd 55%, #f7f1e4 100%);
+  --grad-cool: linear-gradient(150deg, #e1f0f8 0%, #e6f3ec 60%, #f7f1e4 100%);
+  --grad-violet: linear-gradient(155deg, #3f2b52 0%, #6a4a84 55%, #7a5994 100%);
+  --grad-ink: linear-gradient(160deg, #1c2b44 0%, #2e405e 100%);
+  --grad-fade-paper: linear-gradient(180deg, rgba(241, 233, 219, 0) 0%, #f1e9db 72%);
+
+  /* ---- Espaçamento (8px) ---- */
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 32px;
+  --s-5: 48px;
+  --s-6: 64px;
+  --s-7: 80px;
+
+  --margin: 24px;
+  --gutter: 16px;
+
+  /* ---- Raios ---- */
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-pill: 999px;
+
+  /* ---- Elevação ---- */
+  --shadow-1: 0 1px 2px rgba(28, 43, 68, 0.06), 0 1px 1px rgba(28, 43, 68, 0.04);
+  --shadow-2: 0 8px 24px rgba(28, 43, 68, 0.1), 0 2px 6px rgba(28, 43, 68, 0.05);
+  --shadow-3: 0 24px 48px rgba(28, 43, 68, 0.16);
+
+  /* ---- Tipografia ---- */
+  --font-display: "Abril Fatface", Georgia, "Times New Roman", serif;
+  --font-label: "Oswald", "Arial Narrow", Impact, sans-serif;
+  --font-ui: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+  --font-body: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+
+  --t-display-xl: 40px;
+  --t-display: 32px;
+  --t-h1: 28px;
+  --t-h2: 22px;
+  --t-h3: 17px;
+  --t-body: 16px;
+  --t-sm: 14px;
+  --t-xs: 12px;
+  --t-label: 12px;
+
+  /* ---- Movimento ---- */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-1: 160ms;
+  --dur-2: 240ms;
+  --dur-3: 320ms;
+
+  /* ---- Métricas do device ---- */
+  --phone-w: 390px;
+  --phone-h: 844px;
+  --status-h: 44px;
+  --nav-h: 80px;
+  --device-scale: 1;
+
+  /* ---- Textura ---- */
+  --noise-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}

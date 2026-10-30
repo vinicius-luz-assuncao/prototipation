@@ -1,0 +1,634 @@
+/* =========================================================================
+   VEM — Impressão / PDF
+   ========================================================================= */
+
+@page {
+  size: A4 portrait;
+  margin: 13mm;
+}
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html,
+  body.site-page {
+    background: #fff !important;
+    color: #1c2b44 !important;
+    font-size: 10pt;
+    line-height: 1.45;
+  }
+
+  body.site-page::before,
+  .hero__ticker,
+  .site-header,
+  .skip,
+  .hero__actions,
+  .gallery__filters,
+  .closing__actions,
+  .site-footer__nav,
+  .shot__open,
+  .genui__undo,
+  .section--ink::before {
+    display: none !important;
+  }
+
+  .wrap {
+    max-width: none;
+    padding: 0;
+  }
+
+  .section,
+  .section--paper,
+  .section--craft,
+  .closing {
+    background: #fff !important;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Capa ---------------------------------------------------------------- */
+
+  .hero {
+    display: flex;
+    align-items: center;
+    min-height: 255mm;
+    padding: 0;
+    overflow: visible;
+  }
+
+  #conceito,
+  #leis,
+  #genui,
+  #fluxo,
+  #jornada {
+    display: flex;
+    align-items: center;
+    min-height: 255mm;
+  }
+
+  .hero__grid {
+    grid-template-columns: minmax(0, 1fr) 58mm;
+    gap: 10mm;
+    padding-bottom: 0;
+    align-items: center;
+  }
+
+  .hero__title {
+    max-width: none;
+    font-size: 31pt;
+    line-height: 0.98;
+  }
+
+  .hero__title em {
+    text-decoration-thickness: 3pt;
+    text-underline-offset: 2pt;
+  }
+
+  .hero__lead {
+    margin-top: 5mm;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  .hero__stats {
+    gap: 12mm;
+    margin-top: 8mm;
+    padding-top: 4mm;
+    border-top-color: #d8cfbe;
+  }
+
+  .hero__stats dd {
+    font-size: 22pt;
+  }
+
+  .hero__visual {
+    min-height: 0;
+  }
+
+  .hero__halo,
+  .hero__arc,
+  .float-card {
+    display: none !important;
+  }
+
+  .device {
+    width: 58mm;
+    border-width: 1.6mm;
+    border-radius: 7mm;
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  .device img {
+    border-radius: 5.5mm;
+  }
+
+  /* Seções -------------------------------------------------------------- */
+
+  .section {
+    padding: 7mm 0;
+    border-top: 0.3pt solid #cfc6b5;
+  }
+
+  #conceito,
+  #sistema,
+  #leis,
+  #jornada,
+  #genui,
+  #fluxo,
+  #telas,
+  #craft {
+    break-before: page;
+  }
+
+  .section__head {
+    margin-bottom: 6mm;
+    max-width: none;
+  }
+
+  .section__head--split {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 8mm;
+  }
+
+  .section__title {
+    font-size: 24pt;
+  }
+
+  .section__lead,
+  .section__lead--right {
+    max-width: none;
+    margin-top: 3mm;
+    font-size: 10pt;
+    line-height: 1.45;
+  }
+
+  .eyebrow {
+    margin-bottom: 3mm;
+    font-size: 8pt;
+  }
+
+  /* Conceito ------------------------------------------------------------ */
+
+  .concept,
+  .principles,
+  .laws,
+  .craft {
+    gap: 5mm;
+  }
+
+  .concept,
+  .principles,
+  .laws {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .concept__card,
+  .system__block,
+  .flow__col {
+    min-height: 0;
+    padding: 5mm;
+    background: #fff !important;
+    border: 0.4pt solid #d8cfbe;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .concept__card--solution {
+    background: #1c2b44 !important;
+    border-color: #1c2b44;
+  }
+
+  .concept__card--solution p,
+  .genui__lead,
+  .genui__steps p,
+  .genui__note {
+    color: #3a4863 !important;
+  }
+
+  .concept__card--solution p {
+    color: #e4d8c1 !important;
+  }
+
+  .concept__card h3 {
+    margin: 4mm 0 2mm;
+    font-size: 17pt;
+  }
+
+  .concept__card p,
+  .principles__item p,
+  .law p,
+  .craft__item p {
+    font-size: 9pt;
+    line-height: 1.4;
+  }
+
+  .concept__foot {
+    padding-top: 4mm;
+  }
+
+  .principles {
+    margin-top: 7mm;
+    padding-top: 4mm;
+    border-top-color: #d8cfbe;
+  }
+
+  /* Sistema ------------------------------------------------------------- */
+
+  .system {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4mm;
+  }
+
+  .system__block {
+    padding: 4mm;
+  }
+
+  .system__block--wide {
+    grid-column: 1 / -1;
+  }
+
+  .system__label {
+    margin-bottom: 3mm;
+    padding-bottom: 2mm;
+    border-bottom-color: #d8cfbe;
+  }
+
+  .palette {
+    gap: 2.5mm;
+  }
+
+  .swatch__chip {
+    height: 12mm;
+    border: 0.3pt solid #d8cfbe;
+  }
+
+  .system__note {
+    margin-top: 3mm;
+    padding-top: 2mm;
+    font-size: 8pt;
+  }
+
+  .type__row {
+    grid-template-columns: 34mm minmax(0, 1fr);
+    padding: 2mm 0;
+  }
+
+  .type__sample--display {
+    font-size: 17pt;
+  }
+
+  .type__sample--label {
+    font-size: 11pt;
+  }
+
+  .type__sample--ui {
+    font-size: 13pt;
+  }
+
+  .type__sample--body {
+    font-size: 9.5pt;
+    line-height: 1.4;
+  }
+
+  .spacing {
+    min-height: 16mm;
+    padding-bottom: 4mm;
+  }
+
+  .spacing li {
+    height: 12mm;
+  }
+
+  .components {
+    gap: 2mm;
+  }
+
+  /* Leis ---------------------------------------------------------------- */
+
+  .laws {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6mm 5mm;
+  }
+
+  .law {
+    padding-top: 3mm;
+    border-top: 1.2pt solid #1c2b44;
+    break-inside: avoid;
+  }
+
+  .law h3 {
+    font-size: 15pt;
+  }
+
+  /* Jornada ------------------------------------------------------------- */
+
+  .journey {
+    gap: 4mm;
+  }
+
+  .journey__root {
+    padding: 3mm 4mm;
+    border: 0.4pt solid #d8cfbe;
+    background: #fff !important;
+  }
+
+  .journey__root-num {
+    width: 8mm;
+    height: 8mm;
+    background: #1c2b44 !important;
+    color: #fff !important;
+    font-size: 7pt;
+  }
+
+  .journey__root-copy strong {
+    font-size: 10pt;
+  }
+
+  .journey__root-copy span {
+    font-size: 8.5pt;
+  }
+
+  .journey__paths {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4mm;
+  }
+
+  .jpath {
+    padding: 4mm;
+    border: 0.4pt solid #d8cfbe;
+    background: #fff !important;
+    break-inside: avoid;
+  }
+
+  .jpath__head h3 {
+    font-size: 16pt;
+  }
+
+  .jpath__intent {
+    min-height: 0;
+    margin-top: 2mm;
+    font-size: 8.5pt;
+    line-height: 1.4;
+  }
+
+  .jpath__flow {
+    margin-top: 3mm;
+    gap: 2mm;
+  }
+
+  .jpath__flow li {
+    font-size: 7.5pt;
+  }
+
+  .jpath__card {
+    margin-top: 3mm;
+    padding: 2.5mm 3mm;
+    background: #f7f1e4 !important;
+    font-size: 8pt;
+    line-height: 1.35;
+  }
+
+  .jpath__label {
+    font-size: 6.5pt;
+  }
+
+  .jpath__link {
+    display: none !important;
+  }
+
+  .journey__note {
+    padding-top: 3mm;
+    font-size: 8pt;
+  }
+
+  /* GenUI --------------------------------------------------------------- */
+
+  .section--ink {
+    background: #fff !important;
+    color: #1c2b44 !important;
+  }
+
+  .section__title--light {
+    color: #1c2b44 !important;
+  }
+
+  .eyebrow--light {
+    color: #5e6a80 !important;
+  }
+
+  .genui {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .genui__visual {
+    display: none !important;
+  }
+
+  .genui__lead {
+    max-width: none;
+  }
+
+  .genui__steps {
+    margin-top: 4mm;
+  }
+
+  .genui__steps li {
+    padding: 3mm 0;
+    border-top-color: #d8cfbe;
+  }
+
+  .genui__step-num {
+    border-color: #b03d1b;
+    color: #b03d1b;
+  }
+
+  .genui__steps h3 {
+    font-size: 10pt;
+  }
+
+  .genui__steps p {
+    font-size: 9pt;
+  }
+
+  .genui__note {
+    margin-top: 4mm;
+    padding: 3mm 4mm;
+    border-left: 1.5mm solid #f5a23f;
+    background: #f7f1e4 !important;
+    font-size: 8.5pt;
+  }
+
+  .genui__note strong {
+    color: #1c2b44 !important;
+  }
+
+  /* Fluxo --------------------------------------------------------------- */
+
+  .flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5mm;
+  }
+
+  .flow__arrow {
+    display: none;
+  }
+
+  .flow__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flow__list a {
+    min-height: 0;
+    padding: 1.6mm 0;
+    font-size: 8.5pt;
+  }
+
+  .flow__head h3 {
+    font-size: 15pt;
+  }
+
+  /* Galeria ------------------------------------------------------------- */
+
+  .gallery {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 5mm 3mm;
+  }
+
+  .shot {
+    break-inside: avoid;
+  }
+
+  .shot__frame {
+    padding: 1.2mm;
+    border-radius: 4mm;
+    box-shadow: none;
+  }
+
+  .shot__frame img {
+    border-radius: 3mm;
+  }
+
+  .shot--feature .shot__frame::after,
+  .shot--premium .shot__frame::after {
+    top: 2mm;
+    left: 2mm;
+    padding: 0.6mm 1.5mm;
+    font-size: 5.5pt;
+  }
+
+  .shot__meta {
+    margin-top: 2mm;
+    gap: 1.5mm;
+  }
+
+  .shot__num {
+    font-size: 7pt;
+  }
+
+  .shot__title {
+    font-size: 9pt;
+  }
+
+  .shot__desc {
+    margin-top: 0.5mm;
+    font-size: 7.5pt;
+    line-height: 1.3;
+  }
+
+  .gallery__empty {
+    display: none !important;
+  }
+
+  /* Craft e fechamento --------------------------------------------------- */
+
+  .craft {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6mm 5mm;
+  }
+
+  .craft__figure {
+    font-size: 27pt;
+  }
+
+  .craft__item h3 {
+    font-size: 10pt;
+  }
+
+  .closing {
+    padding: 8mm 0;
+    background: #f7f1e4 !important;
+    border-top: 0.3pt solid #cfc6b5;
+    break-inside: avoid;
+  }
+
+  .closing__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .closing__title {
+    font-size: 24pt;
+  }
+
+  .closing__text {
+    max-width: none;
+    font-size: 10pt;
+  }
+
+  .closing::after {
+    display: none;
+  }
+
+  /* Rodapé --------------------------------------------------------------- */
+
+  .site-footer {
+    padding: 6mm 0 0;
+    background: #fff !important;
+    color: #1c2b44 !important;
+    border-top: 0.4pt solid #d8cfbe;
+    break-inside: avoid;
+  }
+
+  .site-footer__inner {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .site-footer__brand img {
+    background: transparent;
+    padding: 0;
+  }
+
+  .site-footer__brand span,
+  .site-footer__note {
+    color: #5e6a80 !important;
+  }
+
+  html.js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

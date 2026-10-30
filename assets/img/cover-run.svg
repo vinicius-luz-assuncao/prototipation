@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 640 480" role="img" aria-label="Pista de corrida ao amanhecer">
+  <rect width="640" height="480" fill="#E1F0F8"/>
+  <circle cx="492" cy="126" r="84" fill="#F5A23F"/>
+  <path d="M-60 430C140 306 500 306 700 430" stroke="#E8542B" stroke-width="52"/>
+  <path d="M-60 400C140 276 500 276 700 400" stroke="#F1E9DB" stroke-width="5" opacity=".7"/>
+  <path d="M64 392C176 250 468 250 578 392" stroke="#1C2B44" stroke-width="3" stroke-dasharray="10 14" opacity=".55"/>
+  <circle cx="64" cy="392" r="7" fill="#1C2B44"/>
+  <path d="M578 392v-54" stroke="#1C2B44" stroke-width="4" stroke-linecap="round"/>
+  <path d="M578 338l32 11-32 11Z" fill="#F5A23F"/>
+  <circle cx="320" cy="216" r="13" fill="#1C2B44"/>
+  <path d="M318 230l-8 42" stroke="#1C2B44" stroke-width="8" stroke-linecap="round"/>
+  <path d="M316 242l24-16M316 244l-24 8" stroke="#1C2B44" stroke-width="7" stroke-linecap="round"/>
+  <path d="M310 272l-18 24M310 272l22 20" stroke="#1C2B44" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="108" cy="150" r="5" fill="#C44E7C"/>
+  <circle cx="212" cy="88" r="3.5" fill="#1C2B44" opacity=".35"/>
+  <circle cx="562" cy="262" r="4" fill="#4AA8D8"/>
+  <path d="M388 110c10-12 26-12 36 0" stroke="#8FC9B4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M84 320c10-12 26-12 36 0" stroke="#F5A23F" stroke-width="4" stroke-linecap="round"/>
+</svg>
