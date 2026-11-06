@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>vem — protótipo navegável</title>
-  <meta name="description" content="Protótipo de alta fidelidade do vem, app de fitness e conexões. 20 telas, GenUI e design system editorial.">
+  <meta name="description" content="Protótipo de alta fidelidade do vem, app de fitness e conexões. 20 telas, GenUI e design system Mineral.">
   <link rel="icon" href="assets/img/logo.svg">
   <link rel="stylesheet" href="assets/fonts/fonts.css?v=2">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=2">
-  <link rel="stylesheet" href="assets/css/base.css?v=2">
-  <link rel="stylesheet" href="assets/css/components.css?v=2">
-  <link rel="stylesheet" href="assets/css/screens.css?v=3">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=3">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/components.css?v=3">
+  <link rel="stylesheet" href="assets/css/screens.css?v=4">
 </head>
 <body class="app-page">
 
@@ -278,7 +278,7 @@
                 </button>
 
                 <button class="path-card" type="button" aria-pressed="false" data-path="self">
-                  <span class="path-card__icon circle circle--sage"><span data-icon="activity"></span></span>
+                  <span class="path-card__icon circle circle--sky"><span data-icon="activity"></span></span>
                   <span class="path-card__body">
                     <span class="path-card__title">Autocuidado</span>
                     <span class="path-card__text">Focar na sua evolução, com treinos e métricas no seu ritmo.</span>
@@ -571,10 +571,10 @@
                   </div>
                   <div class="cat-row">
                     <button class="cat" data-nav="13"><span class="cat__icon"><span data-icon="lotus"></span></span><span>Yoga</span></button>
-                    <button class="cat cat--sky" data-nav="13"><span class="cat__icon"><span data-icon="run"></span></span><span>Corrida</span></button>
-                    <button class="cat" data-nav="13"><span class="cat__icon"><span data-icon="dumbbell"></span></span><span>Força</span></button>
+                    <button class="cat cat--amber" data-nav="13"><span class="cat__icon"><span data-icon="run"></span></span><span>Corrida</span></button>
+                    <button class="cat cat--vermilion" data-nav="13"><span class="cat__icon"><span data-icon="dumbbell"></span></span><span>Força</span></button>
                     <button class="cat cat--plum" data-nav="13"><span class="cat__icon"><span data-icon="music"></span></span><span>Dança</span></button>
-                    <button class="cat cat--sage" data-nav="13"><span class="cat__icon"><span data-icon="swim"></span></span><span>Natação</span></button>
+                    <button class="cat" data-nav="13"><span class="cat__icon"><span data-icon="swim"></span></span><span>Natação</span></button>
                   </div>
                 </section>
 
@@ -638,47 +638,6 @@
                   </div>
                 </section>
 
-                <section class="card week" aria-labelledby="week-title">
-                  <div class="week__top">
-                    <div>
-                      <p class="eyebrow" id="week-title">Minha semana</p>
-                      <div class="week__label"><span class="stat">3</span><span>de 5 treinos</span></div>
-                      <p class="small">Faltam 2 treinos para a meta.</p>
-                    </div>
-                    <div class="ring" role="img" aria-label="60% da meta semanal concluída">
-                      <svg viewBox="0 0 72 72" aria-hidden="true">
-                        <circle class="ring__track" cx="36" cy="36" r="32"></circle>
-                        <circle class="ring__value" cx="36" cy="36" r="32" stroke-dasharray="201" stroke-dashoffset="80"></circle>
-                      </svg>
-                      <span class="ring__label">60<small>%</small></span>
-                    </div>
-                  </div>
-
-                  <div class="week__bars" aria-hidden="true">
-                    <div class="week__bar is-done"><i style="--h: 32px"></i><span>S</span></div>
-                    <div class="week__bar is-done"><i style="--h: 40px"></i><span>T</span></div>
-                    <div class="week__bar is-today"><i style="--h: 24px"></i><span>Q</span></div>
-                    <div class="week__bar"><i style="--h: 8px"></i><span>Q</span></div>
-                    <div class="week__bar"><i style="--h: 8px"></i><span>S</span></div>
-                    <div class="week__bar"><i style="--h: 8px"></i><span>S</span></div>
-                    <div class="week__bar"><i style="--h: 8px"></i><span>D</span></div>
-                  </div>
-
-                  <div class="week__streak">
-                    <span data-icon="flame"></span>
-                    <span>3 semanas seguidas treinando</span>
-                  </div>
-                </section>
-
-                <button class="premium-strip" type="button" data-nav="16">
-                  <span class="circle circle--purple"><span data-icon="crown"></span></span>
-                  <span class="premium-strip__body">
-                    <span class="premium-strip__title">vem+</span>
-                    <span class="premium-strip__sub">Treinos com IA, match sem limites e grupos privados.</span>
-                  </span>
-                  <span data-icon="chevron-right"></span>
-                </button>
-
               </div>
             </div>
           </section>
@@ -698,14 +657,16 @@
                   <div class="avatar avatar--xl">
                     <img src="assets/img/avatar.jpg" alt="Foto de Ana Beatriz">
                   </div>
+                </div>
+
+                <div class="profile__name-row">
+                  <div class="profile__name">
+                    <h1 class="h1">Ana Beatriz</h1>
+                    <span data-icon="verified" aria-label="Perfil verificado"></span>
+                  </div>
                   <button class="profile__share" data-toast="Link do perfil copiado." aria-label="Compartilhar perfil">
                     <span data-icon="share"></span>
                   </button>
-                </div>
-
-                <div class="profile__name">
-                  <h1 class="h1">Ana Beatriz</h1>
-                  <span data-icon="verified" aria-label="Perfil verificado"></span>
                 </div>
 
                 <div class="profile__level">
@@ -770,7 +731,7 @@
                   <p class="eyebrow">Pessoas perto de você</p>
                   <h1 class="h1">Matches</h1>
                 </div>
-                <button class="iconbtn iconbtn--surface" data-toast="Filtros de match: distância, objetivo e nível." aria-label="Filtrar matches">
+                <button class="iconbtn" data-toast="Filtros de match: distância, objetivo e nível." aria-label="Filtrar matches">
                   <span data-icon="filter"></span>
                 </button>
               </header>
@@ -780,6 +741,9 @@
                   <div class="match-card__photo" id="match-photo">
                     <img id="match-img" src="assets/img/avatar.jpg" alt="Foto de Marina">
                     <span class="badge badge--glass match-card__compat" id="match-compat">87% combinam</span>
+                  </div>
+
+                  <div class="match-card__body">
                     <div class="match-card__info">
                       <h2 class="match-card__name">
                         <span><span id="match-name">Marina</span>, <span id="match-age">28</span></span>
@@ -792,9 +756,6 @@
                         <span id="match-area">Vila Madalena</span>
                       </p>
                     </div>
-                  </div>
-
-                  <div class="match-card__body">
                     <p class="match-card__bio" id="match-bio">Corro de manhã e cozinho à noite. Procuro companhia para os treinos de terça e quinta.</p>
                     <div class="match-card__tags" id="match-tags">
                       <span class="tag">Corrida</span><span class="tag">5 km</span><span class="tag">Yoga</span>
@@ -972,7 +933,7 @@
                   <p class="eyebrow">Sua turma</p>
                   <h1 class="h1">Social</h1>
                 </div>
-                <span class="badge badge--light">24 conexões</span>
+                <span class="eyebrow">24 conexões</span>
               </header>
 
               <div class="segmented" role="tablist" aria-label="Conexões ou grupos" data-segmented="social">
@@ -1293,7 +1254,7 @@
                 </div>
 
                 <div class="premium__cta">
-                  <button class="btn btn--premium btn--lg btn--block" data-toast="Assinatura iniciada (demonstração).">Assinar agora</button>
+                  <button class="btn btn--primary btn--lg btn--block" data-toast="Assinatura iniciada (demonstração).">Assinar agora</button>
                   <p class="premium__guarantee"><span data-icon="shield-check"></span> Cancele quando quiser. Sem letras miúdas.</p>
                   <button class="btn btn--ghost btn--block" data-nav="10">Continuar com o gratuito</button>
                 </div>
@@ -1572,7 +1533,7 @@
     </main>
   </div>
 
-  <script src="assets/js/icons.js?v=2"></script>
+  <script src="assets/js/icons.js?v=3"></script>
   <script src="assets/js/data.js?v=3"></script>
   <script src="assets/js/ui.js?v=3"></script>
   <script src="assets/js/app.js?v=2"></script>

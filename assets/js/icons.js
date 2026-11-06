@@ -1,6 +1,6 @@
 /* =========================================================================
    VEM — Ícones (sprite SVG injetado)
-   Traço 1.75 · 24px · pontas arredondadas
+   Traço 1.6 · 24px · pontas arredondadas
    ========================================================================= */
 
 (function () {
@@ -126,7 +126,33 @@
     "face-5":
       '<circle cx="12" cy="12" r="8.8"/><path d="M7.8 8.2c.8-.8 1.8-1 2.8-.6M16.2 8.2c-.8-.8-1.8-1-2.8-.6"/><path d="M7.6 13.4c1 2.4 2.5 3.6 4.4 3.6s3.4-1.2 4.4-3.6Z"/>',
     wifi:
-      '<path d="M3.4 9.4a13 13 0 0 1 17.2 0M6.4 12.8a8.4 8.4 0 0 1 11.2 0M9.4 16.2a4 4 0 0 1 5.2 0"/><circle cx="12" cy="19.2" r="1" fill="currentColor" stroke="none"/>'
+      '<path d="M3.4 9.4a13 13 0 0 1 17.2 0M6.4 12.8a8.4 8.4 0 0 1 11.2 0M9.4 16.2a4 4 0 0 1 5.2 0"/><circle cx="12" cy="19.2" r="1" fill="currentColor" stroke="none"/>',
+    "house": '<path d="M3.5 10.8 12 3.6l8.5 7.2"/><path d="M5.5 9.6V20h13V9.6"/><path d="M9.5 20v-5.6h5V20"/>',
+    "users-round":
+      '<circle cx="9" cy="8.4" r="3.2"/><path d="M2.9 20a6.2 6.2 0 0 1 12.2 0"/><path d="M15.9 5.6a3.2 3.2 0 0 1 0 5.9"/><path d="M17.4 14.4A5.6 5.6 0 0 1 21.1 20"/>',
+    "grid-2x2":
+      '<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>',
+    "user-round":
+      '<circle cx="12" cy="8" r="3.4"/><path d="M4.9 20a7.3 7.3 0 0 1 14.2 0"/>',
+    "list-filter": '<path d="M4 7h16M7 12h10M10 17h4"/><path d="M4 7l16 0"/>',
+    "share-2":
+      '<circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="m8.2 10.9 7.6-3.7M8.2 13.1l7.6 3.7"/>',
+    "message-circle":
+      '<path d="M20.4 11.6a7.9 7.9 0 0 1-11.7 7L4 20l1.4-4.6a7.9 7.9 0 1 1 15-3.8Z"/>',
+    "lock-keyhole":
+      '<rect x="4.5" y="10.2" width="15" height="9.8" rx="3"/><path d="M8 10.2V7.6a4 4 0 0 1 8 0v2.6"/><circle cx="12" cy="14.6" r="1.2" fill="currentColor" stroke="none"/><path d="M12 15.8v1.8"/>',
+    "calendar-days":
+      '<rect x="3.5" y="5.2" width="17" height="15.3" rx="3"/><path d="M8.2 3v4.2M15.8 3v4.2M3.5 10.2h17"/><path d="M8 13.6h.01M12 13.6h.01M16 13.6h.01M8 17h.01M12 17h.01M16 17h.01"/>',
+    "flower-2":
+      '<path d="M12 20.2c-4.4 0-7.4-2.5-8.4-6 3-.9 5.4.3 8.4 3 3-2.7 5.4-3.9 8.4-3-1 3.5-4 6-8.4 6Z"/><path d="M12 17.2c-2.5-3-3-6.4-1.5-9.8 2.5 1.4 3.9 4.8 3.7 8.3"/><path d="M8.6 9.8c.4 2.4 1.6 4.4 3.4 6M15.4 9.8c-.4 2.4-1.6 4.4-3.4 6"/>',
+    "person-standing":
+      '<circle cx="12" cy="5" r="2.2"/><path d="M12 8.2v6.2M8.4 10.6l3.6-1.2 3.6 1.2M9.2 21l2.8-6.6L14.8 21"/>',
+    "music-2":
+      '<path d="M9.4 18V6.2l9.4-2v10.6"/><circle cx="6.6" cy="18.2" r="2.6"/><circle cx="16" cy="16.8" r="2.6"/>',
+    "waves":
+      '<circle cx="16.4" cy="7" r="2.2"/><path d="M3 15.2c2-1.8 4-1.8 6 0s4 1.8 6 0 4-1.8 6 0"/><path d="M3 19.2c2-1.8 4-1.8 6 0s4 1.8 6 0 4-1.8 6 0"/><path d="M7.4 12.2 11 10l4.4 3.4"/>',
+    "sparkles":
+      '<path d="M11.5 3.5 13 8.4l4.9 1.5-4.9 1.5-1.5 4.9-1.5-4.9L5.1 9.9 10 8.4l1.5-4.9Z"/><path d="M18 15.4l.7 2.2 2.2.7-2.2.7-.7 2.2-.7-2.2-2.2-.7 2.2-.7.7-2.2Z"/>'
   };
 
   var names = Object.keys(PATHS);

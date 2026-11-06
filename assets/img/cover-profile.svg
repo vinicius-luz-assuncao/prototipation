@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 640 240" role="img" aria-label="Padrão abstrato de capa de perfil">
   <defs>
     <linearGradient id="pc" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#E1F0F8"/>
-      <stop offset=".55" stop-color="#E6F3EC"/>
-      <stop offset="1" stop-color="#F7F1E4"/>
+      <stop offset="0" stop-color="#F1E4F1"/>
+      <stop offset=".55" stop-color="#F1E4F1"/>
+      <stop offset="1" stop-color="#FCF8FC"/>
     </linearGradient>
   </defs>
   <rect width="640" height="240" fill="url(#pc)"/>
-  <circle cx="536" cy="44" r="132" fill="#F5A23F"/>
-  <circle cx="536" cy="44" r="96" fill="#F1E9DB" opacity=".28"/>
-  <path d="M-40 218C120 92 460 92 680 218" stroke="#1C2B44" stroke-opacity=".28" stroke-width="3" stroke-dasharray="4 12"/>
-  <path d="M356 240c26-58 82-94 152-104-14 62-74 100-152 104Z" fill="#8FC9B4" opacity=".65"/>
-  <circle cx="454" cy="150" r="6" fill="#E8542B"/>
-  <circle cx="612" cy="186" r="5" fill="#1C2B44" opacity=".35"/>
-  <path d="M410 62c10-12 26-12 36 0" stroke="#F1E9DB" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+  <circle cx="536" cy="44" r="132" fill="#F77CC5"/>
+  <circle cx="536" cy="44" r="96" fill="#FCF8FC" opacity=".28"/>
+  <path d="M-40 218C120 92 460 92 680 218" stroke="#302437" stroke-opacity=".28" stroke-width="3" stroke-dasharray="4 12"/>
+  <path d="M356 240c26-58 82-94 152-104-14 62-74 100-152 104Z" fill="#DAE35A" opacity=".65"/>
+  <circle cx="454" cy="150" r="6" fill="#F57335"/>
+  <circle cx="612" cy="186" r="5" fill="#302437" opacity=".35"/>
+  <path d="M410 62c10-12 26-12 36 0" stroke="#FCF8FC" stroke-width="4" stroke-linecap="round" opacity=".8"/>
 </svg>

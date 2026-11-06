@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 400 400" role="img" aria-label="Retrato para verificação facial">
-  <rect width="400" height="400" fill="#E1F0F8"/>
-  <circle cx="200" cy="212" r="150" fill="#F7F1E4" opacity=".55"/>
-  <path d="M52 400c14-86 68-126 148-126s134 40 148 126Z" fill="#8FC9B4"/>
-  <rect x="172" y="266" width="56" height="58" rx="18" fill="#F1E9DB"/>
-  <ellipse cx="200" cy="196" rx="76" ry="92" fill="#F1E9DB"/>
-  <path d="M124 188c0-58 34-94 76-94s76 36 76 94c-18-24-44-36-76-36s-58 12-76 36Z" fill="#1C2B44"/>
-  <path d="M166 192c5-4 12-4 17 0M217 192c5-4 12-4 17 0" stroke="#1C2B44" stroke-width="4" stroke-linecap="round"/>
-  <path d="M200 202v24l-9 6" stroke="#1C2B44" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M184 248c9 7 23 7 32 0" stroke="#1C2B44" stroke-width="4" stroke-linecap="round"/>
-  <path d="M128 210c-6 18-6 34 2 46M272 210c6 18 6 34-2 46" stroke="#1C2B44" stroke-width="3" stroke-linecap="round" opacity=".5"/>
-  <g stroke="#1C2B44" stroke-opacity=".1" stroke-width="1">
+  <rect width="400" height="400" fill="#F1E4F1"/>
+  <circle cx="200" cy="212" r="150" fill="#FCF8FC" opacity=".55"/>
+  <path d="M52 400c14-86 68-126 148-126s134 40 148 126Z" fill="#DAE35A"/>
+  <rect x="172" y="266" width="56" height="58" rx="18" fill="#FDE5F2"/>
+  <ellipse cx="200" cy="196" rx="76" ry="92" fill="#FDE5F2"/>
+  <path d="M124 188c0-58 34-94 76-94s76 36 76 94c-18-24-44-36-76-36s-58 12-76 36Z" fill="#302437"/>
+  <path d="M166 192c5-4 12-4 17 0M217 192c5-4 12-4 17 0" stroke="#302437" stroke-width="4" stroke-linecap="round"/>
+  <path d="M200 202v24l-9 6" stroke="#302437" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M184 248c9 7 23 7 32 0" stroke="#302437" stroke-width="4" stroke-linecap="round"/>
+  <path d="M128 210c-6 18-6 34 2 46M272 210c6 18 6 34-2 46" stroke="#302437" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+  <g stroke="#302437" stroke-opacity=".1" stroke-width="1">
     <path d="M0 60h400M0 100h400M0 140h400M0 180h400M0 220h400M0 260h400M0 300h400M0 340h400"/>
     <path d="M60 0v400M100 0v400M140 0v400M180 0v400M220 0v400M260 0v400M300 0v400M340 0v400"/>
   </g>
-  <path d="M40 200h14M52 192v16M346 148h14M352 140v16" stroke="#F5A23F" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="340" cy="286" r="9" fill="#E8542B"/>
+  <path d="M40 200h14M52 192v16M346 148h14M352 140v16" stroke="#F77CC5" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="340" cy="286" r="9" fill="#F57335"/>
 </svg>
