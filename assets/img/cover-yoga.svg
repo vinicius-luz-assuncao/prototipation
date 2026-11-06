@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 640 480" role="img" aria-label="Sol nascente e postura de yoga">
-  <rect width="640" height="480" fill="#E6F3EC"/>
-  <circle cx="320" cy="248" r="152" fill="#F5A23F"/>
-  <path d="M0 356h640M0 392h640M0 428h640" stroke="#1C2B44" stroke-opacity=".14" stroke-width="2"/>
-  <ellipse cx="320" cy="364" rx="56" ry="7" fill="#1C2B44" opacity=".14"/>
-  <circle cx="320" cy="176" r="14" fill="#1C2B44"/>
-  <path d="M320 194v106" stroke="#1C2B44" stroke-width="12" stroke-linecap="round"/>
-  <path d="M320 216l-30-46M320 216l30-46" stroke="#1C2B44" stroke-width="8" stroke-linecap="round"/>
-  <path d="M320 300v62" stroke="#1C2B44" stroke-width="10" stroke-linecap="round"/>
-  <path d="M320 300h-30l22-30" stroke="#1C2B44" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="112" cy="120" r="5" fill="#C44E7C"/>
-  <circle cx="522" cy="96" r="4" fill="#1C2B44" opacity=".4"/>
-  <circle cx="472" cy="200" r="6" fill="#E8542B"/>
-  <path d="M64 402c0-18 12-30 24-34-4 16-8 26-24 34Z" fill="#8FC9B4"/>
-  <path d="M566 402c0-20-14-34-26-38 6 18 10 30 26 38Z" fill="#8FC9B4"/>
-  <path d="M96 180c10-12 26-12 36 0M508 320c10-12 26-12 36 0" stroke="#4AA8D8" stroke-width="4" stroke-linecap="round"/>
+  <rect width="640" height="480" fill="#F1E4F1"/>
+  <circle cx="320" cy="248" r="152" fill="#F77CC5"/>
+  <path d="M0 356h640M0 392h640M0 428h640" stroke="#302437" stroke-opacity=".14" stroke-width="2"/>
+  <ellipse cx="320" cy="364" rx="56" ry="7" fill="#302437" opacity=".14"/>
+  <circle cx="320" cy="176" r="14" fill="#302437"/>
+  <path d="M320 194v106" stroke="#302437" stroke-width="12" stroke-linecap="round"/>
+  <path d="M320 216l-30-46M320 216l30-46" stroke="#302437" stroke-width="8" stroke-linecap="round"/>
+  <path d="M320 300v62" stroke="#302437" stroke-width="10" stroke-linecap="round"/>
+  <path d="M320 300h-30l22-30" stroke="#302437" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="112" cy="120" r="5" fill="#F77CC5"/>
+  <circle cx="522" cy="96" r="4" fill="#302437" opacity=".4"/>
+  <circle cx="472" cy="200" r="6" fill="#F57335"/>
+  <path d="M64 402c0-18 12-30 24-34-4 16-8 26-24 34Z" fill="#DAE35A"/>
+  <path d="M566 402c0-20-14-34-26-38 6 18 10 30 26 38Z" fill="#DAE35A"/>
+  <path d="M96 180c10-12 26-12 36 0M508 320c10-12 26-12 36 0" stroke="#C799C8" stroke-width="4" stroke-linecap="round"/>
 </svg>

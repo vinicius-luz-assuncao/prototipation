@@ -18,7 +18,7 @@ body {
   min-height: 100%;
   font-family: var(--font-body);
   font-size: var(--t-body);
-  line-height: 24px;
+  line-height: 20px;
   color: var(--ink);
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
@@ -98,8 +98,8 @@ a {
   gap: var(--s-1);
   font-family: var(--font-label);
   font-size: var(--t-label);
-  font-weight: 500;
-  line-height: 16px;
+  font-weight: 600;
+  line-height: 14px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--ink-muted);
@@ -132,7 +132,7 @@ a {
 .h1 {
   font-family: var(--font-ui);
   font-size: var(--t-h1);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 32px;
   letter-spacing: -0.015em;
 }
@@ -140,33 +140,33 @@ a {
 .h2 {
   font-family: var(--font-ui);
   font-size: var(--t-h2);
-  font-weight: 600;
-  line-height: 28px;
+  font-weight: 700;
+  line-height: 26px;
   letter-spacing: -0.01em;
 }
 
 .h3 {
   font-family: var(--font-ui);
   font-size: var(--t-h3);
-  font-weight: 600;
-  line-height: 24px;
+  font-weight: 700;
+  line-height: 22px;
   letter-spacing: -0.005em;
 }
 
 .lede {
   font-size: var(--t-body);
-  line-height: 24px;
+  line-height: 20px;
   color: var(--ink-muted);
 }
 
 .body {
   font-size: var(--t-body);
-  line-height: 24px;
+  line-height: 20px;
 }
 
 .small {
   font-size: var(--t-sm);
-  line-height: 20px;
+  line-height: 18px;
   color: var(--ink-muted);
 }
 
@@ -198,7 +198,7 @@ a {
   flex: none;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.75;
+  stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -310,20 +310,13 @@ a {
 
 .app-page {
   min-height: 100vh;
-  background: var(--paper-deep);
+  background: #f4eaf3;
   position: relative;
   overflow-x: hidden;
 }
 
 .app-page::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: var(--noise-img);
-  opacity: 0.45;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 0;
+  content: none;
 }
 
 .app-page::after {
@@ -331,8 +324,8 @@ a {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(1000px 700px at 18% 20%, rgba(245, 162, 63, 0.18), transparent 60%),
-    radial-gradient(900px 700px at 85% 80%, rgba(74, 168, 216, 0.16), transparent 60%);
+    radial-gradient(1000px 700px at 18% 20%, rgba(247, 124, 197, 0.12), transparent 60%),
+    radial-gradient(900px 700px at 85% 80%, rgba(199, 153, 200, 0.18), transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -363,13 +356,12 @@ a {
   width: var(--phone-w);
   height: var(--phone-h);
   flex: none;
-  border-radius: 44px;
+  border-radius: 22px;
   background: var(--paper);
   box-shadow:
-    0 0 0 1px rgba(28, 43, 68, 0.16),
-    0 2px 0 rgba(255, 255, 255, 0.55) inset,
-    0 40px 80px rgba(28, 43, 68, 0.26),
-    0 12px 24px rgba(28, 43, 68, 0.14);
+    0 0 0 1px var(--line),
+    0 40px 80px rgba(48, 36, 55, 0.18),
+    0 12px 24px rgba(48, 36, 55, 0.1);
   transform: scale(var(--device-scale));
   transform-origin: center center;
   overflow: hidden;
@@ -379,21 +371,13 @@ a {
 .device__screen {
   position: absolute;
   inset: 0;
-  border-radius: 44px;
+  border-radius: 22px;
   overflow: hidden;
   background: var(--paper);
 }
 
 .device__screen::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--noise-img);
-  opacity: 0.18;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 70;
-  border-radius: inherit;
+  content: none;
 }
 
 /* -------------------------------------------------------------------------
@@ -443,7 +427,7 @@ a {
 .rail__brand-text small {
   font-family: var(--font-label);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -458,7 +442,7 @@ a {
   overflow-y: auto;
   padding-right: 4px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(28, 43, 68, 0.22) transparent;
+  scrollbar-color: rgba(48, 36, 55, 0.22) transparent;
   overscroll-behavior: contain;
 }
 
@@ -471,7 +455,7 @@ a {
   padding: 0 var(--s-1) 4px;
   font-family: var(--font-label);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -487,8 +471,8 @@ a {
   border-radius: var(--r-sm);
   color: var(--ink-2);
   font-family: var(--font-ui);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   line-height: 20px;
   text-align: left;
   transition:
@@ -497,7 +481,7 @@ a {
 }
 
 .rail__item:hover {
-  background: rgba(28, 43, 68, 0.07);
+  background: var(--tint-sky);
 }
 
 .rail__num {
@@ -505,7 +489,7 @@ a {
   flex: none;
   font-family: var(--font-label);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--ink-ghost);
   transition: color var(--dur-1) var(--ease);
@@ -517,7 +501,7 @@ a {
 }
 
 .rail__item.is-active .rail__num {
-  color: var(--amber);
+  color: var(--vermilion);
 }
 
 .rail__foot {
@@ -563,15 +547,15 @@ a {
   left: 0;
   right: 0;
   height: var(--status-h);
-  padding: 0 var(--margin) 8px;
+  padding: 0 var(--margin);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   font-family: var(--font-ui);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 800;
   line-height: 16px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   color: var(--ink);
   z-index: 60;
   pointer-events: none;
@@ -711,22 +695,22 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(var(--status-h) + 4px) 72px 4px;
-  min-height: calc(var(--status-h) + 56px);
+  padding: var(--status-h) var(--margin) 0;
+  min-height: calc(var(--status-h) + 40px);
 }
 
 .topbar .iconbtn {
   position: absolute;
-  left: var(--s-1);
-  top: calc(var(--status-h) + 4px);
+  left: 8px;
+  top: calc(var(--status-h) - 4px);
 }
 
 .topbar__title {
   font-family: var(--font-ui);
-  font-size: var(--t-h3);
-  font-weight: 600;
-  line-height: 24px;
-  letter-spacing: -0.005em;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0;
   text-align: center;
 }
 

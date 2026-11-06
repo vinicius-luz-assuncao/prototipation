@@ -18,7 +18,7 @@
   html,
   body.site-page {
     background: #fff !important;
-    color: #1c2b44 !important;
+    color: #302437 !important;
     font-size: 10pt;
     line-height: 1.45;
   }
@@ -115,7 +115,7 @@
     gap: 12mm;
     margin-top: 8mm;
     padding-top: 4mm;
-    border-top-color: #d8cfbe;
+    border-top-color: #e7dae7;
   }
 
   .hero__stats dd {
@@ -148,7 +148,7 @@
 
   .section {
     padding: 7mm 0;
-    border-top: 0.3pt solid #cfc6b5;
+    border-top: 0.3pt solid #e7dae7;
   }
 
   #conceito,
@@ -210,25 +210,25 @@
     min-height: 0;
     padding: 5mm;
     background: #fff !important;
-    border: 0.4pt solid #d8cfbe;
+    border: 0.4pt solid #e7dae7;
     box-shadow: none;
     break-inside: avoid;
   }
 
   .concept__card--solution {
-    background: #1c2b44 !important;
-    border-color: #1c2b44;
+    background: #302437 !important;
+    border-color: #302437;
   }
 
   .concept__card--solution p,
   .genui__lead,
   .genui__steps p,
   .genui__note {
-    color: #3a4863 !important;
+    color: #6d596d !important;
   }
 
   .concept__card--solution p {
-    color: #e4d8c1 !important;
+    color: #e7dae7 !important;
   }
 
   .concept__card h3 {
@@ -251,7 +251,7 @@
   .principles {
     margin-top: 7mm;
     padding-top: 4mm;
-    border-top-color: #d8cfbe;
+    border-top-color: #e7dae7;
   }
 
   /* Sistema ------------------------------------------------------------- */
@@ -272,7 +272,7 @@
   .system__label {
     margin-bottom: 3mm;
     padding-bottom: 2mm;
-    border-bottom-color: #d8cfbe;
+    border-bottom-color: #e7dae7;
   }
 
   .palette {
@@ -281,7 +281,7 @@
 
   .swatch__chip {
     height: 12mm;
-    border: 0.3pt solid #d8cfbe;
+    border: 0.3pt solid #e7dae7;
   }
 
   .system__note {
@@ -334,7 +334,7 @@
 
   .law {
     padding-top: 3mm;
-    border-top: 1.2pt solid #1c2b44;
+    border-top: 1.2pt solid #302437;
     break-inside: avoid;
   }
 
@@ -350,14 +350,14 @@
 
   .journey__root {
     padding: 3mm 4mm;
-    border: 0.4pt solid #d8cfbe;
+    border: 0.4pt solid #e7dae7;
     background: #fff !important;
   }
 
   .journey__root-num {
     width: 8mm;
     height: 8mm;
-    background: #1c2b44 !important;
+    background: #302437 !important;
     color: #fff !important;
     font-size: 7pt;
   }
@@ -377,7 +377,7 @@
 
   .jpath {
     padding: 4mm;
-    border: 0.4pt solid #d8cfbe;
+    border: 0.4pt solid #e7dae7;
     background: #fff !important;
     break-inside: avoid;
   }
@@ -405,7 +405,7 @@
   .jpath__card {
     margin-top: 3mm;
     padding: 2.5mm 3mm;
-    background: #f7f1e4 !important;
+    background: #fbf5fa !important;
     font-size: 8pt;
     line-height: 1.35;
   }
@@ -427,15 +427,15 @@
 
   .section--ink {
     background: #fff !important;
-    color: #1c2b44 !important;
+    color: #302437 !important;
   }
 
   .section__title--light {
-    color: #1c2b44 !important;
+    color: #302437 !important;
   }
 
   .eyebrow--light {
-    color: #5e6a80 !important;
+    color: #6d596d !important;
   }
 
   .genui {
@@ -457,12 +457,12 @@
 
   .genui__steps li {
     padding: 3mm 0;
-    border-top-color: #d8cfbe;
+    border-top-color: #e7dae7;
   }
 
   .genui__step-num {
-    border-color: #b03d1b;
-    color: #b03d1b;
+    border-color: #a64312;
+    color: #a64312;
   }
 
   .genui__steps h3 {
@@ -476,13 +476,13 @@
   .genui__note {
     margin-top: 4mm;
     padding: 3mm 4mm;
-    border-left: 1.5mm solid #f5a23f;
-    background: #f7f1e4 !important;
+    border-left: 1.5mm solid #f77cc5;
+    background: #fbf5fa !important;
     font-size: 8.5pt;
   }
 
   .genui__note strong {
-    color: #1c2b44 !important;
+    color: #302437 !important;
   }
 
   /* Fluxo --------------------------------------------------------------- */
@@ -579,8 +579,8 @@
 
   .closing {
     padding: 8mm 0;
-    background: #f7f1e4 !important;
-    border-top: 0.3pt solid #cfc6b5;
+    background: #fbf5fa !important;
+    border-top: 0.3pt solid #e7dae7;
     break-inside: avoid;
   }
 
@@ -607,8 +607,8 @@
   .site-footer {
     padding: 6mm 0 0;
     background: #fff !important;
-    color: #1c2b44 !important;
-    border-top: 0.4pt solid #d8cfbe;
+    color: #302437 !important;
+    border-top: 0.4pt solid #e7dae7;
     break-inside: avoid;
   }
 
@@ -624,7 +624,7 @@
 
   .site-footer__brand span,
   .site-footer__note {
-    color: #5e6a80 !important;
+    color: #6d596d !important;
   }
 
   html.js [data-reveal] {
