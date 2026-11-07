@@ -240,5 +240,6 @@ desfazer em qualquer caminho.
 - Mais de uma cor de energia competindo na mesma dobra.
 - Texto pequeno sobre cor pura.
 - Cantos menores que 8 px em superfícies interativas.
-- Gradientes fora de premium, perfil e capas.
-- Fotografias genéricas — o protótipo usa `avatar.jpg` com tratamento e SVG.
+- Gradientes fora de premium, perfil, capas e da aura de fundo animada das telas com arte SVG.
+- P&B em fotos de pessoas — o match usa duotone Mineral; os avatares ficam em cor.
+- Fotografias genéricas — o protótipo usa `avatar.jpg` e `avatar_2.jpg` como placeholders e SVG para o restante da arte.

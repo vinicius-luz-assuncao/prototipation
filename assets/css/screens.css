@@ -1387,7 +1387,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center 18%;
-  filter: grayscale(1) contrast(1.02);
   mix-blend-mode: multiply;
   opacity: 0.92;
 }
@@ -2359,6 +2358,88 @@
 
 .notif__card .switch-row + .switch-row {
   border-top: 1px solid var(--line-hair);
+}
+
+/* -------------------------------------------------------------------------
+   Aura de fundo — gradiente Mineral em movimento
+   Aplicada nas telas que exibem arte SVG (ilustrações, capas e marca).
+   ------------------------------------------------------------------------- */
+
+.screen--aura {
+  overflow: hidden;
+}
+
+.screen--aura::before,
+.screen--aura::after {
+  content: "";
+  position: absolute;
+  inset: -22%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(42px);
+  will-change: transform, opacity;
+}
+
+.screen--aura::before {
+  background:
+    radial-gradient(40% 40% at 20% 24%, var(--tint-plum) 0%, transparent 70%),
+    radial-gradient(46% 46% at 82% 28%, var(--tint-sky) 0%, transparent 72%),
+    radial-gradient(48% 48% at 48% 88%, var(--tint-amber) 0%, transparent 74%);
+  opacity: 0.42;
+  animation: aura-drift-a 26s ease-in-out infinite alternate;
+}
+
+.screen--aura::after {
+  background:
+    radial-gradient(42% 42% at 78% 18%, var(--tint-vermilion) 0%, transparent 70%),
+    radial-gradient(46% 46% at 16% 72%, var(--tint-sky) 0%, transparent 72%),
+    radial-gradient(50% 50% at 58% 54%, var(--tint-plum) 0%, transparent 74%);
+  opacity: 0;
+  animation: aura-drift-b 26s ease-in-out infinite alternate;
+}
+
+.screen--aura > * {
+  position: relative;
+  z-index: 1;
+}
+
+.screen--aura:not(.is-active)::before,
+.screen--aura:not(.is-active)::after {
+  animation-play-state: paused;
+}
+
+@keyframes aura-drift-a {
+  0% {
+    transform: translate3d(-3%, -2%, 0) scale(1.04) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(1.5%, 2%, 0) scale(1.11) rotate(2.5deg);
+  }
+  100% {
+    transform: translate3d(-1%, 3%, 0) scale(1.06) rotate(-2deg);
+  }
+}
+
+@keyframes aura-drift-b {
+  0% {
+    transform: translate3d(2%, -2%, 0) scale(1.08) rotate(-2deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translate3d(-2%, 1%, 0) scale(1.13) rotate(1deg);
+    opacity: 0.34;
+  }
+  100% {
+    transform: translate3d(2%, 3%, 0) scale(1.05) rotate(3deg);
+    opacity: 0.06;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen--aura::before,
+  .screen--aura::after {
+    animation: none;
+  }
 }
 
 /* -------------------------------------------------------------------------

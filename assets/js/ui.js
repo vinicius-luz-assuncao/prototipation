@@ -8,6 +8,7 @@
 
   var DATA = window.VEM_DATA || {};
   var AVATAR = DATA.avatar || "assets/img/avatar.jpg";
+  var AVATAR_2 = DATA.avatar2 || "assets/img/avatar_2.jpg";
   var toastTimer = null;
 
   function $(selector, root) {
@@ -16,6 +17,23 @@
 
   function $$(selector, root) {
     return Array.prototype.slice.call((root || document).querySelectorAll(selector));
+  }
+
+  /* -----------------------------------------------------------------------
+     Avatares — alterna os dois placeholders entre as pessoas do app
+     (o avatar do próprio usuário fica fixo em avatar.jpg)
+     ----------------------------------------------------------------------- */
+
+  function alternateAvatars() {
+    var index = 0;
+
+    $$(".avatar img").forEach(function (image) {
+      if (image.id === "pf-avatar" || image.closest(".avatar-upload")) return;
+      if (image.closest("[data-nav='11']")) return;
+
+      image.src = index % 2 ? AVATAR_2 : AVATAR;
+      index++;
+    });
   }
 
   /* -----------------------------------------------------------------------
@@ -349,7 +367,7 @@
 
     if (photo) photo.style.background = match.tint;
     if (image) {
-      image.src = AVATAR;
+      image.src = match.avatar || AVATAR;
       image.alt = "Foto de " + match.name;
     }
     if (compatibility) compatibility.textContent = match.compatibility + "% combinam";
@@ -420,6 +438,7 @@
     });
   }
 
+  alternateAvatars();
   if (matchCard && matches.length) renderMatch();
 
   /* -----------------------------------------------------------------------

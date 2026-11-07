@@ -8,9 +8,11 @@
   "use strict";
 
   var AVATAR = "assets/img/avatar.jpg";
+  var AVATAR_2 = "assets/img/avatar_2.jpg";
 
   var data = {
     avatar: AVATAR,
+    avatar2: AVATAR_2,
 
     user: {
       firstName: "Ana",
@@ -37,7 +39,8 @@
         bio: "Corro de manhã e cozinho à noite. Procuro companhia para os treinos de terça e quinta.",
         tags: ["Corrida", "5 km", "Yoga"],
         ring: "var(--vermilion)",
-        tint: "linear-gradient(160deg,#f3c9a8,#c98e74 55%,#5d6f80)"
+        avatar: AVATAR,
+        tint: "linear-gradient(160deg,#f77cc5 0%,#c799c8 55%,#66416b 100%)"
       },
       {
         name: "Camila",
@@ -48,7 +51,8 @@
         bio: "Musculação três vezes por semana e caminhada no fim de semana. Sem pressa, sem cobrança.",
         tags: ["Força", "Caminhada", "Iniciante"],
         ring: "var(--sky)",
-        tint: "linear-gradient(160deg,#bcd9e8,#7fa6b8 55%,#4d6172)"
+        avatar: AVATAR_2,
+        tint: "linear-gradient(160deg,#f57335 0%,#c799c8 55%,#4a3450 100%)"
       },
       {
         name: "Rafael",
@@ -59,7 +63,8 @@
         bio: "Yoga de manhã, escalada no fim de semana. Ainda aprendendo a correr sem parar.",
         tags: ["Yoga", "Escalada", "Corrida"],
         ring: "var(--sage)",
-        tint: "linear-gradient(160deg,#cfe4d6,#9bb9a2 55%,#586c62)"
+        avatar: AVATAR,
+        tint: "linear-gradient(160deg,#dae35a 0%,#c799c8 58%,#302437 100%)"
       },
       {
         name: "Luiza",
@@ -70,7 +75,8 @@
         bio: "Dança e natação. Quero voltar a treinar em grupo sem sentir que estou atrasada.",
         tags: ["Dança", "Natação", "Bem-estar"],
         ring: "var(--plum)",
-        tint: "linear-gradient(160deg,#e8c6d2,#c294a5 55%,#6c5561)"
+        avatar: AVATAR_2,
+        tint: "linear-gradient(160deg,#f77cc5 0%,#8f6f92 55%,#302437 100%)"
       }
     ],
 

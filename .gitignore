@@ -1,5 +1,9 @@
 # artefatos de build e QA locais
 _build/
+_build.zip
+
+# backups locais de arte
+assets/img/*-old.svg
 
 # PDF gerado a partir de index.html + print.css
 vem-apresentacao.pdf
