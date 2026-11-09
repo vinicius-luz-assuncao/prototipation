@@ -8,11 +8,14 @@
   "use strict";
 
   var NAV_SCREENS = ["10", "11", "12", "13", "14", "15"];
+  /* Controle temporário de teste: visível apenas no onboarding (01–08). */
+  var ONBOARDING_SCREENS = ["01", "02", "03", "04", "05", "06", "07", "08"];
   var screens = {};
   var current = null;
 
   var device = document.getElementById("device");
   var tabbar = document.getElementById("tabbar");
+  var skipButton = document.getElementById("skip-onboarding");
   var railItems = Array.prototype.slice.call(document.querySelectorAll(".rail__item"));
   var tabs = tabbar ? Array.prototype.slice.call(tabbar.querySelectorAll(".tab")) : [];
 
@@ -48,6 +51,9 @@
     if (scroller) scroller.scrollTop = 0;
 
     var hasNav = NAV_SCREENS.indexOf(id) !== -1;
+    var isOnboarding = ONBOARDING_SCREENS.indexOf(id) !== -1;
+
+    if (skipButton) skipButton.hidden = !isOnboarding;
 
     if (device) {
       device.classList.toggle("is-dark-status", next.getAttribute("data-dark") === "true");
