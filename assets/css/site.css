@@ -628,16 +628,44 @@ code {
   box-shadow: var(--shadow-2);
 }
 
+.concept__media {
+  position: relative;
+  margin: -28px -28px 24px;
+  border-radius: 23px 23px 0 0;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.concept__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform var(--dur-3) var(--ease);
+}
+
+.concept__card:hover .concept__media img {
+  transform: scale(1.03);
+}
+
 .concept__num {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(252, 248, 252, 0.94);
+  color: var(--ink);
   font-family: var(--font-label);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.16em;
-  color: var(--ink-ghost);
+  line-height: 1;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 .concept__card h3 {
-  margin: 28px 0 12px;
+  margin: 0 0 12px;
   font-family: var(--font-ui);
   font-size: 28px;
   font-weight: 700;
@@ -678,7 +706,6 @@ code {
   color: rgba(252, 248, 252, 0.74);
 }
 
-.concept__card--solution .concept__num,
 .concept__card--solution .concept__foot {
   color: var(--plum);
 }
@@ -2194,8 +2221,8 @@ code {
     padding: 24px;
   }
 
-  .concept__card h3 {
-    margin-top: 20px;
+  .concept__media {
+    margin: -24px -24px 20px;
   }
 
   .principles {

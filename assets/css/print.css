@@ -215,6 +215,10 @@
     break-inside: avoid;
   }
 
+  .concept__media {
+    margin: -5mm -5mm 4mm;
+  }
+
   .concept__card--solution {
     background: #302437 !important;
     border-color: #302437;

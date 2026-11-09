@@ -145,7 +145,7 @@ só de tela.
 
 - `DESIGN_SYSTEM.md` e `design-system.php` são as referências originais e não
   devem ser alterados.
-- Todas as imagens são locais: um único `avatar.jpg` para pessoas e SVGs para
-  todo o resto. Zero requisições externas.
+- Todos os recursos são locais: fontes, ícones, fotos e ilustrações. Zero
+  requisições externas.
 - Ao editar CSS ou JS, atualize o `?v=` no `<link>` / `<script>` correspondente
   para evitar cache antigo durante a avaliação.
