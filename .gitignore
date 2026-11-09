@@ -5,6 +5,9 @@ _build.zip
 # backups locais de arte
 assets/img/*-old.svg
 
+# pacotes de imagens baixados (os arquivos finais ficam na pasta img)
+assets/img/*.zip
+
 # PDF gerado a partir de index.html + print.css
 vem-apresentacao.pdf
 

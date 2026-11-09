@@ -53,7 +53,7 @@ de ser lido — a navegação continua funcionando normalmente.
 │  │  ├─ ui.js              interações: GenUI/LUI, jornada, filtros, toasts
 │  │  └─ app.js             roteador (?tela=NN), tabbar, escala do device
 │  ├─ fonts/                Abril Fatface, Jost, Nunito Sans, Oswald (woff2)
-│  ├─ img/                  avatar.jpg + ilustrações e capas em SVG
+│  ├─ img/                  fotos de pessoas, avatares recortados, eventos, feed e ilustrações SVG
 │  └─ screens/              s01.png … s20.png (capturas usadas na galeria e no PDF)
 └─ vem-apresentacao.pdf     PDF gerado a partir de index.html + print.css
 ```

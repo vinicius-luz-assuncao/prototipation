@@ -9,14 +9,30 @@
 
   var AVATAR = "assets/img/avatar.jpg";
   var AVATAR_2 = "assets/img/avatar_2.jpg";
+  var AVATAR_ANA = "assets/img/ana-beatriz-avatar.jpg";
+  var AVATAR_MARINA = "assets/img/marina-avatar.jpg";
+  var AVATAR_CAMILA = "assets/img/camila-avatar.jpg";
+  var AVATAR_RAFAEL = "assets/img/rafael-avatar.jpg";
+  var AVATAR_LUIZA = "assets/img/luiza-avatar.jpg";
+  var AVATAR_BRUNA = "assets/img/bruna-avatar.jpg";
 
   var data = {
     avatar: AVATAR,
     avatar2: AVATAR_2,
 
+    people: {
+      ana: AVATAR_ANA,
+      marina: AVATAR_MARINA,
+      camila: AVATAR_CAMILA,
+      rafael: AVATAR_RAFAEL,
+      luiza: AVATAR_LUIZA,
+      bruna: AVATAR_BRUNA
+    },
+
     user: {
       firstName: "Ana",
       name: "Ana Beatriz",
+      avatar: AVATAR_ANA,
       handle: "@anabeatriz",
       email: "ana.beatriz@email.com",
       level: 7,
@@ -39,7 +55,7 @@
         bio: "Corro de manhã e cozinho à noite. Procuro companhia para os treinos de terça e quinta.",
         tags: ["Corrida", "5 km", "Yoga"],
         ring: "var(--vermilion)",
-        avatar: AVATAR,
+        avatar: AVATAR_MARINA,
         tint: "linear-gradient(160deg,#f77cc5 0%,#c799c8 55%,#66416b 100%)"
       },
       {
@@ -51,7 +67,7 @@
         bio: "Musculação três vezes por semana e caminhada no fim de semana. Sem pressa, sem cobrança.",
         tags: ["Força", "Caminhada", "Iniciante"],
         ring: "var(--sky)",
-        avatar: AVATAR_2,
+        avatar: AVATAR_CAMILA,
         tint: "linear-gradient(160deg,#f57335 0%,#c799c8 55%,#4a3450 100%)"
       },
       {
@@ -63,7 +79,7 @@
         bio: "Yoga de manhã, escalada no fim de semana. Ainda aprendendo a correr sem parar.",
         tags: ["Yoga", "Escalada", "Corrida"],
         ring: "var(--sage)",
-        avatar: AVATAR,
+        avatar: AVATAR_RAFAEL,
         tint: "linear-gradient(160deg,#dae35a 0%,#c799c8 58%,#302437 100%)"
       },
       {
@@ -75,18 +91,18 @@
         bio: "Dança e natação. Quero voltar a treinar em grupo sem sentir que estou atrasada.",
         tags: ["Dança", "Natação", "Bem-estar"],
         ring: "var(--plum)",
-        avatar: AVATAR_2,
+        avatar: AVATAR_LUIZA,
         tint: "linear-gradient(160deg,#f77cc5 0%,#8f6f92 55%,#302437 100%)"
       }
     ],
 
     connections: [
-      { name: "Marina Costa", detail: "Treinou com você 2×", group: "Corrida · terças", ring: "var(--vermilion)" },
-      { name: "Camila Reis", detail: "Academia Vem · Pinheiros", group: "Força · seg e qua", ring: "var(--sky)" },
-      { name: "Rafael Nunes", detail: "Yoga no parque", group: "Yoga · domingos", ring: "var(--sage)" },
-      { name: "Luiza Prado", detail: "Amiga desde março", group: "Dança · sextas", ring: "var(--plum)" },
-      { name: "Bruna Alves", detail: "Corrida no Ibirapuera", group: "Corrida · sábados", ring: "var(--amber)" },
-      { name: "Diego Matos", detail: "Natação livre", group: "Natação · manhãs", ring: "var(--sky)" }
+      { name: "Marina Costa", detail: "Treinou com você 2×", group: "Corrida · terças", ring: "var(--vermilion)", avatar: AVATAR_MARINA },
+      { name: "Camila Reis", detail: "Academia Vem · Pinheiros", group: "Força · seg e qua", ring: "var(--sky)", avatar: AVATAR_CAMILA },
+      { name: "Rafael Nunes", detail: "Yoga no parque", group: "Yoga · domingos", ring: "var(--sage)", avatar: AVATAR_RAFAEL },
+      { name: "Luiza Prado", detail: "Amiga desde março", group: "Dança · sextas", ring: "var(--plum)", avatar: AVATAR_LUIZA },
+      { name: "Bruna Alves", detail: "Corrida no Ibirapuera", group: "Corrida · sábados", ring: "var(--amber)", avatar: AVATAR_BRUNA },
+      { name: "Diego Matos", detail: "Natação livre", group: "Natação · manhãs", ring: "var(--sky)", avatar: AVATAR_2 }
     ],
 
     groups: [

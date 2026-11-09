@@ -28,6 +28,8 @@
     var index = 0;
 
     $$(".avatar img").forEach(function (image) {
+      /* Fotos reais de pessoas têm prioridade e não entram no rodízio. */
+      if (image.hasAttribute("data-avatar")) return;
       if (image.id === "pf-avatar" || image.closest(".avatar-upload")) return;
       if (image.closest("[data-nav='11']")) return;
 
