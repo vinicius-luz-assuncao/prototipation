@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>vem — protótipo navegável</title>
-  <meta name="description" content="Protótipo de alta fidelidade do vem, app de fitness e conexões. 20 telas, GenUI e design system Mineral.">
+  <meta name="description" content="Protótipo de alta fidelidade do vem, app de fitness e conexões. 23 telas, GenUI, match por atividade e design system Mineral.">
   <link rel="icon" href="assets/img/logo.svg">
   <link rel="stylesheet" href="assets/fonts/fonts.css?v=2">
   <link rel="stylesheet" href="assets/css/tokens.css?v=3">
   <link rel="stylesheet" href="assets/css/base.css?v=4">
-  <link rel="stylesheet" href="assets/css/components.css?v=5">
-  <link rel="stylesheet" href="assets/css/screens.css?v=6">
+  <link rel="stylesheet" href="assets/css/components.css?v=7">
+  <link rel="stylesheet" href="assets/css/screens.css?v=8">
 </head>
 <body class="app-page">
 
@@ -20,7 +20,7 @@
         <img src="assets/img/logo.svg" alt="" class="rail__logo">
         <span class="rail__brand-text">
           <strong>vem</strong>
-          <small>protótipo · 20 telas</small>
+          <small>protótipo · 23 telas</small>
         </span>
       </a>
 
@@ -53,6 +53,12 @@
           <button class="rail__item" data-nav="18"><span class="rail__num">18</span>Sobre</button>
           <button class="rail__item" data-nav="19"><span class="rail__num">19</span>Configurações</button>
           <button class="rail__item" data-nav="20"><span class="rail__num">20</span>Notificações</button>
+        </div>
+        <div class="rail__group">
+          <p class="rail__label">Rodada de testes</p>
+          <button class="rail__item" data-nav="21"><span class="rail__num">21</span>Documentação</button>
+          <button class="rail__item" data-nav="22"><span class="rail__num">22</span>Conversa</button>
+          <button class="rail__item" data-nav="23"><span class="rail__num">23</span>Meus eventos</button>
         </div>
       </nav>
 
@@ -97,6 +103,15 @@
 
                 <div class="splash__actions">
                   <button class="btn btn--primary btn--lg btn--block" data-nav="02">Começar</button>
+                  <button class="btn btn--google btn--block" type="button" data-google>
+                    <svg class="google-mark" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+                      <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z"/>
+                      <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.81.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18z"/>
+                      <path fill="#FBBC05" d="M3.97 10.72a5.4 5.4 0 0 1 0-3.44V4.95H.96a9 9 0 0 0 0 8.1l3.01-2.33z"/>
+                      <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 .96 4.95l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58z"/>
+                    </svg>
+                    Continuar com Google
+                  </button>
                   <button class="btn btn--text btn--block" data-nav="09">Já tem conta? Entrar</button>
                 </div>
 
@@ -138,11 +153,13 @@
                 <span data-icon="lock"></span>
                 <span>A verificação acontece no seu celular. Nenhuma imagem é compartilhada com outras pessoas.</span>
               </div>
+
+              <p class="tiny mt-2">Sem verificar, você explora o app — mas match, grupos e conversas ficam limitados até concluir.</p>
             </div>
 
             <footer class="foot">
-              <button class="btn btn--primary btn--lg btn--block" data-nav="03">Iniciar verificação</button>
-              <button class="btn btn--text btn--block" data-nav="04">Fazer depois</button>
+              <button class="btn btn--primary btn--lg btn--block" type="button" data-verify-start>Iniciar verificação</button>
+              <button class="btn btn--text btn--block" type="button" data-verify-later>Verificar depois</button>
             </footer>
           </section>
 
@@ -150,7 +167,7 @@
                03 · VERIFICAÇÃO CONCLUÍDA
                ============================================================ -->
           <section class="screen" data-screen="03" data-title="Verificado">
-            <div class="screen__scroll pad-status">
+            <div class="screen__scroll pad-status" id="verify-verified">
               <div class="success">
                 <div class="success__art" aria-hidden="true">
                   <span class="success__disc"></span>
@@ -163,7 +180,7 @@
                 </div>
 
                 <h1 class="h1 success__title">Verificação concluída</h1>
-                <p class="lede success__text">Tudo certo, Ana. Agora a comunidade sabe que você é você — e você pode focar no que importa.</p>
+                <p class="lede success__text">Tudo certo. Agora a comunidade sabe que você é você — e você pode focar no que importa.</p>
 
                 <div class="success__card">
                   <span class="circle circle--sage"><span data-icon="verified"></span></span>
@@ -175,8 +192,34 @@
               </div>
             </div>
 
-            <footer class="foot">
-              <button class="btn btn--primary btn--lg btn--block" data-nav="04">Continuar</button>
+            <footer class="foot" id="verify-verified-foot">
+              <button class="btn btn--primary btn--lg btn--block" type="button" id="verify-continue">Continuar</button>
+            </footer>
+
+            <div class="screen__scroll pad-status" id="verify-pending" hidden>
+              <p class="eyebrow">Camada de segurança</p>
+              <h1 class="h1 mt-1">Verificação pendente</h1>
+              <p class="lede mt-1">Tudo bem verificar depois. A verificação protege as conexões do vem.</p>
+
+              <div class="card mt-3">
+                <p class="h3">Enquanto não verificar</p>
+                <ul class="verify-list mt-2">
+                  <li><span class="verify-list__mark">✓</span> Explorar pessoas, atividades e eventos</li>
+                  <li><span class="verify-list__mark">✓</span> Salvar atividades favoritas</li>
+                  <li><span class="verify-list__mark">🔒</span> Dar match e entrar em grupos</li>
+                  <li><span class="verify-list__mark">🔒</span> Iniciar conversas</li>
+                </ul>
+              </div>
+
+              <div class="note note--sage mt-2">
+                <span data-icon="shield-check"></span>
+                <span>Você pode verificar agora ou quando quiser em Configurações.</span>
+              </div>
+            </div>
+
+            <footer class="foot" id="verify-pending-foot" hidden>
+              <button class="btn btn--primary btn--lg btn--block" type="button" id="verify-now">Verificar agora</button>
+              <button class="btn btn--text btn--block" type="button" data-nav="04">Continuar sem verificar</button>
             </footer>
           </section>
 
@@ -197,14 +240,16 @@
               <div class="progress"><div class="progress__bar" style="width:25%"></div></div>
 
               <div class="avatar-upload">
-                <div class="avatar">
-                  <img id="pf-avatar" src="assets/img/ana-beatriz-avatar.jpg" alt="Sua foto de perfil" data-avatar="ana">
+                <div class="avatar is-empty" id="pf-avatar-wrap">
+                  <img id="pf-avatar" alt="Sua foto de perfil" data-photo="user" hidden>
+                  <span class="avatar__placeholder" data-icon="user" aria-hidden="true"></span>
                 </div>
                 <button class="avatar-upload__btn" id="avatar-btn" type="button" aria-label="Escolher foto de perfil">
                   <span data-icon="camera"></span>
                 </button>
                 <input type="file" id="avatar-input" accept="image/*" hidden>
               </div>
+              <p class="tiny center mb-2">A foto fica salva só neste navegador.</p>
 
               <h1 class="h1">Vamos nos conhecer</h1>
               <p class="lede mt-1">Como podemos te chamar no app? Você pode mudar isso depois.</p>
@@ -214,7 +259,7 @@
                   <label class="field__label" for="pf-name">Nome completo</label>
                   <div class="input input--icon">
                     <span class="input__icon"><span data-icon="user"></span></span>
-                    <input class="input__control" id="pf-name" name="name" type="text" placeholder="Ana Beatriz Luz" autocomplete="name">
+                    <input class="input__control" id="pf-name" name="name" type="text" placeholder="Seu nome completo" autocomplete="name">
                   </div>
                   <span class="field__error"><span data-icon="x"></span> Digite seu nome completo.</span>
                 </div>
@@ -264,7 +309,7 @@
 
               <div class="choice__head mt-3">
                 <h1 class="h1">Qual o seu objetivo?</h1>
-                <p class="lede mt-1">Escolha o que mais combina com este momento. A partir daqui, o app adapta a ordem das telas e as sugestões.</p>
+                <p class="lede mt-1">Escolha o que mais combina com este momento. O app adapta as sugestões da Home — e você começa por ela.</p>
               </div>
 
               <div class="path-list" role="group" aria-label="Objetivo">
@@ -294,13 +339,22 @@
                   </span>
                   <span class="path-card__check"><span data-icon="check"></span></span>
                 </button>
+
+                <button class="path-card" type="button" aria-pressed="false" data-path="teacher">
+                  <span class="path-card__icon circle circle--purple"><span data-icon="trophy"></span></span>
+                  <span class="path-card__body">
+                    <span class="path-card__title">Sou educador físico</span>
+                    <span class="path-card__text">Enviar CREF e criar eventos e grupos como professor.</span>
+                  </span>
+                  <span class="path-card__check"><span data-icon="check"></span></span>
+                </button>
               </div>
 
               <p class="choice__counter"><span data-path-counter>Nenhum selecionado</span></p>
             </div>
 
             <footer class="foot">
-              <button class="btn btn--primary btn--lg btn--block" id="objective-continue" data-nav="06" disabled>Continuar</button>
+              <button class="btn btn--primary btn--lg btn--block" id="objective-continue" type="button" disabled>Continuar</button>
             </footer>
           </section>
 
@@ -321,42 +375,27 @@
               <div class="progress"><div class="progress__bar" style="width:75%"></div></div>
 
               <div class="choice__head mt-3">
-                <h1 class="h1">Conte-nos mais sobre você</h1>
-                <p class="lede mt-1">Que atividades te dão vontade de sair de casa?</p>
+                <h1 class="h1">Como você gosta de treinar?</h1>
+                <p class="lede mt-1">Primeiro o contexto. Depois a atividade — se não estiver na lista, escreva e adicione.</p>
               </div>
 
-              <div class="chip-grid" role="group" aria-label="Interesses">
-                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Musculação">
-                  <span data-icon="dumbbell"></span><span>Musculação</span><span class="chip__check" data-icon="check"></span>
-                </button>
-                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Corrida">
-                  <span data-icon="run"></span><span>Corrida</span><span class="chip__check" data-icon="check"></span>
-                </button>
-                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Yoga">
-                  <span data-icon="lotus"></span><span>Yoga</span><span class="chip__check" data-icon="check"></span>
-                </button>
-                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Dança">
-                  <span data-icon="music"></span><span>Dança</span><span class="chip__check" data-icon="check"></span>
-                </button>
-                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Natação">
-                  <span data-icon="swim"></span><span>Natação</span><span class="chip__check" data-icon="check"></span>
-                </button>
-                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Lutas">
-                  <span data-icon="glove"></span><span>Lutas</span><span class="chip__check" data-icon="check"></span>
-                </button>
-                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Ciclismo">
-                  <span data-icon="bike"></span><span>Ciclismo</span><span class="chip__check" data-icon="check"></span>
-                </button>
-                <button class="chip chip--compact" aria-pressed="false" data-chip data-chip-group="interest" data-chip-label="Vôlei">
-                  <span data-icon="ball"></span><span>Vôlei</span><span class="chip__check" data-icon="check"></span>
-                </button>
-              </div>
+              <p class="eyebrow mt-3">1 · Contexto</p>
+              <div class="chip-row chip-row--wrap mt-1" id="broad-tags" role="group" aria-label="Contexto de treino"></div>
+              <p class="choice__counter"><span data-chip-counter="broad">Nenhum contexto selecionado</span></p>
 
-              <p class="choice__counter"><span data-chip-counter="interest">Nenhum selecionado</span></p>
+              <p class="eyebrow mt-3">2 · Atividades</p>
+              <div class="input input--icon mt-1">
+                <span class="input__icon"><span data-icon="search"></span></span>
+                <input class="input__control" id="interest-search" type="search" placeholder="Buscar atividade (yoga, corrida, boxe…)" aria-label="Buscar atividade" autocomplete="off">
+              </div>
+              <div class="activity-suggest" id="interest-suggest" hidden></div>
+
+              <div class="specific-tags" id="specific-tags" aria-live="polite"></div>
+              <p class="choice__counter"><span data-chip-counter="specific">Nenhuma atividade escolhida</span></p>
 
               <div class="note note--sage mt-3">
-                <span data-icon="sparkle"></span>
-                <span>Essas escolhas alimentam o card inteligente e as conexões sugeridas na Home.</span>
+                <span data-icon="star"></span>
+                <span>As <strong>5 primeiras atividades</strong> viram favoritas e aparecem no leque de match.</span>
               </div>
             </div>
 
@@ -434,7 +473,7 @@
 
                 <div class="success__card">
                   <div class="avatar-stack" aria-hidden="true">
-                    <span class="avatar"><img src="assets/img/ana-beatriz-avatar.jpg" alt="" data-avatar="ana"></span>
+                    <span class="avatar is-empty" id="welcome-avatar"><img alt="" data-photo="user" hidden><span class="avatar__placeholder" data-icon="user"></span></span>
                     <span class="avatar"><img src="assets/img/marina-avatar.jpg" alt="" data-avatar="marina"></span>
                     <span class="avatar"><img src="assets/img/rafael-avatar.jpg" alt="" data-avatar="rafael"></span>
                     <span class="avatar-stack__more">+9</span>
@@ -489,7 +528,7 @@
             </div>
 
             <footer class="foot">
-              <button class="btn btn--primary btn--lg btn--block" type="button" data-nav="10" data-toast="Bem-vindo de volta, Ana.">Entrar</button>
+              <button class="btn btn--primary btn--lg btn--block" type="button" data-nav="10" id="login-enter">Entrar</button>
               <button class="btn btn--text btn--block" type="button" data-nav="01">Ainda não tem conta? Começar</button>
             </footer>
           </section>
@@ -504,7 +543,7 @@
                 <header class="home__head">
                   <div>
                     <p class="eyebrow">Quinta, 29 de outubro</p>
-                    <h1 class="home__hello">Bom dia, Ana</h1>
+                    <h1 class="home__hello" id="home-hello">Bom dia</h1>
                     <button class="journey-chip" type="button" data-nav="05" aria-label="Jornada atual. Trocar objetivo">
                       <span data-icon="sparkle"></span>
                       <span>Jornada: <strong id="journey-chip-text">Autocuidado</strong></span>
@@ -516,11 +555,30 @@
                       <span data-icon="bell"></span>
                       <span class="iconbtn__badge" aria-hidden="true"></span>
                     </button>
-                    <button class="avatar avatar--md avatar--ring" data-nav="11" aria-label="Abrir meu perfil" style="--ring: var(--amber)">
-                      <img src="assets/img/ana-beatriz-avatar.jpg" alt="Ana Beatriz" data-avatar="ana">
+                    <button class="avatar avatar--md avatar--ring is-empty" data-nav="11" aria-label="Abrir meu perfil" style="--ring: var(--amber)" id="home-avatar">
+                      <img alt="Seu avatar" data-photo="user" hidden>
+                      <span class="avatar__placeholder" data-icon="user"></span>
                     </button>
                   </div>
                 </header>
+
+                <button class="verify-banner" type="button" data-verify-open id="verify-banner" hidden>
+                  <span class="circle circle--32 circle--sky"><span data-icon="shield"></span></span>
+                  <span class="verify-banner__body">
+                    <strong>Verificação pendente</strong>
+                    <small>Libere match e conversas quando quiser.</small>
+                  </span>
+                  <span data-icon="chevron-right"></span>
+                </button>
+
+                <button class="verify-banner" type="button" data-nav="04" id="profile-nudge" hidden>
+                  <span class="circle circle--32 circle--amber"><span data-icon="user"></span></span>
+                  <span class="verify-banner__body">
+                    <strong>Seu perfil está vazio</strong>
+                    <small>Adicione nome, foto e bio para aparecer nos matches.</small>
+                  </span>
+                  <span data-icon="chevron-right"></span>
+                </button>
 
                 <form class="lui" id="lui-form" role="search">
                   <span class="lui__spark"><span data-icon="sparkle"></span></span>
@@ -691,46 +749,49 @@
 
               <div class="profile__body">
                 <div class="profile__identity">
-                  <div class="avatar avatar--xl">
-                    <img src="assets/img/ana-beatriz-avatar.jpg" alt="Foto de Ana Beatriz" data-avatar="ana">
+                  <div class="avatar avatar--xl is-empty" id="profile-avatar">
+                    <img alt="Seu avatar" data-photo="user" hidden>
+                    <span class="avatar__placeholder" data-icon="user"></span>
                   </div>
                 </div>
 
                 <div class="profile__name-row">
                   <div class="profile__name">
-                    <h1 class="h1">Ana Beatriz</h1>
-                    <span data-icon="verified" aria-label="Perfil verificado"></span>
+                    <h1 class="h1" id="profile-name">Seu perfil</h1>
+                    <span data-icon="verified" id="profile-verified" aria-label="Perfil verificado" hidden></span>
+                    <span class="tag tag--amber" id="profile-pending" hidden>Verificação pendente</span>
                   </div>
                   <button class="profile__share" data-toast="Link do perfil copiado." aria-label="Compartilhar perfil">
                     <span data-icon="share"></span>
                   </button>
                 </div>
 
-                <div class="profile__level">
-                  <b>Nível 7</b> · Corredora
-                  <span class="progress progress--amber profile__levelbar" aria-hidden="true"><span class="progress__bar" style="width: 64%"></span></span>
+                <div class="profile__level" id="profile-level">
+                  <b>Nível 1</b> · Começando
+                  <span class="progress progress--amber profile__levelbar" aria-hidden="true"><span class="progress__bar" style="width: 8%"></span></span>
                 </div>
 
                 <div class="profile__stats">
-                  <button class="profile__stat" data-toast="248 pessoas seguem você.">
-                    <span class="stat">248</span><span>Seguidores</span>
+                  <button class="profile__stat" data-toast="Ninguém segue você ainda.">
+                    <span class="stat" data-stat="followers">0</span><span>Seguidores</span>
                   </button>
-                  <button class="profile__stat" data-toast="Você segue 132 pessoas.">
-                    <span class="stat">132</span><span>Seguindo</span>
+                  <button class="profile__stat" data-toast="Você ainda não segue ninguém.">
+                    <span class="stat" data-stat="following">0</span><span>Seguindo</span>
                   </button>
-                  <button class="profile__stat" data-toast="36 amigos treinam com você.">
-                    <span class="stat">36</span><span>Amigos</span>
+                  <button class="profile__stat" data-toast="Seus matches aparecem aqui.">
+                    <span class="stat" data-stat="friends">0</span><span>Amigos</span>
                   </button>
                 </div>
 
-                <p class="profile__bio">Corro para organizar a cabeça. Yoga nos dias de descanso. Sempre procurando gente para treinar às 6h.</p>
+                <p class="profile__bio" id="profile-bio">Seu perfil começa vazio. Preencha no cadastro e edite quando quiser.</p>
 
-                <div class="profile__tags">
-                  <span class="tag tag--amber">5 km</span>
-                  <span class="tag tag--sage">Yoga</span>
-                  <span class="tag">Força</span>
-                  <span class="tag">Iniciante</span>
+                <div class="profile__tags" id="profile-tags">
+                  <span class="tag">Sem interesses ainda</span>
                 </div>
+
+                <p class="profile__educator" id="profile-educator" hidden>
+                  <span data-icon="trophy"></span> Educador físico · CREF em análise
+                </p>
 
                 <div class="profile__buttons">
                   <button class="btn btn--secondary" data-nav="04"><span data-icon="edit"></span> Editar perfil</button>
@@ -744,6 +805,15 @@
                   <div class="achievement"><span data-icon="flame"></span><span>7 dias<br>seguidos</span></div>
                   <div class="achievement"><span data-icon="run"></span><span>Primeiro<br>5 km</span></div>
                   <div class="achievement"><span data-icon="trophy"></span><span>10 treinos<br>no mês</span></div>
+                </div>
+
+                <div class="section-head mt-4">
+                  <h2 class="h3">Sinais de atividade</h2>
+                  <span class="tiny">editável</span>
+                </div>
+                <p class="tiny">Curtidas e salvamentos no Feed ajudam o app a sugerir match por atividade.</p>
+                <div class="signal-list mt-2" id="signal-list">
+                  <p class="tiny">Nenhum sinal ainda. Explore o Feed.</p>
                 </div>
 
                 <button class="premium-strip mt-3" type="button" data-nav="16">
@@ -776,8 +846,9 @@
               <div class="match__stage">
                 <article class="match-card" id="match-card">
                   <div class="match-card__photo" id="match-photo">
-                    <img id="match-img" src="assets/img/marina-avatar.jpg" alt="Foto de Marina">
+                    <img id="match-img" src="assets/img/marina-avatar.jpg" alt="Foto de Marina" data-avatar="marina">
                     <span class="badge badge--glass match-card__compat" id="match-compat">87% combinam</span>
+                    <span class="match-card__activity" id="match-activity" hidden></span>
                   </div>
 
                   <div class="match-card__body">
@@ -799,6 +870,13 @@
                     </div>
                   </div>
                 </article>
+
+                <div class="match-empty" id="match-empty" hidden>
+                  <span class="circle circle--56 circle--sky"><span data-icon="users"></span></span>
+                  <p class="h3 mt-2">Nenhum match com esses filtros</p>
+                  <p class="tiny mt-1">Ligue o match geral ou escolha outra atividade no leque.</p>
+                  <button class="btn btn--secondary btn--sm mt-2" type="button" id="match-empty-reset">Reativar match geral</button>
+                </div>
               </div>
 
               <div class="match__actions">
@@ -808,17 +886,24 @@
                 <button class="match-action match-action--like" id="match-like" aria-label="Curtir" title="Curtir">
                   <span data-icon="heart" data-icon-class="icon--fill"></span>
                 </button>
-                <button class="match-action match-action--star" id="match-star" aria-label="Favoritar" title="Favoritar">
-                  <span data-icon="star"></span>
-                </button>
               </div>
 
-              <p class="match__hint">Use os botões ou arraste o card</p>
+              <p class="match__hint">Arraste ou use os botões. A estrela controla o match por atividade.</p>
 
               <div class="match__footer">
                 <button class="btn btn--text" data-toast="Perfil completo disponível na versão final.">Ver perfil completo</button>
               </div>
             </div>
+
+            <div class="match-fanout" id="match-fanout" hidden aria-label="Filtros de match">
+              <p class="match-fanout__label">Match por atividade</p>
+              <div class="match-fanout__items" id="match-fanout-items"></div>
+            </div>
+
+            <button class="match-fab" id="match-fab" type="button" aria-expanded="false" aria-controls="match-fanout" aria-label="Escolher atividades do match">
+              <span data-icon="star"></span>
+              <span class="match-fab__badge" id="match-fab-badge" hidden>0</span>
+            </button>
           </section>
 
           <!-- ============================================================
@@ -1022,112 +1107,32 @@
                   <p class="eyebrow">Sua turma</p>
                   <h1 class="h1">Social</h1>
                 </div>
-                <span class="eyebrow">24 conexões</span>
+                <span class="eyebrow" id="social-count">0 conexões</span>
               </header>
 
-              <div class="segmented" role="tablist" aria-label="Conexões ou grupos" data-segmented="social">
-                <button class="segmented__btn" role="tab" aria-selected="true" data-seg-value="connections">Conexões <span class="segmented__count">24</span></button>
-                <button class="segmented__btn" role="tab" aria-selected="false" data-seg-value="groups">Grupos <span class="segmented__count">5</span></button>
+              <div class="segmented" role="tablist" aria-label="Conexões, grupos ou eventos" data-segmented="social">
+                <button class="segmented__btn" role="tab" aria-selected="true" data-seg-value="connections">Conexões <span class="segmented__count" id="social-tab-connections">0</span></button>
+                <button class="segmented__btn" role="tab" aria-selected="false" data-seg-value="groups">Grupos <span class="segmented__count" id="social-tab-groups">0</span></button>
+                <button class="segmented__btn" role="tab" aria-selected="false" data-seg-value="events">Eventos <span class="segmented__count" id="social-tab-events">0</span></button>
               </div>
 
               <div data-seg-panel="social:connections">
-                <p class="eyebrow social__section-label">Treinaram com você</p>
-                <ul class="social__list list">
-                  <li class="list-row">
-                    <div class="avatar avatar--ring" style="--ring: var(--vermilion)"><img src="assets/img/marina-avatar.jpg" alt="Foto de Marina Costa" data-avatar="marina"></div>
-                    <div class="list-row__body">
-                      <span class="list-row__title">Marina Costa</span>
-                      <span class="list-row__sub">Treinou com você 2× · Corrida</span>
-                    </div>
-                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Marina aberta (demonstração)." aria-label="Enviar mensagem para Marina">
-                      <span data-icon="message"></span>
-                    </button>
-                  </li>
-                  <li class="list-row">
-                    <div class="avatar avatar--ring" style="--ring: var(--sky)"><img src="assets/img/camila-avatar.jpg" alt="Foto de Camila Reis" data-avatar="camila"></div>
-                    <div class="list-row__body">
-                      <span class="list-row__title">Camila Reis</span>
-                      <span class="list-row__sub">Academia Vem · seg e qua</span>
-                    </div>
-                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Camila aberta (demonstração)." aria-label="Enviar mensagem para Camila">
-                      <span data-icon="message"></span>
-                    </button>
-                  </li>
-                  <li class="list-row">
-                    <div class="avatar avatar--ring" style="--ring: var(--sage)"><img src="assets/img/rafael-avatar.jpg" alt="Foto de Rafael Nunes" data-avatar="rafael"></div>
-                    <div class="list-row__body">
-                      <span class="list-row__title">Rafael Nunes</span>
-                      <span class="list-row__sub">Yoga no parque · domingos</span>
-                    </div>
-                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Rafael aberta (demonstração)." aria-label="Enviar mensagem para Rafael">
-                      <span data-icon="message"></span>
-                    </button>
-                  </li>
-                  <li class="list-row">
-                    <div class="avatar avatar--ring" style="--ring: var(--plum)"><img src="assets/img/luiza-avatar.jpg" alt="Foto de Luiza Prado" data-avatar="luiza"></div>
-                    <div class="list-row__body">
-                      <span class="list-row__title">Luiza Prado</span>
-                      <span class="list-row__sub">Amiga desde março · Dança</span>
-                    </div>
-                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Luiza aberta (demonstração)." aria-label="Enviar mensagem para Luiza">
-                      <span data-icon="message"></span>
-                    </button>
-                  </li>
-                  <li class="list-row">
-                    <div class="avatar avatar--ring" style="--ring: var(--amber)"><img src="assets/img/bruna-avatar.jpg" alt="Foto de Bruna Alves" data-avatar="bruna"></div>
-                    <div class="list-row__body">
-                      <span class="list-row__title">Bruna Alves</span>
-                      <span class="list-row__sub">Corrida no Ibirapuera · sábados</span>
-                    </div>
-                    <button class="iconbtn iconbtn--surface" data-toast="Conversa com Bruna aberta (demonstração)." aria-label="Enviar mensagem para Bruna">
-                      <span data-icon="message"></span>
-                    </button>
-                  </li>
-                </ul>
+                <p class="eyebrow social__section-label">Suas conexões</p>
+                <div id="social-connections"></div>
               </div>
 
               <div data-seg-panel="social:groups" hidden>
-                <p class="eyebrow social__section-label">Grupos que você participa</p>
-                <div class="list">
-                  <button class="social__group" data-toast="Grupo Corrida às 6h aberto (demonstração).">
-                    <span class="circle circle--vermilion"><span data-icon="run"></span></span>
-                    <span class="list-row__body">
-                      <span class="list-row__title">Corrida às 6h</span>
-                      <span class="list-row__sub">24 membros · Ibirapuera</span>
-                    </span>
-                    <span data-icon="chevron-right" class="list-row__action"></span>
-                  </button>
-                  <button class="social__group" data-toast="Grupo Yoga para começar aberto (demonstração).">
-                    <span class="circle circle--sage"><span data-icon="lotus"></span></span>
-                    <span class="list-row__body">
-                      <span class="list-row__title">Yoga para começar</span>
-                      <span class="list-row__sub">18 membros · encontros online</span>
-                    </span>
-                    <span data-icon="chevron-right" class="list-row__action"></span>
-                  </button>
-                  <button class="social__group" data-toast="Grupo Força sem julgamento aberto (demonstração).">
-                    <span class="circle circle--amber"><span data-icon="dumbbell"></span></span>
-                    <span class="list-row__body">
-                      <span class="list-row__title">Força sem julgamento</span>
-                      <span class="list-row__sub">31 membros · Pinheiros</span>
-                    </span>
-                    <span data-icon="chevron-right" class="list-row__action"></span>
-                  </button>
-                  <button class="social__group" data-toast="Grupo Natação livre aberto (demonstração).">
-                    <span class="circle circle--sky"><span data-icon="swim"></span></span>
-                    <span class="list-row__body">
-                      <span class="list-row__title">Natação livre</span>
-                      <span class="list-row__sub">12 membros · Clube Paulista</span>
-                    </span>
-                    <span data-icon="chevron-right" class="list-row__action"></span>
-                  </button>
-                </div>
+                <p class="eyebrow social__section-label">Grupos sugeridos</p>
+                <p class="tiny">Um grupo só aparece quando alguém com quem você deu match já está nele.</p>
+                <div id="social-groups" class="mt-2"></div>
+              </div>
+
+              <div data-seg-panel="social:events" hidden>
+                <p class="eyebrow social__section-label">Meus eventos</p>
+                <div id="social-events"></div>
+                <button class="btn btn--secondary btn--block mt-2" type="button" data-nav="23">Ver meus eventos</button>
               </div>
             </div>
-
-            <button class="fab" data-toast="Convide alguém para treinar com você." aria-label="Adicionar conexão">
-              <span data-icon="plus"></span>
-            </button>
           </section>
 
           <!-- ============================================================
@@ -1159,7 +1164,7 @@
                     <button class="iconbtn" data-toast="Opções do post" aria-label="Mais opções"><span data-icon="more"></span></button>
                   </header>
 
-                  <div class="post__media">
+                  <div class="post__media" data-post-activity="corrida">
                     <img src="assets/img/feed-marina-corrida.jpg" alt="Pista arborizada do parque com corredores ao fundo">
                     <span class="tag">5 km</span>
                   </div>
@@ -1196,7 +1201,7 @@
                     <button class="iconbtn" data-toast="Opções do post" aria-label="Mais opções"><span data-icon="more"></span></button>
                   </header>
 
-                  <div class="post__media">
+                  <div class="post__media" data-post-activity="yoga">
                     <img src="assets/img/feed-rafael-yoga.jpg" alt="Aula de yoga em estúdio com luz vermelha">
                     <span class="tag">Yoga</span>
                   </div>
@@ -1235,7 +1240,7 @@
                     <button class="iconbtn" data-toast="Opções do post" aria-label="Mais opções"><span data-icon="more"></span></button>
                   </header>
 
-                  <div class="post__media">
+                  <div class="post__media" data-post-activity="musculacao">
                     <img src="assets/img/cover-gym.svg" alt="Ilustração de um halter">
                     <span class="tag">Força</span>
                   </div>
@@ -1272,7 +1277,7 @@
                     <button class="iconbtn" data-toast="Opções do post" aria-label="Mais opções"><span data-icon="more"></span></button>
                   </header>
 
-                  <div class="post__media">
+                  <div class="post__media" data-post-activity="danca">
                     <img src="assets/img/cover-dance.svg" alt="Ilustração de fitas em movimento">
                     <span class="tag">Dança</span>
                   </div>
@@ -1459,10 +1464,13 @@
 
             <div class="screen__scroll">
               <button class="settings__account" data-nav="11">
-                <div class="avatar avatar--ring" style="--ring: var(--amber)"><img src="assets/img/ana-beatriz-avatar.jpg" alt="Foto de Ana Beatriz" data-avatar="ana"></div>
+                <div class="avatar avatar--ring is-empty" style="--ring: var(--amber)" id="settings-avatar">
+                  <img alt="Seu avatar" data-photo="user" hidden>
+                  <span class="avatar__placeholder" data-icon="user"></span>
+                </div>
                 <span class="settings__account-body">
-                  <span class="settings__account-name">Ana Beatriz</span>
-                  <span class="settings__account-mail">ana.beatriz@email.com</span>
+                  <span class="settings__account-name" id="settings-name">Seu perfil</span>
+                  <span class="settings__account-mail" id="settings-mail">Sem e-mail cadastrado</span>
                 </span>
                 <span data-icon="chevron-right" class="list-row__action"></span>
               </button>
@@ -1479,10 +1487,10 @@
                   <span class="settings__row-body">Segurança</span>
                   <span data-icon="chevron-right" class="chev"></span>
                 </button>
-                <button class="settings__row" data-toast="Seu perfil já está verificado.">
+                <button class="settings__row" type="button" data-verify-open>
                   <span class="circle circle--sky"><span data-icon="verified"></span></span>
                   <span class="settings__row-body">Verificação</span>
-                  <span class="settings__row-value">Verificado</span>
+                  <span class="settings__row-value" id="settings-verify">Verificar agora</span>
                 </button>
               </div>
 
@@ -1522,6 +1530,19 @@
                   <span class="circle circle--amber"><span data-icon="info"></span></span>
                   <span class="settings__row-body">Sobre o vem</span>
                   <span data-icon="chevron-right" class="chev"></span>
+                </button>
+              </div>
+
+              <div class="settings__group">
+                <p class="eyebrow settings__label">Rodada de testes</p>
+                <button class="settings__row" type="button" data-export-log>
+                  <span class="circle circle--sage"><span data-icon="share"></span></span>
+                  <span class="settings__row-body">Exportar log do teste</span>
+                  <span data-icon="chevron-right" class="chev"></span>
+                </button>
+                <button class="settings__row settings__danger" type="button" data-reset-test>
+                  <span class="circle"><span data-icon="refresh"></span></span>
+                  <span class="settings__row-body">Reiniciar teste</span>
                 </button>
               </div>
 
@@ -1597,6 +1618,140 @@
           </section>
 
           <!-- ============================================================
+               21 · DOCUMENTAÇÃO DO EDUCADOR (CREF)
+               ============================================================ -->
+          <section class="screen" data-screen="21" data-title="Documentação">
+            <header class="topbar">
+              <button class="iconbtn" data-back="05" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Documentação</span>
+            </header>
+
+            <div class="screen__scroll" id="cref-form-wrap">
+              <p class="eyebrow">Educador físico</p>
+              <h1 class="h1 mt-1">Envie seu CREF</h1>
+              <p class="lede mt-1">Professores com registro ativo podem criar eventos e moderar grupos da comunidade. A conferência é simulada nesta rodada.</p>
+
+              <div class="card card--soft mt-3">
+                <div class="row">
+                  <span class="circle circle--purple"><span data-icon="trophy"></span></span>
+                  <div>
+                    <p class="h3">O que o selo libera</p>
+                    <p class="tiny">Criar eventos, moderar conversas e aparecer como educador.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field mt-3">
+                <label class="field__label" for="cref-number">Número do CREF</label>
+                <div class="input input--icon">
+                  <span class="input__icon"><span data-icon="document"></span></span>
+                  <input class="input__control" id="cref-number" type="text" placeholder="000000-G/SP" autocomplete="off">
+                </div>
+                <span class="field__hint">Exemplo: 123456-G/SP. Não validamos o registro de verdade.</span>
+              </div>
+
+              <button class="upload-zone mt-3" type="button" id="cref-file-btn">
+                <span data-icon="camera"></span>
+                <span>
+                  <strong>Anexar foto do documento</strong>
+                  <small>Opcional · fica só neste navegador</small>
+                </span>
+              </button>
+              <input type="file" id="cref-file" accept="image/*" hidden>
+              <p class="field__hint mt-1" id="cref-file-name">Nenhum arquivo selecionado.</p>
+
+              <div class="note mt-3">
+                <span data-icon="lock"></span>
+                <span>O envio é simulado. Nada é enviado para um servidor nesta rodada.</span>
+              </div>
+            </div>
+
+            <div class="screen__scroll" id="cref-pending-wrap" hidden>
+              <div class="success">
+                <div class="success__art" aria-hidden="true">
+                  <span class="success__disc"></span>
+                  <span class="success__disc success__disc--ring"></span>
+                  <span class="success__check"><span data-icon="clock"></span></span>
+                </div>
+                <h1 class="h1 success__title">Documentação em análise</h1>
+                <p class="lede success__text">Recebemos seu CREF. Enquanto a análise simulada acontece, você segue para os interesses e já pode explorar grupos e eventos.</p>
+
+                <div class="success__card">
+                  <span class="circle circle--sky"><span data-icon="trophy"></span></span>
+                  <div>
+                    <p class="h3">Selo Educador</p>
+                    <p class="tiny">Aparece no seu perfil como “em análise”.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <footer class="foot" id="cref-foot">
+              <button class="btn btn--primary btn--lg btn--block" type="button" id="cref-submit" disabled>Enviar documentação</button>
+              <button class="btn btn--text btn--block" type="button" data-nav="06">Agora não</button>
+            </footer>
+
+            <footer class="foot" id="cref-foot-pending" hidden>
+              <button class="btn btn--primary btn--lg btn--block" type="button" data-nav="06">Continuar</button>
+              <p class="foot__note">Você pode trocar de objetivo depois.</p>
+            </footer>
+          </section>
+
+          <!-- ============================================================
+               22 · CONVERSA SIMULADA
+               ============================================================ -->
+          <section class="screen screen--chat" data-screen="22" data-title="Conversa">
+            <header class="chat__top">
+              <button class="iconbtn" data-back="14" aria-label="Voltar para o Social"><span data-icon="chevron-left"></span></button>
+              <div class="chat__person">
+                <span class="avatar avatar--sm"><img id="chat-avatar" src="assets/img/marina-avatar.jpg" alt=""></span>
+                <span class="chat__person-text">
+                  <strong id="chat-name">Marina</strong>
+                  <small id="chat-activity">Yoga</small>
+                </span>
+              </div>
+              <button class="iconbtn" type="button" id="chat-share" aria-label="Compartilhar um evento"><span data-icon="calendar"></span></button>
+            </header>
+
+            <div class="chat__scroll" id="chat-scroll">
+              <div class="chat__context" id="chat-context"></div>
+              <div class="chat__messages" id="chat-messages" aria-live="polite"></div>
+              <div class="chat__typing" id="chat-typing" hidden>
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <div class="chat__options" id="chat-options"></div>
+
+            <form class="chat__composer" id="chat-form">
+              <label class="sr-only" for="chat-input">Escreva uma mensagem</label>
+              <input class="chat__input" id="chat-input" type="text" placeholder="Escreva uma mensagem" autocomplete="off">
+              <button class="chat__send" type="submit" aria-label="Enviar mensagem"><span data-icon="send"></span></button>
+            </form>
+          </section>
+
+          <!-- ============================================================
+               23 · MEUS EVENTOS
+               ============================================================ -->
+          <section class="screen" data-screen="23" data-title="Meus eventos">
+            <header class="topbar">
+              <button class="iconbtn" data-back="14" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Meus eventos</span>
+            </header>
+
+            <div class="screen__scroll">
+              <p class="eyebrow">Sua agenda</p>
+              <h1 class="h1 mt-1">Meus eventos</h1>
+              <p class="lede mt-1">Atividades que você confirmou. Compartilhe com um match para não ir sozinho.</p>
+
+              <div class="stack mt-3" id="events-list"></div>
+
+              <button class="btn btn--secondary btn--block mt-3" type="button" data-nav="13">Encontrar atividades</button>
+              <p class="foot__note mt-2">Eventos confirmados ficam salvos neste navegador durante o teste.</p>
+            </div>
+          </section>
+
+          <!-- ============================================================
                NAVEGAÇÃO PRINCIPAL
                ============================================================ -->
           <nav class="tabbar is-hidden" id="tabbar" aria-label="Navegação principal">
@@ -1608,6 +1763,7 @@
             </button>
             <button class="tab" data-tab="14" aria-label="Social">
               <span data-icon="users"></span><span>Social</span><i class="tab__dot"></i>
+              <span class="tab__count" id="social-tab-badge" hidden>1</span>
             </button>
             <button class="tab" data-tab="15" aria-label="Feed">
               <span data-icon="grid"></span><span>Feed</span><i class="tab__dot"></i>
@@ -1617,11 +1773,17 @@
             </button>
           </nav>
 
-          <!-- BOTÃO TEMPORÁRIO DE TESTE — remover antes da entrega -->
-          <button class="skip-onboarding" id="skip-onboarding" type="button" data-nav="10" data-toast="Onboarding pulado. Modo de teste." aria-label="Pular onboarding (modo de teste)" hidden>
-            Pular onboarding
-            <span data-icon="arrow-right"></span>
-          </button>
+          <!-- Folha reutilizável: escolher favoritos e compartilhar evento -->
+          <div class="sheet" id="sheet" hidden>
+            <div class="sheet__scrim" data-sheet-close></div>
+            <div class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+              <header class="sheet__head">
+                <h2 class="h3" id="sheet-title">Escolha uma atividade</h2>
+                <button class="iconbtn" type="button" data-sheet-close aria-label="Fechar"><span data-icon="x"></span></button>
+              </header>
+              <div class="sheet__body" id="sheet-body"></div>
+            </div>
+          </div>
 
           <div class="toast" id="toast" role="status" aria-live="polite">
             <span class="toast__text" id="toast-text"></span>
@@ -1634,8 +1796,10 @@
   </div>
 
   <script src="assets/js/icons.js?v=3"></script>
-  <script src="assets/js/data.js?v=5"></script>
-  <script src="assets/js/ui.js?v=5"></script>
-  <script src="assets/js/app.js?v=3"></script>
+  <script src="assets/js/data.js?v=7"></script>
+  <script src="assets/js/store.js?v=2"></script>
+  <script src="assets/js/ui.js?v=7"></script>
+  <script src="assets/js/social.js?v=2"></script>
+  <script src="assets/js/app.js?v=5"></script>
 </body>
 </html>

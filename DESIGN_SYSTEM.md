@@ -179,6 +179,52 @@ Sombras são exceção: `--shadow-1/2/3` existem para overlays e apresentação.
 - Card branco com borda, ações confirmar/descartar.
 - Undo em pílula de tinta.
 
+### Avatar e foto (rodada v2)
+
+- Avatar vazio usa `--tint-sky` com ícone de usuário; ao receber foto, o anel de
+  afinidade reaparece.
+- Upload de perfil é redimensionado para 480 px e salvo como data URL.
+
+### Botão Google e verificações
+
+- `.btn--google`: superfície branca, borda 1 px, com a marca “G” à esquerda.
+- Selo verificado (`verified`) e tag de pendência (`--amber`) no Perfil.
+- Banner de verificação pendente na Home: `--surface`, borda 1 px, círculo `--sky`.
+
+### Interesses em dois níveis
+
+- **Contextos amplos:** chips com emoji, seleção múltipla, contador.
+- **Atividades específicas:** tags `--sage` com emoji; sugestão de busca e
+  atividade customizada (⭐) quando não existir no catálogo.
+- Até 5 favoritas; as favoritas alimentam o leque de match.
+
+### Match, leque e FAB
+
+- FAB de estrela (56 px, `--ink`, badge `--vermilion`) abre o leque de atividades
+  em pílulas (48 px), com o item “match geral” destacado.
+- Selo “Match em …” sobre a foto: pílula translúcida `rgba(48,36,55,.72)`.
+
+### Conversa simulada
+
+- Balões: o match entra à esquerda (`--surface`, borda); a pessoa sai à direita
+  (`--ink`, texto `--paper`).
+- Indicador de digitação com três pontos animados; opções em pílulas de 48 px.
+- Convite de evento como card dentro do chat.
+
+### Grupos e eventos
+
+- `.group-card`: linha com emoji, nome, contexto em comum e CTA de 48 px.
+- `.event-ticket`: mídia 144 px + corpo com título, meta e rodapé de ação.
+
+### Sinais do Feed
+
+- `.signal`: emoji + atividade + contagem de interações, com botão de remover.
+
+### Sheet e picker
+
+- `.sheet` reaproveitada para convite de evento e confirmações; fecha no scrim e
+  no botão de fechar.
+
 ---
 
 ## 07. ANATOMIA DA TELA (390 × 844)
@@ -219,18 +265,19 @@ tab bar           78 px   (apenas telas de navegação)
 ## 10. TELAS
 
 ```text
-01 Boas-vindas        08 Pronto            15 Feed
-02 Verificação        09 Login             16 vem+
-03 Verificado         10 Home (GenUI)      17 Feedback
-04 Criar perfil        11 Perfil            18 Sobre
-05 Objetivo (ramifica) 12 Match            19 Configurações
-06 Interesses         13 Atividades         20 Notificações
-07 Senha              14 Social
+01 Boas-vindas        09 Login             17 Feedback
+02 Verificação        10 Home (GenUI)      18 Sobre
+03 Verificado         11 Perfil            19 Configurações
+04 Criar perfil        12 Match            20 Notificações
+05 Objetivo (ramifica) 13 Atividades        21 CREF (educador)
+06 Interesses         14 Social            22 Conversa
+07 Senha              15 Feed              23 Meus eventos
+08 Pronto             16 vem+
 ```
 
-O onboarding ramifica na tela 05 em três jornadas (autocuidado, conexão,
-eventos). A tela 10 mantém o fluxo de GenUI/LUI com confirmar, descartar e
-desfazer em qualquer caminho.
+O onboarding ramifica na tela 05 em quatro jornadas (autocuidado, conexão,
+eventos e educador físico). A tela 10 mantém o fluxo de GenUI/LUI com confirmar,
+descartar e desfazer em qualquer caminho.
 
 ---
 

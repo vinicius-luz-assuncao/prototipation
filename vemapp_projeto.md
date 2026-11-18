@@ -1,10 +1,10 @@
 # vem — documento do projeto
 
 > **Projeto:** vem — treino que encontra companhia
-> **Tipo:** protótipo navegável de 20 telas + design system + apresentação
+> **Tipo:** protótipo navegável de 23 telas + design system + apresentação
 > **Stack:** HTML, CSS e JavaScript puros — sem build, sem framework, sem dependência de internet
-> **Última atualização deste documento:** 17/11/2026
-> **Commit de referência:** `d7ce196`
+> **Última atualização deste documento:** 18/11/2026
+> **Rodada:** testes v2 (social e confiança)
 
 ---
 
@@ -16,7 +16,7 @@ gente quer se movimentar, mas não encontra alguém para começar ou continuar.
 
 O projeto entrega três camadas:
 
-1. **Protótipo navegável** com 20 telas em um device frame de 390 × 844.
+1. **Protótipo navegável** com 23 telas em um device frame de 390 × 844.
 2. **Design system “Mineral”** aplicado de ponta a ponta.
 3. **Apresentação/pitch** em página única, com conceito, jornada, GenUI,
    arquitetura, galeria das telas e acabamento.
@@ -34,7 +34,6 @@ A promessa do produto aparece em uma frase:
 | Repositório | `https://github.com/vinicius-luz-assuncao/prototipation.git` |
 | Remote | `origin` |
 | Branch principal | `main` |
-| Último commit enviado | `d7ce196` — “Adiciona imagens aos cards de conceito” |
 | Branch secundária | `design/mineral` (mantida no remoto) |
 | Licença | Projeto acadêmico, sem licença de distribuição definida |
 
@@ -92,13 +91,23 @@ o vem promove conexões sem julgamentos e incentiva a prática contínua.
 
 ## 4. O que o projeto entrega
 
-- Protótipo de **20 telas** navegáveis por cliques, teclado e URL (`?tela=NN`).
-- **Onboarding** com verificação social, criação de perfil, objetivo,
-  interesses, senha e tela de sucesso.
-- **Jornada adaptativa** com três caminhos definidos na tela 05.
+- Protótipo de **23 telas** navegáveis por cliques, teclado e URL (`?tela=NN`).
+- **Login com Google** simulado e **verificação não bloqueante** (verificar agora
+  ou depois).
+- **Onboarding** com criação de perfil (nome, e-mail, foto), objetivo,
+  interesses em dois níveis, senha e tela de sucesso.
+- **Jornada adaptativa** com quatro caminhos definidos na tela 05 (incluindo
+  educador físico com fluxo de CREF).
 - **Home com GenUI/LUI**: a pessoa escreve o que quer e recebe um card editável.
-- **Match**, **Atividades**, **Social**, **Feed** e **Perfil**.
+- **Match específico** com leque de atividades (FAB de estrela) e selo de
+  atividade em comum.
+- **Conversa simulada** disparada pelo terceiro like, com roteiro e convite de
+  evento.
+- **Social em três abas** (Conexões, Grupos, Eventos) e **Meus eventos**.
+- **Feed** com sinalização de atividade ao curtir/salvar.
+- **Match**, **Atividades**, **Feed** e **Perfil** com estado vazio no início.
 - **vem+** (premium), feedback, sobre, configurações e notificações.
+- **Persistência local** (`localStorage`) com reset e exportação de log.
 - **Design system Mineral** documentado e implementado em tokens CSS.
 - **Apresentação navegável** (`index.html`) e PDF gerado (`vem-apresentacao.pdf`).
 - Conteúdo em **PT-BR**, com copy real, sem lorem ipsum.
@@ -113,7 +122,7 @@ Não precisa instalar nada.
 | Arquivo | O que é |
 | --- | --- |
 | `index.html` | Apresentação do projeto |
-| `app.html` | Protótipo navegável com as 20 telas |
+| `app.html` | Protótipo navegável com as 23 telas |
 | `vemapp_projeto.md` | Este documento |
 | `README.md` | Guia rápido de uso e estrutura |
 | `DESIGN_SYSTEM.md` | Documento do sistema visual |
@@ -135,11 +144,12 @@ lido, mas a navegação interna continua funcionando.
 ```text
 .
 ├─ index.html                    apresentação/pitch (8 seções)
-├─ app.html                      protótipo: 20 telas + tabbar + rail desktop
+├─ app.html                      protótipo: 23 telas + tabbar + rail desktop
 ├─ README.md                     guia rápido
 ├─ DESIGN_SYSTEM.md              referência do design system
 ├─ design-system.php             referência histórica (não editar)
 ├─ vemapp_projeto.md             este documento
+├─ vem-rodada-testes.md          roteiro da rodada de testes v2
 ├─ vem-apresentacao.pdf          PDF gerado (ignorado pelo Git)
 │
 ├─ assets/
@@ -147,14 +157,16 @@ lido, mas a navegação interna continua funcionando.
 │  │  ├─ tokens.css              cores, tipografia, grid, raios, sombras
 │  │  ├─ base.css                reset, tipografia base, device frame
 │  │  ├─ components.css          botões, chips, cards, avatar, tabbar, toast
-│  │  ├─ screens.css             layout específico das 20 telas
+│  │  ├─ screens.css             layout específico das 23 telas
 │  │  ├─ site.css                layout da apresentação
 │  │  └─ print.css               paginação A4 do PDF
 │  │
 │  ├─ js/
 │  │  ├─ icons.js                sprite SVG inline
-│  │  ├─ data.js                 pessoas, grupos, treinos, matches, sugestões
-│  │  ├─ ui.js                   GenUI/LUI, jornada, filtros, chips e toasts
+│  │  ├─ data.js                 pessoas, atividades, grupos, eventos, jornadas
+│  │  ├─ store.js                estado persistido (localStorage) + reset/log
+│  │  ├─ ui.js                   GenUI/LUI, jornada, foto de perfil, toasts
+│  │  ├─ social.js               login, verificação, interesses, match, chat e social
 │  │  └─ app.js                  roteador, tabbar, escala do device
 │  │
 │  ├─ fonts/                     Abril Fatface, Nunito Sans, Jost, Oswald
@@ -170,8 +182,10 @@ lido, mas a navegação interna continua funcionando.
 - **Sem dependência externa:** fontes e imagens são locais.
 - **Roteamento simples:** `app.js` lê `data-screen`, `data-nav`, `data-back` e
   `data-tab`, além do parâmetro `?tela=`.
-- **Estado local:** a jornada escolhida é salva em `localStorage`
-  (`vem.goal.v1`).
+- **Estado local:** todo o estado do testador (perfil, verificação, interesses,
+  favoritos, match, chat, eventos, grupos, sinais) é salvo em `localStorage`
+  sob as chaves `vem.*` (`assets/js/store.js`).
+- **Reset de teste:** `app.html?reset=1` ou Configurações → “Redefinir teste”.
 - **Cache busting manual:** ao alterar CSS/JS, atualizar `?v=` no `<link>` ou
   `<script>` correspondente.
 - **Mobile first no protótipo:** até 1180 px o app ocupa a tela inteira; acima
@@ -179,35 +193,39 @@ lido, mas a navegação interna continua funcionando.
 
 ---
 
-## 7. As 20 telas
+## 7. As 23 telas
 
 | # | Tela | Grupo | Papel |
 | --- | --- | --- | --- |
-| 01 | Boas-vindas | Onboarding | Apresenta a promessa e as duas entradas |
-| 02 | Verificação | Onboarding | Código de 6 dígitos |
+| 01 | Boas-vindas | Onboarding | Apresenta a promessa e o login com Google |
+| 02 | Verificação | Onboarding | Identidade — verificar agora ou depois |
 | 03 | Verificado | Onboarding | Confirmação do selo |
-| 04 | Criar perfil | Onboarding | Dados essenciais + foto |
+| 04 | Criar perfil | Onboarding | Dados essenciais + upload de foto |
 | 05 | **Objetivo** | Onboarding | **Ponto de ramificação da jornada** |
-| 06 | Interesses | Onboarding | Modalidades e ritmo |
+| 06 | Interesses | Onboarding | Contextos amplos + atividades específicas |
 | 07 | Senha | Onboarding | Requisitos em tempo real |
 | 08 | Pronto | Onboarding | Celebração e entrada no app |
 | 09 | Login | Onboarding | Retorno para quem já tem conta |
 | 10 | Início | App | Card GenUI + LUI + treino do dia |
-| 11 | Perfil | App | Progresso, constância e preferências |
-| 12 | Match | App | Pessoas por perto com compatibilidade |
+| 11 | Perfil | App | Progresso, selo, interesses e foto |
+| 12 | Match | App | Pessoas por perto + leque de atividades |
 | 13 | Atividades | App | Busca, filtros e eventos |
-| 14 | Social | App | Conexões e grupos |
-| 15 | Feed | App | Histórias e conquistas |
+| 14 | Social | App | Conexões, grupos e eventos |
+| 15 | Feed | App | Histórias e conquistas com atividade |
 | 16 | vem+ | Conta | Premium com preço claro |
 | 17 | Feedback | Conta | Avaliação rápida |
 | 18 | Sobre | Conta | Propósito e valores |
-| 19 | Configurações | Conta | Conta, privacidade e acessibilidade |
+| 19 | Configurações | Conta | Conta, privacidade, reset e exportação |
 | 20 | Notificações | Conta | Controle granular + retorno ao projeto |
+| 21 | Documentação do educador | Onboarding (educador) | Envio simulado de CREF |
+| 22 | Conversa | App | Chat simulado com roteiro e convite |
+| 23 | Meus eventos | App | Agenda de eventos confirmados |
 
 ### Navegação principal
 
 Tabbar fixa com cinco abas: **Início, Match, Social, Feed, Perfil**.
-As telas 13, 16, 17, 18, 19 e 20 são acessadas por atalhos contextuais.
+As telas 13, 16, 17, 18, 19 e 20 são acessadas por atalhos contextuais; as telas
+21, 22 e 23 aparecem nos fluxos de educador, match e social.
 
 ---
 
@@ -223,11 +241,14 @@ define a primeira tela depois do onboarding e o card que a Home gera.
 | **A** | Se conectar | Match → Categorias → Feed | “Encontramos 3 pessoas com o mesmo interesse em Yoga. Quer ver?” |
 | **B** | Autocuidado | Perfil e métricas → Match | “Sua meta está em 60%. Sugerimos um treino rápido de 15 min.” |
 | **C** | Eventos e comunidade | Feed de atividades | “Há um evento de corrida no seu bairro neste sábado. Quer se inscrever?” |
+| **D** | Sou educador físico | CREF (21) → Interesses → Home | “Seu CREF está em análise. Enquanto isso, explore a comunidade.” |
 
-- Seleção única com três cards grandes, contador visível e `aria-pressed`.
+- Seleção única com cards grandes, contador visível e `aria-pressed`.
 - A escolha fica em `localStorage` (`vem.goal.v1`).
 - Sem escolha salva, o app abre na jornada **Autocuidado**.
 - O chip “Jornada: …” na Home permite trocar o objetivo a qualquer momento.
+- O caminho **D** abre a tela 21 (envio simulado de CREF, selo “em análise”) antes
+  dos interesses.
 
 ### 8.2 GenUI + LUI na Home
 
@@ -255,13 +276,36 @@ desfeita.
 - **Configurações** cobre conta, privacidade e acessibilidade.
 - **Notificações** tem controle granular e mantém o retorno à página do projeto.
 
-### 8.5 Controle temporário de teste
+### 8.5 Verificação e login (rodada v2)
 
-As telas **01 a 08** exibem um botão flutuante **“Pular onboarding”**. Ele leva
-direto à Home (10) e mostra o toast “Onboarding pulado. Modo de teste.”.
+- **Login com Google** (tela 01) conecta uma conta simulada e segue para a
+  verificação.
+- A **verificação não trava**: a pessoa vê “Verificar agora” e “Verificar
+  depois”. Ao verificar, passa pela tela 03 (selo) e volta para o ponto de
+  origem.
+- Sem verificar, match, grupos e conversas mostram um convite para verificar;
+  exploração, favoritos e eventos continuam livres.
 
-> **Atenção:** esse controle é temporário e deve ser removido antes da entrega
-> final. Ele não aparece no PDF nem nas capturas de tela.
+### 8.6 Match específico e conversa simulada
+
+- **Dois níveis de interesse:** contextos amplos (tela 06) alimentam o match
+  geral; atividades específicas (até 5 favoritas) alimentam o match específico,
+  o leque do FAB e as sugestões de grupos.
+- **FAB de estrela** abre o leque de atividades. Sem atividade em comum, o FAB
+  continua disponível para escolher por onde começar com aquela pessoa.
+- O **terceiro like** dispara a conversa simulada (tela 22), com roteiro sim/não,
+  convite de evento e convites por contexto.
+- As conversas antigas ficam **arquivadas**; abrir outra pessoa não apaga o
+  histórico, e a badge do Social soma as não lidas.
+
+### 8.7 Social, eventos e sinais
+
+- **Social** em três abas: Conexões, Grupos e Eventos.
+- **Grupos** aparecem apenas quando há uma conexão que já participa.
+- **Meus eventos** (tela 23) reúne os eventos confirmados, com convite vindo da
+  conversa ou do Feed.
+- **Feed** carrega a atividade de cada post; curtir ou salvar gera um sinal que
+  alimenta as sugestões do Perfil.
 
 ---
 
@@ -336,6 +380,8 @@ O app mantém hierarquia fixa entre H1, título de card, corpo e microtexto.
 - **Avatares reais:** `ana-beatriz-avatar.jpg`, `marina-avatar.jpg`,
   `camila-avatar.jpg`, `rafael-avatar.jpg`, `luiza-avatar.jpg` e
   `bruna-avatar.jpg`.
+- **Fotos de match:** `ana-beatriz.jpg`, `marina.jpg`, `camila.jpg`,
+  `rafael.jpg`, `luiza.jpg` e `bruna.jpg` (retrato 2:3, usadas no card de match).
 - **Perfil próprio:** avatar de Ana Beatriz + capa `ana-capa.jpg`.
 - **Eventos:** `evento-corrida-no-parque.jpg` e `evento-yoga.jpg`.
 - **Feed:** `feed-marina-corrida.jpg` e `feed-rafael-yoga.jpg`.
@@ -362,6 +408,7 @@ carregados pela página.
 | `932420d` | 09/11/2026 | Eventos, fotos e avatares reais no protótipo |
 | `908e82a` | 09/11/2026 | Botão temporário “Pular onboarding” |
 | `d7ce196` | 09/11/2026 | Imagens nos três cards de conceito da apresentação |
+| `e70420e` | 18/11/2026 | Rodada de testes v2: login, verificação, interesses, match e social |
 
 ### Marcos conceituais
 
@@ -371,6 +418,7 @@ carregados pela página.
    imagens reais.
 4. **Refinamento de pitch** — nova apresentação, textos e cards visuais.
 5. **Testes de navegação** — botão temporário de skip do onboarding.
+6. **Rodada de testes v2** — fluxo social e de confiança (23 telas).
 
 ---
 
@@ -378,12 +426,20 @@ carregados pela página.
 
 ### O que está validado
 
-- Navegação entre as 20 telas e pela URL `?tela=NN`.
+- Navegação entre as 23 telas e pela URL `?tela=NN`.
 - Tabbar contextual, rail de desktop e escala do device.
 - Layout mobile em **390 × 844**, tablet em **768 × 1024** e desktop em
   **1024 × 768**.
 - Sem overflow horizontal nas telas testadas.
-- Botão de skip visível apenas no onboarding, com navegação para a Home e toast.
+- Sem erros de console na varredura das 23 telas.
+- Fluxo completo de login → verificação → perfil → objetivo → interesses →
+  Home.
+- Caminho do educador (tela 05 → 21 → interesses) com selo “em análise”.
+- Match específico: terceiro like arma a conversa; leque do FAB funciona com e
+  sem favoritas.
+- Conversa simulada com roteiro, convite de evento e arquivamento de históricos.
+- Upload de foto persistido como data URL durante o teste.
+- Reset (`?reset=1` e Configurações) e exportação de log.
 - Cards de conceito responsivos em **1440 px**, **900 px** e **390 px**, com
   imagens carregando e cards alinhados.
 - Nenhuma dependência externa de rede.
@@ -406,15 +462,13 @@ carregados pela página.
 
 ## 13. Pendências e próximos passos
 
-1. **Remover o botão “Pular onboarding”** e o toast de teste antes da entrega.
-2. **Regerar as capturas e o PDF** se a apresentação for congelada.
-3. **Revisar os arquivos não versionados:** decidir se `index_02.html`, os
+1. **Regerar as capturas e o PDF** se a apresentação for congelada (as telas
+   21–23 ainda não têm captura na galeria).
+2. **Revisar os arquivos não versionados:** decidir se `index_02.html`, os
    originais das fotos e `app.zip` entram no repositório ou ficam apenas locais.
-4. **Atualizar o `DESIGN_SYSTEM.md`** em uma próxima rodada: ele ainda menciona
+3. **Atualizar o `DESIGN_SYSTEM.md`** em uma próxima rodada: ele ainda menciona
    `avatar.jpg` como placeholder e não reflete todos os assets atuais. É uma
    referência histórica, portanto foi mantido sem alterações.
-5. **Revisar acessibilidade do skip** ou confirmar sua remoção, já que é um
-   controle de teste fora do fluxo definitivo.
 
 ---
 
@@ -425,7 +479,8 @@ carregados pela página.
 | [`README.md`](README.md) | Guia rápido: como abrir, estrutura, telas, jornada, GenUI e PDF |
 | [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) | Sistema visual completo: cor, tipo, grid, componentes, movimento e acessibilidade |
 | [`index.html`](index.html) | Pitch navegável: conceito, sistema, leis, jornada, GenUI, arquitetura, telas e acabamento |
-| [`app.html`](app.html) | Protótipo funcional com as 20 telas |
+| [`app.html`](app.html) | Protótipo funcional com as 23 telas |
+| [`vem-rodada-testes.md`](vem-rodada-testes.md) | Roteiro de teste da rodada v2 |
 | `vemapp_projeto.md` | Este documento: visão consolidada, evolução e estado do projeto |
 
 ---
@@ -450,3 +505,4 @@ carregados pela página.
 | Data | Alteração |
 | --- | --- |
 | 17/11/2026 | Criação do documento consolidado a partir do estado do commit `d7ce196` |
+| 18/11/2026 | Atualização para a rodada de testes v2: 23 telas, login, verificação, interesses em dois níveis, match específico, conversa simulada e social em três abas |

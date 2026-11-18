@@ -30,6 +30,7 @@
     $$(".avatar img").forEach(function (image) {
       /* Fotos reais de pessoas têm prioridade e não entram no rodízio. */
       if (image.hasAttribute("data-avatar")) return;
+      if (image.hasAttribute("data-photo")) return;
       if (image.id === "pf-avatar" || image.closest(".avatar-upload")) return;
       if (image.closest("[data-nav='11']")) return;
 
@@ -216,10 +217,40 @@
         return;
       }
 
+      if (file.size > 8 * 1024 * 1024) {
+        toast("Imagem muito grande. Use um arquivo de até 8 MB.");
+        return;
+      }
+
       var reader = new FileReader();
       reader.onload = function () {
-        avatarPreview.src = String(reader.result);
-        toast("Foto de perfil atualizada.");
+        var image = new Image();
+        image.onload = function () {
+          var limit = 480;
+          var scale = Math.min(1, limit / Math.max(image.width, image.height));
+          var canvas = document.createElement("canvas");
+          canvas.width = Math.max(1, Math.round(image.width * scale));
+          canvas.height = Math.max(1, Math.round(image.height * scale));
+          canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+
+          var data = canvas.toDataURL("image/jpeg", 0.82);
+          avatarPreview.src = data;
+          avatarPreview.hidden = false;
+          var wrap = avatarPreview.closest(".avatar");
+          if (wrap) wrap.classList.remove("is-empty");
+
+          if (window.VemStore) {
+            window.VemStore.state.profile.photo = data;
+            window.VemStore.save("profile");
+            window.VemStore.log("profile:photo");
+          }
+          if (window.VemSocial) window.VemSocial.refresh();
+          toast("Foto de perfil atualizada. Ela fica salva neste navegador.");
+        };
+        image.onerror = function () {
+          toast("Não foi possível ler essa imagem.");
+        };
+        image.src = String(reader.result);
       };
       reader.readAsDataURL(file);
     });
@@ -341,107 +372,27 @@
   });
 
   /* -----------------------------------------------------------------------
-     Match — deck de pessoas
+     Perfil — salva a identidade local antes de seguir no onboarding
      ----------------------------------------------------------------------- */
 
-  var matches = DATA.matches || [];
-  var matchIndex = 0;
-  var matchCard = $("#match-card");
+  var continueProfile = $("#profile-continue");
 
-  function currentMatch() {
-    return matches[matchIndex % matches.length];
-  }
+  if (continueProfile) {
+    continueProfile.addEventListener("click", function () {
+      if (continueProfile.disabled || !window.VemStore) return;
 
-  function renderMatch() {
-    if (!matchCard || !matches.length) return;
+      var profile = window.VemStore.state.profile;
+      profile.name = pfName ? pfName.value.trim() : profile.name;
+      profile.email = pfEmail ? pfEmail.value.trim() : profile.email;
+      profile.birth = pfBirth ? pfBirth.value.trim() : profile.birth;
 
-    var match = currentMatch();
-    var photo = $("#match-photo");
-    var image = $("#match-img");
-    var compatibility = $("#match-compat");
-    var name = $("#match-name");
-    var age = $("#match-age");
-    var distance = $("#match-dist");
-    var area = $("#match-area");
-    var bio = $("#match-bio");
-    var tags = $("#match-tags");
-    var star = $("#match-star");
-
-    if (photo) photo.style.background = match.tint;
-    if (image) {
-      image.src = match.avatar || AVATAR;
-      image.alt = "Foto de " + match.name;
-    }
-    if (compatibility) compatibility.textContent = match.compatibility + "% combinam";
-    if (name) name.textContent = match.name;
-    if (age) age.textContent = String(match.age);
-    if (distance) distance.textContent = match.distance;
-    if (area) area.textContent = match.area;
-    if (bio) bio.textContent = match.bio;
-    if (tags) {
-      tags.innerHTML = match.tags
-        .map(function (tag) {
-          return '<span class="tag">' + tag + "</span>";
-        })
-        .join("");
-    }
-    if (star) {
-      star.setAttribute("aria-pressed", "false");
-      star.classList.remove("is-starred");
-    }
-  }
-
-  function swipeMatch(direction) {
-    if (!matchCard || !matches.length) return;
-    if (matchCard.dataset.busy === "1") return;
-
-    var match = currentMatch();
-    matchCard.dataset.busy = "1";
-    matchCard.classList.add(direction === "like" ? "is-out-right" : "is-out-left");
-
-    if (direction === "like") {
-      toast("Você curtiu " + match.name + ". Se for recíproco, vira match.");
-    } else {
-      toast("Card passado. Próxima pessoa.");
-    }
-
-    window.setTimeout(function () {
-      matchIndex = (matchIndex + 1) % matches.length;
-      matchCard.classList.remove("is-out-left", "is-out-right");
-      renderMatch();
-      delete matchCard.dataset.busy;
-    }, 340);
-  }
-
-  var matchPass = $("#match-pass");
-  var matchLike = $("#match-like");
-  var matchStar = $("#match-star");
-
-  if (matchPass) {
-    matchPass.addEventListener("click", function () {
-      swipeMatch("pass");
-    });
-  }
-
-  if (matchLike) {
-    matchLike.addEventListener("click", function () {
-      swipeMatch("like");
-    });
-  }
-
-  if (matchStar) {
-    matchStar.addEventListener("click", function () {
-      var starred = matchStar.getAttribute("aria-pressed") === "true";
-      matchStar.setAttribute("aria-pressed", starred ? "false" : "true");
-      matchStar.classList.toggle("is-starred", !starred);
-      toast(
-        currentMatch().name + (starred ? " removida dos favoritos." : " salva nos favoritos.")
-      );
+      window.VemStore.save("profile");
+      window.VemStore.log("profile:save");
+      if (window.VemSocial) window.VemSocial.refresh();
     });
   }
 
   alternateAvatars();
-  if (matchCard && matches.length) renderMatch();
 
   /* -----------------------------------------------------------------------
      Feed — curtir e salvar
@@ -849,7 +800,9 @@
   var enterApp = $("#enter-app");
   if (enterApp) {
     enterApp.addEventListener("click", function () {
-      if (window.VemApp) window.VemApp.go(journeyStart());
+      if (window.VemStore) window.VemStore.log("onboarding:enter");
+      if (window.VemSocial) window.VemSocial.refresh();
+      if (window.VemApp) window.VemApp.go("10");
     });
   }
 
