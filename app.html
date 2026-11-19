@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="assets/css/tokens.css?v=3">
   <link rel="stylesheet" href="assets/css/base.css?v=5">
   <link rel="stylesheet" href="assets/css/components.css?v=7">
-  <link rel="stylesheet" href="assets/css/screens.css?v=14">
+  <link rel="stylesheet" href="assets/css/screens.css?v=15">
 </head>
 <body class="app-page">
 
@@ -922,6 +922,8 @@
                 </button>
               </header>
 
+              <p class="match__hint match__hint--top" id="match-hint">Toque no card para ver o perfil · segure para abrir as ações.</p>
+
               <div class="match__stage">
                 <article class="match-card" id="match-card">
                   <div class="match-card__photo" id="match-photo">
@@ -991,13 +993,17 @@
               </div>
               -->
 
-              <p class="match__hint" id="match-hint">Toque no card para ver o perfil · segure para abrir as ações. A estrela controla as conexões por atividade.</p>
+              <p class="match__hint match__hint--top" id="match-hint">Toque no card para ver o perfil · segure para abrir as ações.</p>
 
+              <!-- Botão "Abrir ações" e a estrela (FAB) ficam fora desta tela
+                   por enquanto. A interação acontece toda no card.
               <div class="match__footer">
                 <button class="btn btn--text" type="button" id="match-actions-open">Abrir ações (menu radial)</button>
               </div>
+              -->
             </div>
 
+            <!--
             <div class="match-fanout" id="match-fanout" hidden aria-label="Filtros de conexões">
               <p class="match-fanout__label">Conexões por atividade</p>
               <div class="match-fanout__items" id="match-fanout-items"></div>
@@ -1007,6 +1013,7 @@
               <span data-icon="star"></span>
               <span class="match-fab__badge" id="match-fab-badge" hidden>0</span>
             </button>
+            -->
           </section>
 
           <!-- ============================================================
