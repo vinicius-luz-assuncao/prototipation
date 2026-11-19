@@ -965,6 +965,155 @@
 
   var matchCard = $("#match-card");
 
+  /* -----------------------------------------------------------------------
+     Reação do match — animações Lottie em SVG, dois estados
+     "thumb"    → a pessoa ainda não deu like (curtida enviada)
+     "highfive" → a pessoa já deu like (match mútuo confirmado)
+     ----------------------------------------------------------------------- */
+
+  var LOTTIE_MS = { thumb: 1017, highfive: 2428 };
+  /* Ponto de parada de cada reação (o high-five para no auge do toque). */
+  var LOTTIE_STOP_MS = { thumb: 987, highfive: 1900 };
+  var thumbSvg = null;
+  var reactionSvg = null;
+
+  function mountLottie(host, markup) {
+    if (!host || !markup) return null;
+    host.innerHTML = markup;
+    var svg = host.querySelector("svg");
+    if (!svg) return null;
+    svg.setAttribute("focusable", "false");
+    restSvg(svg);
+    return svg;
+  }
+
+  function restSvg(svg) {
+    if (!svg) return;
+    try {
+      svg.pauseAnimations();
+      svg.setCurrentTime(0);
+    } catch (error) {
+      /* ambiente sem SMIL: segue sem controle de tempo */
+    }
+  }
+
+  function playSvg(svg, kind, done) {
+    if (!svg) {
+      done();
+      return;
+    }
+
+    var duration = Math.max(0.12, (LOTTIE_STOP_MS[kind] || LOTTIE_MS[kind]) / 1000);
+    var finished = false;
+    var started = null;
+    var raf = window.requestAnimationFrame;
+    var guard = null;
+    var ticker = null;
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      if (guard) window.clearTimeout(guard);
+      if (ticker) window.clearInterval(ticker);
+      try {
+        svg.pauseAnimations();
+      } catch (error) {
+        /* ignora */
+      }
+      done();
+    }
+
+    try {
+      /* O timeline do SMIL não avança de forma confiável em alguns
+         navegadores; a animação é dirigida manualmente por frame. */
+      svg.pauseAnimations();
+      svg.setCurrentTime(0);
+    } catch (error) {
+      finish();
+      return;
+    }
+
+    /* Rede de segurança: se nenhum relógio rodar (janela oculta ou aba em
+       segundo plano), a reação ainda conclui. */
+    guard = window.setTimeout(finish, duration * 1000 + 200);
+
+    function step(timestamp) {
+      if (finished) return;
+      if (started === null) started = timestamp;
+
+      var elapsed = (timestamp - started) / 1000;
+
+      if (elapsed >= duration - 0.03) {
+        try {
+          svg.setCurrentTime(duration - 0.03);
+        } catch (error) {
+          /* ignora */
+        }
+        finish();
+        return;
+      }
+
+      try {
+        svg.setCurrentTime(elapsed);
+      } catch (error) {
+        finish();
+      }
+    }
+
+    if (raf) {
+      (function loop(timestamp) {
+        step(timestamp);
+        if (!finished) raf(loop);
+      })(window.performance && window.performance.now ? window.performance.now() : Date.now());
+    }
+
+    /* Relógio de reserva para ambientes que suspendem o rAF. */
+    ticker = window.setInterval(function () {
+      step(window.performance && window.performance.now ? window.performance.now() : Date.now());
+    }, 32);
+  }
+
+  function hideReaction() {
+    var overlay = $("#match-reaction");
+    if (overlay) {
+      overlay.hidden = true;
+      overlay.classList.remove("is-leaving");
+    }
+    restSvg(reactionSvg);
+  }
+
+  function playReaction(kind, done) {
+    if (kind === "highfive") {
+      var overlay = $("#match-reaction");
+      if (overlay) {
+        overlay.classList.remove("is-leaving");
+        overlay.hidden = false;
+      }
+      playSvg(reactionSvg, "highfive", function () {
+        if (!overlay) {
+          done();
+          return;
+        }
+        overlay.classList.add("is-leaving");
+        window.setTimeout(function () {
+          hideReaction();
+          done();
+        }, 160);
+      });
+      return;
+    }
+
+    playSvg(thumbSvg, "thumb", done);
+  }
+
+  function initReactions() {
+    var data = window.VemLottie;
+    if (!data) return;
+    thumbSvg = mountLottie($("#match-thumb"), data.thumb);
+    reactionSvg = mountLottie($("#match-reaction-lottie"), data.highfive);
+    hideReaction();
+  }
+
   function advanceMatch(direction) {
     if (!matchCard || matchBusy) return;
     var person = currentPerson();
@@ -976,6 +1125,8 @@
     window.setTimeout(function () {
       matchIndex += 1;
       matchCard.classList.remove("is-out-left", "is-out-right");
+      hideReaction();
+      restSvg(thumbSvg);
       renderMatch();
       matchBusy = false;
     }, 320);
@@ -1018,24 +1169,56 @@
     }, delay);
   }
 
+  var reacting = false;
+
+  function reducedMotion() {
+    return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }
+
   if ($("#match-like")) {
     $("#match-like").addEventListener("click", function () {
-      if (matchBusy) return;
+      if (matchBusy || reacting) return;
       var person = currentPerson();
       if (!person) return;
       if (!guardVerified("dar match")) return;
 
+      var mutual = !!person.likedYou;
+      reacting = true;
+
       S.match.likes += 1;
       registerMatch(person);
-      STORE.log("match:like", { id: person.id, likes: S.match.likes });
+      STORE.log("match:like", {
+        id: person.id,
+        likes: S.match.likes,
+        mutual: mutual
+      });
+      if (mutual) STORE.log("match:mutual", person.id);
 
-      toast("Você e " + person.name + " deram match! " + activityEmoji(activityForMatch(person)) + " " + activityLabel(activityForMatch(person)) + ".");
+      function afterReaction() {
+        reacting = false;
 
-      if (S.match.matched.length === 3) {
-        armConversation(person);
+        if (mutual) {
+          toast(
+            "Você e " + person.name + " deram match! " +
+            activityEmoji(activityForMatch(person)) + " " + activityLabel(activityForMatch(person)) + "."
+          );
+        } else {
+          toast("Curtida enviada para " + person.name + ".");
+        }
+
+        if (S.match.matched.length === 3) {
+          armConversation(person);
+        }
+
+        advanceMatch("like");
       }
 
-      advanceMatch("like");
+      if (reducedMotion()) {
+        afterReaction();
+        return;
+      }
+
+      playReaction(mutual ? "highfive" : "thumb", afterReaction);
     });
   }
 
@@ -2039,6 +2222,7 @@
   /* Boot */
   renderVerificationState();
   hydrateInterests();
+  initReactions();
   renderFanout();
   renderMatch();
   renderSocial();

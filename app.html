@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="assets/css/tokens.css?v=3">
   <link rel="stylesheet" href="assets/css/base.css?v=4">
   <link rel="stylesheet" href="assets/css/components.css?v=7">
-  <link rel="stylesheet" href="assets/css/screens.css?v=8">
+  <link rel="stylesheet" href="assets/css/screens.css?v=11">
 </head>
 <body class="app-page">
 
@@ -877,6 +877,11 @@
                   <p class="tiny mt-1">Ligue o match geral ou escolha outra atividade no leque.</p>
                   <button class="btn btn--secondary btn--sm mt-2" type="button" id="match-empty-reset">Reativar match geral</button>
                 </div>
+
+                <div class="match-reaction" id="match-reaction" hidden aria-hidden="true">
+                  <span class="match-reaction__lottie" id="match-reaction-lottie"></span>
+                  <span class="match-reaction__label" id="match-reaction-label">Deu match!</span>
+                </div>
               </div>
 
               <div class="match__actions">
@@ -884,7 +889,7 @@
                   <span data-icon="x"></span>
                 </button>
                 <button class="match-action match-action--like" id="match-like" aria-label="Curtir" title="Curtir">
-                  <span data-icon="heart" data-icon-class="icon--fill"></span>
+                  <span class="match-action__lottie" id="match-thumb" aria-hidden="true"></span>
                 </button>
               </div>
 
@@ -1796,10 +1801,11 @@
   </div>
 
   <script src="assets/js/icons.js?v=3"></script>
-  <script src="assets/js/data.js?v=7"></script>
+  <script src="assets/js/data.js?v=8"></script>
   <script src="assets/js/store.js?v=2"></script>
   <script src="assets/js/ui.js?v=7"></script>
-  <script src="assets/js/social.js?v=2"></script>
+  <script src="assets/js/lottie.js?v=1"></script>
+  <script src="assets/js/social.js?v=8"></script>
   <script src="assets/js/app.js?v=5"></script>
 </body>
 </html>

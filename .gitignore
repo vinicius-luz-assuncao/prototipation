@@ -8,6 +8,9 @@ assets/img/*-old.svg
 # pacotes de imagens baixados (os arquivos finais ficam na pasta img)
 assets/img/*.zip
 
+# exportações alternativas das animações (o app usa os SVGs)
+assets/lotties/*.webm
+
 # PDF gerado a partir de index.html + print.css
 vem-apresentacao.pdf
 

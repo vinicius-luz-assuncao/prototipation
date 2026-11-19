@@ -1528,9 +1528,92 @@
   height: 24px;
 }
 
-.match-action--like .icon {
-  width: 32px;
-  height: 32px;
+.match-action--like {
+  overflow: hidden;
+}
+
+.match-action__lottie {
+  display: block;
+  width: 52px;
+  height: 52px;
+  pointer-events: none;
+}
+
+.match-action__lottie svg,
+.match-reaction__lottie svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Reação do match: high-five em sobreposição, centralizado na foto. */
+.match-reaction {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 320px;
+  z-index: 6;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--s-1);
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 42%,
+    rgba(48, 36, 55, 0.82) 0%,
+    rgba(48, 36, 55, 0.62) 46%,
+    rgba(48, 36, 55, 0) 76%
+  );
+  animation: match-reaction-in 180ms var(--ease);
+}
+
+.match-reaction[hidden] {
+  display: none;
+}
+
+.match-reaction.is-leaving {
+  opacity: 0;
+  transition: opacity 160ms var(--ease);
+}
+
+.match-reaction__lottie {
+  display: block;
+  width: 264px;
+  height: 198px;
+}
+
+.match-reaction__label {
+  padding: 5px 14px;
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-2);
+  animation: match-reaction-label 240ms var(--ease) 120ms both;
+}
+
+@keyframes match-reaction-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes match-reaction-label {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .match__hint {

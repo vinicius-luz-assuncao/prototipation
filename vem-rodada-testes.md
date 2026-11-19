@@ -65,6 +65,10 @@ python -m http.server 4173
 ### C. Match específico e leque (FAB de estrela)
 
 - Com atividades em comum, o card de match mostra o selo “Match em …”.
+- O botão de match usa duas animações: **joinha** (curtida enviada, a pessoa
+  ainda não curtiu você) e **high-five** com o selo “Deu match!” (a pessoa já
+  tinha curtido você). Nos dois casos o card só corre para o lado depois da
+  animação terminar.
 - O FAB de estrela abre o leque de atividades; sem favoritas, ainda é possível
   escolher por onde começar com aquela pessoa.
 - Alternar entre **match geral** e **match específico** muda o deck.
