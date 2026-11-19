@@ -95,6 +95,27 @@
     { slug: "avancado", label: "Avançado", emoji: "🚀" }
   ];
 
+  /* Contextos principais exibidos na tela 06 (Interesses) — a busca revela
+     os demais contextos da lista acima. */
+  var broadPrimary = [
+    "ao-ar-livre",
+    "indoor",
+    "em-grupo",
+    "individual",
+    "leve",
+    "intenso"
+  ];
+
+  /* Atividades sugeridas (atalhos) na tela 06, antes da busca. */
+  var suggestedActivities = [
+    "yoga",
+    "corrida",
+    "musculacao",
+    "danca",
+    "natacao",
+    "caminhada"
+  ];
+
   /* -----------------------------------------------------------------------
      Pessoas e eventos do cenário simulado
      ----------------------------------------------------------------------- */
@@ -198,6 +219,24 @@
       avatar: AVATAR_BRUNA,
       photo: "assets/img/bruna.jpg",
       tint: "linear-gradient(160deg,#f57335 0%,#dae35a 50%,#302437 100%)"
+    },
+    vem: {
+      id: "vem",
+      name: "Vem",
+      age: "",
+      distance: "Seu guia",
+      area: "Sempre por perto",
+      compatibility: 100,
+      bio: "Oi! Eu sou o Vem, o guia do app. Vou te mostrar como conhecer gente para treinar.",
+      activities: ["corrida"],
+      level: "Guia",
+      groups: [],
+      likedYou: true,
+      guide: true,
+      ring: "var(--vermilion)",
+      avatar: "assets/img/logo.svg",
+      photo: "assets/img/logo.svg",
+      tint: "linear-gradient(160deg,#f57335 0%,#f77cc5 55%,#302437 100%)"
     }
   };
 
@@ -298,6 +337,8 @@
     people: people,
     activities: activities,
     broadTags: broadTags,
+    broadPrimary: broadPrimary,
+    suggestedActivities: suggestedActivities,
     events: events,
     groups: groups,
 

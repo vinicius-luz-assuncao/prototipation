@@ -744,7 +744,6 @@ a {
     background: var(--paper);
     overflow: hidden;
   }
-
   .app-page::after {
     display: none;
   }
@@ -778,5 +777,21 @@ a {
 
   .device__screen {
     border-radius: 0;
+  }
+}
+
+/* Legibilidade em desktop: em telas largas o device é exibido em escala
+   reduzida; aumentamos levemente a tipografia para manter o conforto. */
+@media (min-width: 1180px) {
+  :root {
+    --t-display-xl: 44px;
+    --t-display: 36px;
+    --t-h1: 30px;
+    --t-h2: 24px;
+    --t-h3: 18px;
+    --t-body: 16px;
+    --t-sm: 14px;
+    --t-xs: 12px;
+    --t-label: 11px;
   }
 }

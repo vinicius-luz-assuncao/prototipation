@@ -123,7 +123,7 @@
     var availableHeight = window.innerHeight - 96;
     var availableWidth = window.innerWidth - 96 - (railVisible ? 280 + 64 : 0);
     var scale = Math.min(1, availableHeight / 844, availableWidth / 390);
-    scale = Math.max(0.45, Math.round(scale * 1000) / 1000);
+    scale = Math.max(0.6, Math.round(scale * 1000) / 1000);
 
     root.style.setProperty("--device-scale", String(scale));
   }

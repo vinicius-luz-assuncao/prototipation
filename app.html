@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>vem — protótipo navegável</title>
-  <meta name="description" content="Protótipo de alta fidelidade do vem, app de fitness e conexões. 23 telas, GenUI, conexões por atividade e design system Mineral.">
+  <meta name="description" content="Protótipo de alta fidelidade do vem, app de fitness e conexões. 24 telas, GenUI, conexões por atividade e design system Mineral.">
   <link rel="icon" href="assets/img/logo.svg">
   <link rel="stylesheet" href="assets/fonts/fonts.css?v=2">
   <link rel="stylesheet" href="assets/css/tokens.css?v=3">
-  <link rel="stylesheet" href="assets/css/base.css?v=4">
+  <link rel="stylesheet" href="assets/css/base.css?v=5">
   <link rel="stylesheet" href="assets/css/components.css?v=7">
-  <link rel="stylesheet" href="assets/css/screens.css?v=13">
+  <link rel="stylesheet" href="assets/css/screens.css?v=14">
 </head>
 <body class="app-page">
 
@@ -20,7 +20,7 @@
         <img src="assets/img/logo.svg" alt="" class="rail__logo">
         <span class="rail__brand-text">
           <strong>vem</strong>
-          <small>protótipo · 23 telas</small>
+          <small>protótipo · 24 telas</small>
         </span>
       </a>
 
@@ -41,6 +41,7 @@
           <p class="rail__label">App</p>
           <button class="rail__item" data-nav="10"><span class="rail__num">10</span>Início</button>
           <button class="rail__item" data-nav="11"><span class="rail__num">11</span>Perfil</button>
+          <button class="rail__item" data-nav="24"><span class="rail__num">24</span>Editar perfil</button>
           <button class="rail__item" data-nav="12"><span class="rail__num">12</span>Conexões</button>
           <button class="rail__item" data-nav="13"><span class="rail__num">13</span>Atividades</button>
           <button class="rail__item" data-nav="14"><span class="rail__num">14</span>Social</button>
@@ -380,11 +381,16 @@
               </div>
 
               <p class="eyebrow mt-3">1 · Contexto</p>
+              <div class="input input--icon mt-1">
+                <span class="input__icon"><span data-icon="search"></span></span>
+                <input class="input__control" id="broad-search" type="search" placeholder="Buscar contexto (grupo, ar livre, intenso…)" aria-label="Buscar contexto" autocomplete="off">
+              </div>
               <div class="chip-row chip-row--wrap mt-1" id="broad-tags" role="group" aria-label="Contexto de treino"></div>
               <p class="choice__counter"><span data-chip-counter="broad">Nenhum contexto selecionado</span></p>
 
               <p class="eyebrow mt-3">2 · Atividades</p>
-              <div class="input input--icon mt-1">
+              <div class="chip-row chip-row--wrap mt-1" id="interest-suggested" role="group" aria-label="Atividades sugeridas"></div>
+              <div class="input input--icon mt-2">
                 <span class="input__icon"><span data-icon="search"></span></span>
                 <input class="input__control" id="interest-search" type="search" placeholder="Buscar atividade (yoga, corrida, boxe…)" aria-label="Buscar atividade" autocomplete="off">
               </div>
@@ -571,7 +577,7 @@
                   <span data-icon="chevron-right"></span>
                 </button>
 
-                <button class="verify-banner" type="button" data-nav="04" id="profile-nudge" hidden>
+                <button class="verify-banner" type="button" data-nav="24" id="profile-nudge" hidden>
                   <span class="circle circle--32 circle--amber"><span data-icon="user"></span></span>
                   <span class="verify-banner__body">
                     <strong>Seu perfil está vazio</strong>
@@ -743,8 +749,10 @@
           <section class="screen screen--profile screen--nav screen--aura" data-screen="11" data-title="Perfil">
             <div class="screen__scroll">
               <div class="profile__cover">
-                <img src="assets/img/ana-capa.jpg" alt="Ana Beatriz praticando yoga na praia ao pôr do sol">
-                <button class="iconbtn" data-nav="19" aria-label="Configurações"><span data-icon="settings"></span></button>
+                <img id="profile-cover-img" src="assets/img/ana-capa.jpg" alt="Ana Beatriz praticando yoga na praia ao pôr do sol">
+                <button class="iconbtn profile__cover-edit" type="button" id="cover-edit" aria-label="Editar foto de capa"><span data-icon="camera"></span></button>
+                <input type="file" id="cover-input" accept="image/*" hidden>
+                <button class="iconbtn profile__cover-settings" data-nav="19" aria-label="Configurações"><span data-icon="settings"></span></button>
               </div>
 
               <div class="profile__body">
@@ -794,8 +802,16 @@
                 </p>
 
                 <div class="profile__buttons">
-                  <button class="btn btn--secondary" data-nav="04"><span data-icon="edit"></span> Editar perfil</button>
+                  <button class="btn btn--secondary" data-nav="24"><span data-icon="edit"></span> Editar perfil</button>
                 </div>
+
+                <div class="section-head mt-4">
+                  <h2 class="h3">Fotos de atividades</h2>
+                  <button class="section-head__link" type="button" id="gallery-add">Adicionar <span data-icon="plus"></span></button>
+                </div>
+                <p class="tiny">Mostre como você treina. As fotos aparecem no seu perfil e no card das conexões.</p>
+                <div class="gallery" id="profile-gallery"></div>
+                <input type="file" id="gallery-input" accept="image/*" hidden>
 
                 <div class="section-head mt-4">
                   <h2 class="h3">Conquistas</h2>
@@ -826,6 +842,69 @@
                 </button>
               </div>
             </div>
+          </section>
+
+          <!-- ============================================================
+               24 · EDITAR PERFIL (independente do onboarding)
+               ============================================================ -->
+          <section class="screen" data-screen="24" data-title="Editar perfil">
+            <header class="topbar">
+              <button class="iconbtn" data-back="11" aria-label="Voltar"><span data-icon="chevron-left"></span></button>
+              <span class="topbar__title">Editar perfil</span>
+            </header>
+
+            <div class="screen__scroll">
+              <div class="avatar-upload">
+                <div class="avatar is-empty" id="edit-avatar-wrap">
+                  <img id="edit-avatar" alt="Sua foto de perfil" data-photo="user" hidden>
+                  <span class="avatar__placeholder" data-icon="user" aria-hidden="true"></span>
+                </div>
+                <button class="avatar-upload__btn" id="edit-avatar-btn" type="button" aria-label="Escolher foto de perfil">
+                  <span data-icon="camera"></span>
+                </button>
+                <input type="file" id="edit-avatar-input" accept="image/*" hidden>
+              </div>
+              <p class="tiny center mb-2">A foto fica salva só neste navegador.</p>
+
+              <form class="form-stack" id="edit-profile-form" novalidate>
+                <div class="field">
+                  <label class="field__label" for="edit-name">Nome completo</label>
+                  <div class="input input--icon">
+                    <span class="input__icon"><span data-icon="user"></span></span>
+                    <input class="input__control" id="edit-name" name="name" type="text" placeholder="Seu nome completo" autocomplete="name">
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="edit-email">E-mail</label>
+                  <div class="input input--icon">
+                    <span class="input__icon"><span data-icon="mail"></span></span>
+                    <input class="input__control" id="edit-email" name="email" type="email" placeholder="voce@email.com" autocomplete="email" inputmode="email">
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="edit-birth">Data de nascimento</label>
+                  <div class="input input--icon">
+                    <span class="input__icon"><span data-icon="calendar"></span></span>
+                    <input class="input__control" id="edit-birth" name="birth" type="text" placeholder="dd/mm/aaaa" inputmode="numeric" autocomplete="bday">
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="edit-bio">Bio</label>
+                  <div class="input">
+                    <textarea class="input__control" id="edit-bio" maxlength="160" placeholder="Conte o que você gosta de treinar e o que procura."></textarea>
+                  </div>
+                  <span class="field__hint">Até 160 caracteres.</span>
+                </div>
+              </form>
+            </div>
+
+            <footer class="foot">
+              <button class="btn btn--primary btn--lg btn--block" type="button" id="edit-save">Salvar alterações</button>
+              <p class="foot__note">Suas mudanças aparecem no perfil e nas conexões.</p>
+            </footer>
           </section>
 
           <!-- ============================================================
@@ -1177,7 +1256,19 @@
                 <button class="segmented__btn" role="tab" aria-selected="false" data-seg-value="explore">Explorar</button>
               </div>
 
+              <div class="input input--icon mt-3">
+                <span class="input__icon"><span data-icon="search"></span></span>
+                <input class="input__control" id="feed-search" type="search" placeholder="Buscar no feed por atividade" aria-label="Buscar no feed" autocomplete="off">
+              </div>
+              <div class="feed__empty" id="feed-empty" hidden>
+                <span data-icon="search"></span>
+                <p class="body">Nenhum post ou evento com essa atividade.</p>
+                <button class="btn btn--secondary btn--sm" type="button" id="feed-clear">Limpar busca</button>
+              </div>
+
               <div class="mt-3" data-seg-panel="feed:following">
+                <section class="feed__events" id="feed-events" aria-label="Eventos perto de você"></section>
+
                 <article class="post">
                   <header class="post__head">
                     <div class="avatar avatar--ring" style="--ring: var(--vermilion)"><img src="assets/img/marina-avatar.jpg" alt="Foto de Marina Costa" data-avatar="marina"></div>
@@ -1501,7 +1592,7 @@
 
               <div class="settings__group">
                 <p class="eyebrow settings__label">Conta</p>
-                <button class="settings__row" data-nav="04">
+                <button class="settings__row" data-nav="24">
                   <span class="circle circle--amber"><span data-icon="user"></span></span>
                   <span class="settings__row-body">Dados pessoais</span>
                   <span data-icon="chevron-right" class="chev"></span>
@@ -1809,6 +1900,28 @@
             </div>
           </div>
 
+          <!-- Modal reutilizável: confirmação e feedback pós-conexão -->
+          <div class="modal" id="modal" hidden>
+            <div class="modal__scrim" data-modal-close></div>
+            <div class="modal__card" role="alertdialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-text">
+              <span class="modal__emoji" id="modal-emoji" aria-hidden="true">🤝</span>
+              <h2 class="h3" id="modal-title"></h2>
+              <p class="tiny" id="modal-text"></p>
+              <div class="modal__actions">
+                <button class="btn btn--ghost btn--sm" type="button" id="modal-secondary" hidden>Continuar</button>
+                <button class="btn btn--primary btn--sm" type="button" id="modal-primary">Confirmar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Balão do guia "Vem" (tutorial) -->
+          <div class="vem-bubble" id="vem-bubble" hidden>
+            <button class="vem-bubble__close" type="button" id="vem-bubble-close" aria-label="Fechar dica"><span data-icon="x"></span></button>
+            <span class="vem-mascot" aria-hidden="true">👋</span>
+            <p class="vem-bubble__text" id="vem-bubble-text"></p>
+            <div class="vem-bubble__actions" id="vem-bubble-actions"></div>
+          </div>
+
           <div class="toast" id="toast" role="status" aria-live="polite">
             <span class="toast__text" id="toast-text"></span>
             <button class="toast__action" id="toast-action" hidden>Desfazer</button>
@@ -1820,11 +1933,11 @@
   </div>
 
   <script src="assets/js/icons.js?v=3"></script>
-  <script src="assets/js/data.js?v=8"></script>
-  <script src="assets/js/store.js?v=2"></script>
-  <script src="assets/js/ui.js?v=7"></script>
+  <script src="assets/js/data.js?v=9"></script>
+  <script src="assets/js/store.js?v=3"></script>
+  <script src="assets/js/ui.js?v=8"></script>
   <script src="assets/js/lottie.js?v=1"></script>
-  <script src="assets/js/social.js?v=13"></script>
-  <script src="assets/js/app.js?v=5"></script>
+  <script src="assets/js/social.js?v=14"></script>
+  <script src="assets/js/app.js?v=6"></script>
 </body>
 </html>

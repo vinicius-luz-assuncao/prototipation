@@ -17,6 +17,8 @@
   var MATCHES = DATA.matches || [];
   var ACTIVITIES = DATA.activities || [];
   var BROAD = DATA.broadTags || [];
+  var BROAD_PRIMARY = DATA.broadPrimary || [];
+  var SUGGESTED = DATA.suggestedActivities || [];
   var EVENTS = DATA.events || [];
   var GROUPS = DATA.groups || [];
 
@@ -269,12 +271,19 @@
 
     var bio = $("#profile-bio");
     if (bio) {
-      bio.textContent = S.profile.educator
-        ? "Educador físico em análise no CREF. Crie eventos e modere grupos da comunidade."
-        : S.match.matched.length
-          ? "Seu perfil está em construção. " + S.match.matched.length + " conexão" + (S.match.matched.length > 1 ? "ões" : "") + " e " + S.events.length + " evento" + (S.events.length === 1 ? "" : "s") + " confirmado" + (S.events.length === 1 ? "" : "s") + "."
-          : "Seu perfil começa vazio. Preencha no cadastro e edite quando quiser.";
+      bio.textContent = S.profile.bio
+        ? S.profile.bio
+        : S.profile.educator
+          ? "Educador físico em análise no CREF. Crie eventos e modere grupos da comunidade."
+          : S.match.matched.length
+            ? "Seu perfil está em construção. " + S.match.matched.length + " conexão" + (S.match.matched.length > 1 ? "ões" : "") + " e " + S.events.length + " evento" + (S.events.length === 1 ? "" : "s") + " confirmado" + (S.events.length === 1 ? "" : "s") + "."
+            : "Seu perfil começa vazio. Preencha no cadastro e edite quando quiser.";
     }
+
+    var cover = $("#profile-cover-img");
+    if (cover && S.profile.cover) cover.src = S.profile.cover;
+
+    if (window.VemUI && window.VemUI.renderGallery) window.VemUI.renderGallery();
 
     var level = $("#profile-level");
     if (level) {
@@ -488,13 +497,47 @@
     return "custom:" + String(label).trim().toLowerCase();
   }
 
-  function renderBroad() {
+  function broadOf(slug) {
+    for (var i = 0; i < BROAD.length; i++) {
+      if (BROAD[i].slug === slug) return BROAD[i];
+    }
+    return null;
+  }
+
+  function renderBroad(term) {
     if (!broadHost) return;
-    broadHost.innerHTML = BROAD.map(function (tag) {
+    var needle = normalize(term || "");
+
+    var list = BROAD_PRIMARY.map(broadOf).filter(Boolean);
+
+    /* A busca revela também os contextos que não estão entre os principais. */
+    if (needle) {
+      var matches = BROAD.filter(function (tag) {
+        return normalize(tag.label).indexOf(needle) !== -1;
+      });
+      list = matches;
+    }
+
+    broadHost.innerHTML = list.map(function (tag) {
       var on = S.interests.broad.indexOf(tag.slug) !== -1;
       return (
         '<button class="chip chip--compact" type="button" data-broad="' + tag.slug + '" aria-pressed="' + (on ? "true" : "false") + '">' +
         '<span class="chip__emoji" aria-hidden="true">' + tag.emoji + "</span><span>" + esc(tag.label) + "</span>" +
+        "</button>"
+      );
+    }).join("");
+  }
+
+  function renderSuggested() {
+    var host = $("#interest-suggested");
+    if (!host) return;
+
+    host.innerHTML = SUGGESTED.map(function (slug) {
+      var act = activityOf(slug);
+      var chosen = S.interests.specific.indexOf(slug) !== -1;
+      return (
+        '<button class="chip chip--compact' + (chosen ? " is-selected" : "") + '" type="button" data-add-activity="' + slug + '" aria-pressed="' + (chosen ? "true" : "false") + '">' +
+        '<span class="chip__emoji" aria-hidden="true">' + act.emoji + "</span><span>" + esc(act.label) + "</span>" +
         "</button>"
       );
     }).join("");
@@ -568,6 +611,7 @@
     save();
     syncInterestCounters();
     renderSpecific();
+    renderSuggested();
     renderFanout();
     renderMatch();
     refresh();
@@ -659,8 +703,16 @@
 
   function hydrateInterests() {
     renderBroad();
+    renderSuggested();
     renderSpecific();
     syncInterestCounters();
+  }
+
+  var broadSearch = $("#broad-search");
+  if (broadSearch) {
+    broadSearch.addEventListener("input", function () {
+      renderBroad(broadSearch.value);
+    });
   }
 
   if (broadHost) {
@@ -1143,10 +1195,13 @@
         activity: activity,
         at: Date.now()
       });
+      S.social.pending += 1;
+      STORE.save("social");
     }
     save();
     renderSocial();
     refresh();
+    updateChatBadge();
   }
 
   function armConversation(person) {
@@ -1214,11 +1269,28 @@
       reacting = false;
 
       if (mutual) {
-        toast(
-          "Vocês conectaram para treinar " +
-          activityEmoji(act) + " " + activityLabel(act) + "!"
-        );
-      } else if (specific) {
+        if (S.match.matched.length === 3) {
+          armConversation(person);
+        }
+
+        modal({
+          emoji: "🤝",
+          title: "Vocês conectaram!",
+          text: "Você e " + person.name + " combinaram de treinar " + activityEmoji(act) + " " + activityLabel(act) + ". Bora conversar?",
+          primaryLabel: "Iniciar conversa",
+          secondaryLabel: "Continuar",
+          onConfirm: function () {
+            startChat(person, act, { open: true });
+            advanceMatch("like");
+          },
+          onSecondary: function () {
+            advanceMatch("like");
+          }
+        });
+        return;
+      }
+
+      if (specific) {
         toast(
           "Conexão enviada para treinar " +
           activityEmoji(act) + " " + activityLabel(act) + " com " + person.name + "."
@@ -2065,8 +2137,10 @@
       if (S.archive[key].unread) unread += 1;
     });
 
-    badge.hidden = unread === 0;
-    badge.textContent = String(unread);
+    var total = unread + (S.social.pending || 0);
+
+    badge.hidden = total === 0;
+    badge.textContent = String(total);
   }
 
   function maybeNudge() {
@@ -2214,10 +2288,16 @@
       '<p class="tiny mt-1">' + esc(event.place) + " · " + esc(event.duration) + "</p>" +
       '<div class="event-ticket__foot">' +
       '<div class="avatar-stack" aria-hidden="true">' + confirmed + "</div>" +
+      '<div class="event-ticket__actions">' +
+      (options.toggle
+        ? '<button class="btn btn--ghost btn--sm" type="button" data-event-toggle="' + event.id + '">' +
+          (S.events.indexOf(event.id) === -1 ? "Inscrever-se" : "Desinscrever") +
+          "</button>"
+        : "") +
       (options.share
         ? '<button class="btn btn--secondary btn--sm" type="button" data-share-to-chat="' + event.id + '">Compartilhar</button>'
         : '<button class="btn btn--ghost btn--sm" type="button" data-nav="23">Ver evento</button>') +
-      "</div></div></article>"
+      "</div></div></div></article>"
     );
   }
 
@@ -2237,7 +2317,7 @@
     }
 
     host.innerHTML = list.map(function (event) {
-      return eventCard(event, { share: true });
+      return eventCard(event, { share: true, toggle: true });
     }).join("");
   }
 
@@ -2254,7 +2334,7 @@
     }
 
     host.innerHTML = list.map(function (event) {
-      return eventCard(event, { share: true });
+      return eventCard(event, { share: true, toggle: true });
     }).join("");
   }
 
@@ -2332,8 +2412,29 @@
   });
 
   /* -----------------------------------------------------------------------
-     Atividades — participar guarda o evento
+     Atividades — participar/desinscrever guarda ou remove o evento
      ----------------------------------------------------------------------- */
+
+  var ACTIVITY_EVENT_MAP = {
+    corrida: "evento-corrida",
+    yoga: "evento-yoga",
+    forca: "evento-forca",
+    natacao: "evento-natacao"
+  };
+
+  function renderActivityButtons() {
+    $$(".activity").forEach(function (card) {
+      var cat = card.getAttribute("data-cat");
+      var id = ACTIVITY_EVENT_MAP[cat];
+      var button = card.querySelector(".btn");
+      if (!button || !id) return;
+
+      var subscribed = isSubscribed(id);
+      button.textContent = subscribed ? "Desinscrever" : "Participar";
+      button.classList.toggle("btn--primary", !subscribed);
+      button.classList.toggle("btn--ghost", subscribed);
+    });
+  }
 
   document.addEventListener("click", function (event) {
     var button = event.target.closest(".activity .btn");
@@ -2343,21 +2444,16 @@
     if (!card) return;
 
     var cat = card.getAttribute("data-cat");
-    var map = {
-      corrida: "evento-corrida",
-      yoga: "evento-yoga",
-      forca: "evento-forca",
-      natacao: "evento-natacao"
-    };
-    var id = map[cat];
+    var id = ACTIVITY_EVENT_MAP[cat];
     if (!id) return;
 
-    button.textContent = "Confirmado";
-    button.disabled = true;
-    addEvent(id);
-    renderSocial();
+    if (isSubscribed(id)) {
+      unsubscribeEvent(id);
+    } else {
+      subscribeEvent(id);
+    }
+    renderActivityButtons();
     STORE.log("activity:join", id);
-    toast("Inscrição confirmada. O evento está em Meus eventos.");
   });
 
   /* -----------------------------------------------------------------------
@@ -2418,6 +2514,237 @@
   });
 
   /* -----------------------------------------------------------------------
+     v3 — modal, inscrição em eventos, badge do Social e tutorial do Vem
+     ----------------------------------------------------------------------- */
+
+  function modal(options) {
+    if (window.VemUI && window.VemUI.modal) window.VemUI.modal(options);
+  }
+
+  function isSubscribed(id) {
+    return S.events.indexOf(id) !== -1;
+  }
+
+  function removeEvent(id) {
+    S.events = S.events.filter(function (item) {
+      return item !== id;
+    });
+    STORE.save("events");
+    STORE.log("event:leave", id);
+    renderEvents();
+    renderSocial();
+    renderFeedEvents();
+    renderActivityButtons();
+    toast("Você saiu do evento.");
+  }
+
+  function subscribeEvent(id) {
+    if (S.events.indexOf(id) === -1) {
+      S.events.push(id);
+      STORE.save("events");
+      STORE.log("event:join", id);
+    }
+    renderEvents();
+    renderSocial();
+    renderFeedEvents();
+    renderActivityButtons();
+    toast("Inscrição confirmada. O evento está em Meus eventos.");
+  }
+
+  /* Inscrever não pede confirmação (reversível e de baixo risco); desinscrever
+     pede, porque remove um compromisso já assumido. */
+  function unsubscribeEvent(id) {
+    var event = eventOf(id);
+    var title = event ? event.title : "evento";
+    modal({
+      emoji: "🗓️",
+      title: "Desinscrever do evento?",
+      text: "Você vai sair de “" + title + "”. Pode se inscrever de novo quando quiser.",
+      primaryLabel: "Desinscrever",
+      danger: true,
+      secondaryLabel: "Cancelar",
+      onConfirm: function () {
+        removeEvent(id);
+      }
+    });
+  }
+
+  document.addEventListener("click", function (event) {
+    var toggle = event.target.closest("[data-event-toggle]");
+    if (!toggle) return;
+    var id = toggle.getAttribute("data-event-toggle");
+    if (isSubscribed(id)) unsubscribeEvent(id);
+    else subscribeEvent(id);
+  });
+
+  function feedEventCard(event) {
+    var subscribed = isSubscribed(event.id);
+    return (
+      '<article class="feed-event" data-event-activity="' + event.activity + '">' +
+      '<div class="feed-event__media"><img src="' + event.image + '" alt=""></div>' +
+      '<div class="feed-event__body">' +
+      '<p class="feed-event__title">' + esc(event.title) + "</p>" +
+      '<p class="feed-event__meta">' + event.emoji + " " + esc(event.when) + " · " + esc(event.place) + "</p>" +
+      "</div>" +
+      '<button class="btn btn--' + (subscribed ? "ghost" : "primary") + ' btn--sm" type="button" data-event-toggle="' + event.id + '">' +
+      (subscribed ? "Desinscrever" : "Inscrever-se") +
+      "</button>" +
+      "</article>"
+    );
+  }
+
+  function renderFeedEvents() {
+    var host = $("#feed-events");
+    if (!host) return;
+    host.innerHTML =
+      '<p class="feed__events-title">Eventos perto de você</p>' +
+      EVENTS.map(feedEventCard).join("");
+  }
+
+  /* Ao visitar o Social, as pendências de conexão deixam de marcar a badge. */
+  document.addEventListener("vem:visited-social", function () {
+    if (S.social.pending) {
+      S.social.pending = 0;
+      STORE.save("social");
+      updateChatBadge();
+    }
+  });
+
+  /* -----------------------------------------------------------------------
+     Tutorial do Vem — mascote com balões de fala
+     ----------------------------------------------------------------------- */
+
+  function showBubble(text, actions) {
+    var bubble = $("#vem-bubble");
+    if (!bubble) return;
+    var textEl = $("#vem-bubble-text");
+    var actionsEl = $("#vem-bubble-actions");
+
+    if (textEl) textEl.textContent = text;
+    if (actionsEl) {
+      actionsEl.innerHTML = "";
+      (actions || []).forEach(function (action) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn btn--" + (action.primary ? "primary" : "ghost");
+        btn.textContent = action.label;
+        btn.onclick = action.onClick;
+        actionsEl.appendChild(btn);
+      });
+    }
+    bubble.hidden = false;
+  }
+
+  function hideBubble() {
+    var bubble = $("#vem-bubble");
+    if (bubble) bubble.hidden = true;
+  }
+
+  function simulateVemMatch() {
+    hideBubble();
+
+    var vem = personOf("vem") || PEOPLE.vem;
+    if (!vem) return;
+
+    if (!isMatched("vem")) {
+      S.match.matched.push({ id: "vem", activity: "corrida", at: Date.now() });
+      S.match.likes += 1;
+      S.social.pending += 1;
+      STORE.save("match");
+      STORE.save("social");
+    }
+
+    STORE.log("tour:simulate-match", "vem");
+    renderSocial();
+    refresh();
+    updateChatBadge();
+
+    /* Cria a conversa com o Vem (não lida) para acender a badge do Social. */
+    if (!S.chat || S.chat.personId !== "vem") {
+      startChat(vem, "corrida", { open: false });
+    }
+
+    S.tour.step = 2;
+    STORE.save("tour");
+
+    showBubble(
+      "🎉 Conectamos! (Eu sou o Vem.) Agora veja como funciona uma conversa — vai aparecer um aviso no Social.",
+      [
+        {
+          label: "Abrir Social",
+          primary: true,
+          onClick: function () {
+            S.tour.step = 3;
+            STORE.save("tour");
+            hideBubble();
+            go("14");
+          }
+        }
+      ]
+    );
+  }
+
+  function runTour(id) {
+    if (S.tour.done) {
+      hideBubble();
+      return;
+    }
+
+    if (id === "10" && S.tour.step === 0) {
+      showBubble(
+        "Oi! Eu sou o Vem 👋 Que tal conhecer as Conexões? É onde você encontra gente para treinar. (Dica: você pode dar feedback em Configurações.)",
+        [
+          {
+            label: "Começar tour",
+            primary: true,
+            onClick: function () {
+              S.tour.step = 1;
+              STORE.save("tour");
+              hideBubble();
+              go("12");
+            }
+          },
+          {
+            label: "Agora não",
+            onClick: function () {
+              S.tour.done = true;
+              STORE.save("tour");
+              hideBubble();
+            }
+          }
+        ]
+      );
+      return;
+    }
+
+    if (id === "12" && S.tour.step === 1) {
+      showBubble(
+        "É aqui que você conhece gente. Toque e segure um card para abrir as ações, ou toque rápido para ver o perfil. Vamos simular uma conexão comigo?",
+        [
+          { label: "Simular conexão", primary: true, onClick: simulateVemMatch },
+          { label: "Entendi", onClick: hideBubble }
+        ]
+      );
+      return;
+    }
+
+    if (id === "14" && S.tour.step === 3) {
+      showBubble(
+        "Sua conexão está aqui no Social. Toque na conversa para continuar. 🎉",
+        [{ label: "Entendi", primary: true, onClick: hideBubble }]
+      );
+      return;
+    }
+
+    hideBubble();
+  }
+
+  var vemBubbleClose = $("#vem-bubble-close");
+  if (vemBubbleClose) {
+    vemBubbleClose.addEventListener("click", hideBubble);
+  }
+
+  /* -----------------------------------------------------------------------
      Navegação e inicialização
      ----------------------------------------------------------------------- */
 
@@ -2430,6 +2757,7 @@
     if (id === "10") refresh();
     if (id === "11") refresh();
     if (id === "12") renderMatch();
+    if (id === "13") renderActivityButtons();
     if (id === "14") renderSocial();
     if (id === "19") refresh();
     if (id === "21") renderCref();
@@ -2441,9 +2769,17 @@
     }
     if (id === "23") renderEvents();
 
+    if (id === "22" && S.tour.step === 3) {
+      S.tour.done = true;
+      STORE.save("tour");
+      hideBubble();
+    }
+
     if (id === "14" || id === "22") {
       document.dispatchEvent(new CustomEvent("vem:visited-social"));
     }
+
+    runTour(id);
   });
 
   /* Objetivo professor → documentação antes dos interesses. */
@@ -2479,6 +2815,8 @@
   renderMatch();
   renderSocial();
   renderCref();
+  renderFeedEvents();
+  renderActivityButtons();
   updateChatBadge();
   refresh();
 

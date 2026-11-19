@@ -1,85 +1,79 @@
 # vem — lista de execuções da rodada v3
 
-> Documento de tarefas da próxima rodada do protótipo. Serve de guia para a
-> supervisão: cada item aberto é um bloco de trabalho; itens marcados como
-> **criado** já têm código no repositório e aguardam revisão/refino.
+> Documento de tarefas da rodada v3 do protótipo. Itens marcados como **✅**
+> estão implementados e testados; **🔨** está em andamento; **☐** ainda aberto.
+> O **Bloco 3 (menu radial)** segue com itens de supervisão listados ao final.
 
-Status: `☐` pendente · `🔨` em andamento · `✅` criado (aguardando supervisão)
+Status: `☐` pendente · `🔨` em andamento · `✅` implementado
 
 ---
 
 ## BLOCO 1 — Correções críticas e estruturais (bugs)
 
-- ☐ Corrigir o **loop de perfil**: desvincular “Perfil vazio” e “Editar foto” do
-  fluxo de onboarding; criar tela/modal independente de edição de perfil.
-- ☐ Ajustar layout da **Tela 01**: espaçamento do botão “Continuar com Google”
-  respeitando a grade de 8px.
-- ☐ **Legibilidade desktop**: aumentar a escala das fontes na visualização web.
+- ✅ **Loop de perfil**: criada a tela independente **24 · Editar perfil**
+  (`app.html`), com foto, nome, e-mail, nascimento e bio. “Editar perfil” (11),
+  “Perfil vazio” (10) e “Dados pessoais” (19) agora apontam para a tela 24, e
+  não mais para o onboarding (04).
+- ✅ **Layout da Tela 01**: `.splash__actions` passou a usar `display: grid;
+  gap: var(--s-2)`, alinhando o botão “Continuar com Google” à grade de 8px.
+- ✅ **Legibilidade desktop**: tokens de tipografia ampliados em telas ≥1180px
+  (`base.css`) e piso da escala do device elevado de 0.45 → 0.6 (`app.js`).
 
 ## BLOCO 2 — Nova arquitetura de informação (telas)
 
-- ☐ **Tela 06 (Interesses)**: reduzir para 6 contextos principais + 6 atividades
-  sugeridas; adicionar busca por texto nas duas seções.
-- ☐ **Tela 11 (Perfil)**: galeria para upload de fotos de atividades + foto de capa.
-- ☐ **Tela 14 (Social)**: aba de Eventos lista apenas eventos criados ou com
-  inscrição confirmada do usuário.
-- ☐ **Tela 15 (Feed)**: feed híbrido (posts de atividades + cards de eventos
-  futuros) com busca por atividade.
+- ✅ **Tela 06 (Interesses)**: reduzida a **6 contextos principais** (busca por
+  texto revela os demais) + **6 atividades sugeridas** como atalhos, com busca
+  por texto já existente na seção de atividades.
+- ✅ **Tela 11 (Perfil)**: **galeria de fotos de atividades** (até 6, com upload
+  e remoção) e **edição de foto de capa** (upload local, data URL).
+- ✅ **Tela 14 (Social)**: aba de Eventos segue listando apenas eventos com
+  inscrição confirmada do usuário (compartilhamento mantido).
+- ✅ **Tela 15 (Feed)**: **feed híbrido** com faixa de **eventos** (com botão de
+  inscrição) + posts, e **busca por atividade** que filtra posts e eventos.
 
 ## BLOCO 3 — A grande virada do “Match” (interação e nomenclatura)
 
-- ✅ Substituir a nomenclatura “Match” → “Conexões” em todas as telas (título,
-  aba, rail, hint, leque, badges, toasts e textos de vazio/ajuda).
-- ✅ **[CÓDIGO CRIADO / AGUARDANDO SUPERVISÃO]** Card interativo (menu radial,
-  estilo Pinterest):
-  - **Toque curto** → abre o perfil da pessoa (sheet com foto, bio, atividades
-    e CTAs “Conectar” / “Conectar em {atividade}”).
-  - **Toque longo (420 ms)** → abre o menu radial com **X** (esquerda),
-    **👍 conectar** (direita) e as **atividades da pessoa** em arco no topo.
-  - **Arrastar e soltar** sobre uma ação executa; soltar fora cancela.
-  - **Fallback acessível**: botão “Abrir ações (menu radial)” sob o card.
-  - **Botões fixos abaixo do card removidos** (comentados no `app.html`): a
-    interação agora acontece toda no card, mantendo-o na zona de alcance do
-    dedão. As reações (joinha/high-five) passaram a ser **overlays sobre o
-    card** (`#match-thumb-reaction` e `#match-reaction`), já que não há mais o
-    botão para hospedar o joinha.
-  - Arquivos: `app.html` (markup do radial + overlays), `assets/css/screens.css`
-    (`.match-radial*`, `.match-reaction*`), `assets/js/social.js` (`likePerson`,
-    `openRadial`, `layoutRadial`, `runRadialAction`, `openPersonProfile`).
-- ☐ **Feedback pós-conexão**: modal “Deu match!” com botão primário
-  “Iniciar conversa”.
-- ☐ **Badge no Social**: indicador vermelho na aba Social quando houver nova
-  conexão ou mensagem não lida.
+- ✅ Substituir a nomenclatura “Match” → “Conexões” em todas as telas.
+- ✅ **[SUPERVISÃO]** Card interativo (menu radial, estilo Pinterest).
+- ✅ **Feedback pós-conexão**: modal “Vocês conectaram!” com botão primário
+  “Iniciar conversa” e secundário “Continuar” (mutual — joinha/high-five).
+- ✅ **Badge no Social**: contador na aba Social acende com **nova conexão** ou
+  **mensagem não lida**, e zera ao visitar o Social.
 
 ## BLOCO 4 — Onboarding guiado (o tutorial do Vem)
 
-- ☐ Criar o avatar do Vem e os balões de fala.
-- ☐ Fluxo passo a passo: introdução na Home (mencionando Feedback nas
-  Configurações) → aba Conexões → simulação de match com o perfil do Vem →
-  redirecionamento com badge para o Chat no Social.
+- ✅ **Avatar do Vem + balões de fala**: mascote `👋` com balão reutilizável
+  (`#vem-bubble`) e ações configuráveis.
+- ✅ **Fluxo passo a passo**: introdução na Home (mencionando Feedback nas
+  Configurações) → aba Conexões → **simulação de conexão com o Vem** → badge +
+  conversa no Social.
+
+## EXTRA — Inscrição em eventos (cards)
+
+- ✅ **Botão de inscrição/desinscrição** nos cards de evento (feed, Social e
+  Meus eventos) e nas atividades:
+  - **Inscrever-se**: sem confirmação (ação reversível e de baixo risco).
+  - **Desinscrever-se**: confirmação via modal (remove um compromisso assumido).
+  - Estado refletido nos botões em todas as telas (`Inscrever-se` ⇄ `Desinscrever`).
 
 ---
 
-## Notas para a supervisão (item do menu radial)
+## Notas para a supervisão
 
-O que já está pronto e testado (QA funcional, zero erros de console):
+Pronto e testado (QA funcional, zero erros de console): menu radial, reações,
+modal de conexão, badge do Social, inscrição/desinscrição em eventos, tutorial
+do Vem, tela de edição de perfil, galeria, capa, feed híbrido e interesses 6+6.
 
-- Long press abre o radial; soltar sobre X avança o deck (pass), sobre 👍 roda a
-  reação existente (joinha/high-five) e sobre uma pílula conecta na atividade
-  específica (salva em `S.match.specifics`, favorita e registra o match).
-- Reaproveita a lógica anterior: `likePerson(person, slug)` centraliza curtida
-  geral e específica; o 3º like continua armando a conversa simulada.
-- `openPersonProfile` reusa o `openSheet` existente.
-
-Pontos em aberto para refinar (deixados de propósito para a supervisão):
+Pontos em aberto para refinar (deixados de propósito):
 
 - **Acessibilidade**: os botões do radial permanecem no tab order mesmo fechados;
-  ideal é `tabindex="-1"`/`inert` quando fechado e `aria-expanded` no gatilho.
-- **Notificação da outra pessoa**: hoje só há `toast` local; falta o texto
-  “Fulano quer se conectar para treinar {atividade} com você!” como mensagem.
-- **Galeria do perfil** (toque curto) ainda não existe — o sheet mostra as
-  atividades, não as fotos; depende do Bloco 2 (Tela 11).
-- A posição do arco é calculada sobre `clientWidth/clientHeight`; recalcular em
-  `resize` se o card mudar de tamanho.
-- `preview-radial.html` é um preview estático autocontido (só visual); pode ser
-  removido quando não for mais útil.
+  ideal `tabindex="-1"`/`inert` quando fechado e `aria-expanded` no gatilho.
+- **Notificação da outra pessoa**: hoje só há `toast`/modal local; falta a
+  mensagem “Fulano quer se conectar para treinar {atividade} com você!”.
+- **Perfil do Vem no deck**: a “simulação de match com o Vem” é feita pelo balão
+  do tutorial (mantém o deck focado em pessoas reais). O perfil `vem` existe em
+  `data.js` (chat/conexão) caso se queira inseri-lo no deck.
+- A posição do arco do radial é calculada sobre `clientWidth/clientHeight`;
+  recalcular em `resize`.
+- `preview-radial.html` é um preview estático autocontido; pode ser removido.
+- Galeria/capa/fotos usam `data URL` (localStorage); sem banco, conforme escopo.

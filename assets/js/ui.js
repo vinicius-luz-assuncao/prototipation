@@ -816,5 +816,322 @@
     applyJourneyCard();
   }
 
-  window.VemUI = { toast: toast, hideToast: hideToast, journey: function () { return goal; } };
+  /* -----------------------------------------------------------------------
+     Modal reutilizável (confirmação e feedback)
+     ----------------------------------------------------------------------- */
+
+  var modalEl = $("#modal");
+
+  function closeModal() {
+    if (modalEl) modalEl.hidden = true;
+  }
+
+  function showModal(options) {
+    if (!modalEl) return;
+    options = options || {};
+
+    var emoji = $("#modal-emoji");
+    var title = $("#modal-title");
+    var text = $("#modal-text");
+    var primary = $("#modal-primary");
+    var secondary = $("#modal-secondary");
+
+    if (emoji) emoji.textContent = options.emoji || "🤝";
+    if (title) title.textContent = options.title || "";
+    if (text) text.textContent = options.text || "";
+
+    if (primary) {
+      primary.textContent = options.primaryLabel || "Confirmar";
+      primary.classList.toggle("btn--danger", !!options.danger);
+      primary.onclick = function () {
+        closeModal();
+        if (typeof options.onConfirm === "function") options.onConfirm();
+      };
+    }
+
+    if (secondary) {
+      secondary.hidden = !options.secondaryLabel;
+      if (options.secondaryLabel) {
+        secondary.textContent = options.secondaryLabel;
+        secondary.onclick = function () {
+          closeModal();
+          if (typeof options.onSecondary === "function") options.onSecondary();
+        };
+      }
+    }
+
+    modalEl.hidden = false;
+  }
+
+  document.addEventListener("click", function (event) {
+    if (event.target.closest("[data-modal-close]")) closeModal();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && modalEl && !modalEl.hidden) closeModal();
+  });
+
+  /* -----------------------------------------------------------------------
+     Editar perfil (tela 24) — independente do onboarding
+     ----------------------------------------------------------------------- */
+
+  var editName = $("#edit-name");
+  var editEmail = $("#edit-email");
+  var editBirth = $("#edit-birth");
+  var editBio = $("#edit-bio");
+  var editAvatarPreview = $("#edit-avatar");
+  var editAvatarInput = $("#edit-avatar-input");
+  var editAvatarBtn = $("#edit-avatar-btn");
+  var editSave = $("#edit-save");
+
+  function readImageFile(file, onDone) {
+    if (!file) return;
+    if (!/^image\//.test(file.type)) {
+      toast("Escolha um arquivo de imagem.");
+      return;
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      toast("Imagem muito grande. Use um arquivo de até 8 MB.");
+      return;
+    }
+
+    var reader = new FileReader();
+    reader.onload = function () {
+      var image = new Image();
+      image.onload = function () {
+        var limit = 480;
+        var scale = Math.min(1, limit / Math.max(image.width, image.height));
+        var canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+        canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+        onDone(canvas.toDataURL("image/jpeg", 0.82));
+      };
+      image.onerror = function () {
+        toast("Não foi possível ler essa imagem.");
+      };
+      image.src = String(reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function hydrateEditProfile() {
+    if (!editName) return;
+    var profile = window.VemStore ? window.VemStore.state.profile : {};
+    editName.value = profile.name || "";
+    editEmail.value = profile.email || "";
+    editBirth.value = profile.birth || "";
+    editBio.value = profile.bio || "";
+
+    if (editAvatarPreview) {
+      if (profile.photo) {
+        editAvatarPreview.src = profile.photo;
+        editAvatarPreview.hidden = false;
+        var wrap = editAvatarPreview.closest(".avatar");
+        if (wrap) wrap.classList.remove("is-empty");
+      } else {
+        editAvatarPreview.removeAttribute("src");
+        editAvatarPreview.hidden = true;
+        var w2 = editAvatarPreview.closest(".avatar");
+        if (w2) w2.classList.add("is-empty");
+      }
+    }
+  }
+
+  if (editAvatarBtn && editAvatarInput) {
+    editAvatarBtn.addEventListener("click", function () {
+      editAvatarInput.click();
+    });
+  }
+
+  if (editAvatarInput && editAvatarPreview) {
+    editAvatarInput.addEventListener("change", function () {
+      var file = editAvatarInput.files && editAvatarInput.files[0];
+      readImageFile(file, function (data) {
+        editAvatarPreview.src = data;
+        editAvatarPreview.hidden = false;
+        var wrap = editAvatarPreview.closest(".avatar");
+        if (wrap) wrap.classList.remove("is-empty");
+        window.VemStore.state.profile.photo = data;
+        window.VemStore.save("profile");
+        window.VemStore.log("profile:photo-edit");
+        toast("Foto de perfil atualizada.");
+      });
+    });
+  }
+
+  if (editSave) {
+    editSave.addEventListener("click", function () {
+      var profile = window.VemStore.state.profile;
+      if (editName) profile.name = editName.value.trim();
+      if (editEmail) profile.email = editEmail.value.trim();
+      if (editBirth) profile.birth = editBirth.value.trim();
+      if (editBio) profile.bio = editBio.value.trim();
+
+      window.VemStore.save("profile");
+      window.VemStore.log("profile:edit");
+      if (window.VemSocial) window.VemSocial.refresh();
+      toast("Perfil atualizado.");
+      if (window.VemApp) window.VemApp.go("11");
+    });
+  }
+
+  document.addEventListener("vem:screen", function (event) {
+    var id = event.detail && event.detail.id;
+    if (id === "24") hydrateEditProfile();
+  });
+
+  /* -----------------------------------------------------------------------
+     Galeria de fotos de atividades (perfil)
+     ----------------------------------------------------------------------- */
+
+  var galleryHost = $("#profile-gallery");
+  var galleryInput = $("#gallery-input");
+  var galleryAdd = $("#gallery-add");
+
+  function renderGallery() {
+    if (!galleryHost) return;
+    var gallery = window.VemStore ? window.VemStore.state.profile.gallery : [];
+
+    var html = gallery.map(function (src, index) {
+      return (
+        '<div class="gallery__item">' +
+        '<img src="' + src + '" alt="Foto de atividade ' + (index + 1) + '">' +
+        '<button class="gallery__remove" type="button" data-gallery-remove="' + index + '" aria-label="Remover foto"><span data-icon="x"></span></button>' +
+        "</div>"
+      );
+    }).join("");
+
+    if (gallery.length < 6) {
+      html += '<button class="gallery__item gallery__add" type="button" data-gallery-trigger aria-label="Adicionar foto"><span data-icon="plus"></span></button>';
+    }
+
+    galleryHost.innerHTML = html;
+    if (window.VemIcons) window.VemIcons.hydrate(galleryHost);
+  }
+
+  function triggerGallery() {
+    if (galleryInput) galleryInput.click();
+  }
+
+  if (galleryAdd) galleryAdd.addEventListener("click", triggerGallery);
+
+  document.addEventListener("click", function (event) {
+    if (event.target.closest("[data-gallery-trigger]")) {
+      triggerGallery();
+      return;
+    }
+    var remove = event.target.closest("[data-gallery-remove]");
+    if (remove) {
+      var index = Number(remove.getAttribute("data-gallery-remove"));
+      var gallery = window.VemStore.state.profile.gallery;
+      gallery.splice(index, 1);
+      window.VemStore.save("profile");
+      window.VemStore.log("profile:gallery-remove");
+      renderGallery();
+      toast("Foto removida.");
+    }
+  });
+
+  if (galleryInput) {
+    galleryInput.addEventListener("change", function () {
+      var file = galleryInput.files && galleryInput.files[0];
+      readImageFile(file, function (data) {
+        var gallery = window.VemStore.state.profile.gallery;
+        if (gallery.length >= 6) {
+          toast("Você já tem 6 fotos. Remova uma para adicionar outra.");
+          return;
+        }
+        gallery.push(data);
+        window.VemStore.save("profile");
+        window.VemStore.log("profile:gallery-add");
+        renderGallery();
+        toast("Foto adicionada à galeria.");
+      });
+      galleryInput.value = "";
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+     Foto de capa (perfil)
+     ----------------------------------------------------------------------- */
+
+  var coverEdit = $("#cover-edit");
+  var coverInput = $("#cover-input");
+  var coverImg = $("#profile-cover-img");
+
+  if (coverEdit && coverInput) {
+    coverEdit.addEventListener("click", function () {
+      coverInput.click();
+    });
+  }
+
+  if (coverInput && coverImg) {
+    coverInput.addEventListener("change", function () {
+      var file = coverInput.files && coverInput.files[0];
+      readImageFile(file, function (data) {
+        coverImg.src = data;
+        window.VemStore.state.profile.cover = data;
+        window.VemStore.save("profile");
+        window.VemStore.log("profile:cover");
+        toast("Foto de capa atualizada.");
+      });
+      coverInput.value = "";
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+     Feed — busca por atividade
+     ----------------------------------------------------------------------- */
+
+  var feedSearch = $("#feed-search");
+  var feedEmpty = $("#feed-empty");
+  var feedClear = $("#feed-clear");
+
+  function normalizeFeed(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function applyFeedSearch() {
+    var term = feedSearch ? normalizeFeed(feedSearch.value) : "";
+    var visible = 0;
+
+    $$(".post, .feed-event").forEach(function (node) {
+      var show = true;
+      if (term) {
+        var label = node.getAttribute("data-post-activity") ||
+          node.getAttribute("data-event-activity") ||
+          "";
+        var text = normalizeFeed(node.textContent);
+        show = text.indexOf(term) !== -1 || label.indexOf(term) !== -1;
+      }
+      node.classList.toggle("is-filtered-out", !show);
+      if (show) visible += 1;
+    });
+
+    if (feedEmpty) feedEmpty.hidden = visible > 0;
+  }
+
+  if (feedSearch) {
+    feedSearch.addEventListener("input", applyFeedSearch);
+  }
+
+  if (feedClear) {
+    feedClear.addEventListener("click", function () {
+      if (feedSearch) feedSearch.value = "";
+      applyFeedSearch();
+    });
+  }
+
+  window.VemUI = {
+    toast: toast,
+    hideToast: hideToast,
+    journey: function () { return goal; },
+    modal: showModal,
+    closeModal: closeModal,
+    renderGallery: renderGallery
+  };
 })();

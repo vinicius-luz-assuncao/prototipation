@@ -21,12 +21,14 @@
     events: "vem.events.v1",
     groups: "vem.groups.v1",
     signals: "vem.signals.v1",
+    social: "vem.social.v1",
+    tour: "vem.tour.v1",
     log: "vem.log.v1",
     google: "vem.google.v1"
   };
 
   var DEFAULTS = {
-    profile: { name: "", email: "", birth: "", photo: "", educator: null, cref: "" },
+    profile: { name: "", email: "", birth: "", photo: "", bio: "", cover: "", gallery: [], educator: null, cref: "" },
     verification: "none",
     interests: { broad: [], specific: [], custom: [] },
     favorites: [],
@@ -36,6 +38,8 @@
     events: [],
     groups: [],
     signals: {},
+    social: { pending: 0 },
+    tour: { step: 0, done: false },
     log: []
   };
 
@@ -77,6 +81,8 @@
     events: read(KEYS.events, DEFAULTS.events),
     groups: read(KEYS.groups, DEFAULTS.groups),
     signals: read(KEYS.signals, DEFAULTS.signals),
+    social: read(KEYS.social, DEFAULTS.social),
+    tour: read(KEYS.tour, DEFAULTS.tour),
     google: read(KEYS.google, false)
   };
 
@@ -91,6 +97,9 @@
   state.groups = Array.isArray(state.groups) ? state.groups : [];
   state.signals = state.signals && typeof state.signals === "object" ? state.signals : {};
   state.archive = state.archive && typeof state.archive === "object" ? state.archive : {};
+  state.social = Object.assign({}, DEFAULTS.social, state.social || {});
+  state.tour = Object.assign({}, DEFAULTS.tour, state.tour || {});
+  state.profile.gallery = Array.isArray(state.profile.gallery) ? state.profile.gallery : [];
 
   function save(key) {
     var map = {
@@ -104,6 +113,8 @@
       events: state.events,
       groups: state.groups,
       signals: state.signals,
+      social: state.social,
+      tour: state.tour,
       google: state.google
     };
     if (!(key in map)) return false;
