@@ -1583,6 +1583,11 @@
   height: 198px;
 }
 
+.match-reaction__lottie--thumb {
+  width: 150px;
+  height: 150px;
+}
+
 .match-reaction__label {
   padding: 5px 14px;
   border-radius: var(--r-pill);

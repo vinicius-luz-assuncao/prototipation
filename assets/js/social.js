@@ -1,7 +1,7 @@
 /* =========================================================================
    VEM — Rodada de testes v2
-   Verificação com advertising · interesses em duas camadas · match geral e
-   por atividade (fan-out) · grupos ancorados em matches · eventos · feed com
+   Verificação com advertising · interesses em duas camadas · conexões gerais e
+   por atividade (fan-out) · grupos ancorados em conexões · eventos · feed com
    sinais · conversa simulada com roteiro sim/não.
    ========================================================================= */
 
@@ -111,7 +111,7 @@
     return S.verification === "verified";
   }
 
-  /* Gate suave: a pessoa explora, mas match/grupo/conversa pedem verificação. */
+  /* Gate suave: a pessoa explora, mas conexão/grupo/conversa pedem verificação. */
   function guardVerified(action) {
     if (isVerified()) return true;
     toast("Verifique para " + action + ". Leva menos de um minuto.", {
@@ -743,7 +743,7 @@
   });
 
   /* -----------------------------------------------------------------------
-     Match — deck, leque de atividades e likes
+     Conexões — deck, leque de atividades e curtidas
      ----------------------------------------------------------------------- */
 
   function deck() {
@@ -833,10 +833,10 @@
 
       if (specific) {
         activityBadge.hidden = false;
-        activityBadge.textContent = "Match em " + activityLabel(specific);
+        activityBadge.textContent = "Conexão em " + activityLabel(specific);
       } else if (specs.length) {
         activityBadge.hidden = false;
-        activityBadge.textContent = "Match geral";
+        activityBadge.textContent = "Conexões gerais";
       } else {
         activityBadge.hidden = true;
       }
@@ -929,7 +929,7 @@
     });
 
     var html =
-      '<p class="tiny mb-2">Escolha até 5 atividades. Elas viram o leque do match e a base dos grupos sugeridos.</p>' +
+      '<p class="tiny mb-2">Escolha até 5 atividades. Elas viram o leque de conexões e a base dos grupos sugeridos.</p>' +
       '<div class="picker-grid">' +
       pool.slice(0, 12).map(function (slug) {
         return (
@@ -960,7 +960,7 @@
     renderMatch();
     closeSheet();
     openFanout();
-    toast(activityEmoji(slug) + " match ativado em " + activityLabel(slug) + ".");
+    toast(activityEmoji(slug) + " conexão ativada em " + activityLabel(slug) + ".");
   }
 
   var matchCard = $("#match-card");
@@ -968,7 +968,7 @@
   /* -----------------------------------------------------------------------
      Reação do match — animações Lottie em SVG, dois estados
      "thumb"    → a pessoa ainda não deu like (curtida enviada)
-     "highfive" → a pessoa já deu like (match mútuo confirmado)
+     "highfive" → a pessoa já deu like (conexão mútua confirmado)
      ----------------------------------------------------------------------- */
 
   var LOTTIE_MS = { thumb: 1017, highfive: 2428 };
@@ -1079,37 +1079,40 @@
       overlay.hidden = true;
       overlay.classList.remove("is-leaving");
     }
+    var thumbOverlay = $("#match-thumb-reaction");
+    if (thumbOverlay) {
+      thumbOverlay.hidden = true;
+      thumbOverlay.classList.remove("is-leaving");
+    }
     restSvg(reactionSvg);
+    restSvg(thumbSvg);
   }
 
   function playReaction(kind, done) {
-    if (kind === "highfive") {
-      var overlay = $("#match-reaction");
-      if (overlay) {
-        overlay.classList.remove("is-leaving");
-        overlay.hidden = false;
-      }
-      playSvg(reactionSvg, "highfive", function () {
-        if (!overlay) {
-          done();
-          return;
-        }
-        overlay.classList.add("is-leaving");
-        window.setTimeout(function () {
-          hideReaction();
-          done();
-        }, 160);
-      });
+    var overlay = kind === "highfive" ? $("#match-reaction") : $("#match-thumb-reaction");
+    var svg = kind === "highfive" ? reactionSvg : thumbSvg;
+
+    if (!overlay) {
+      playSvg(svg, kind, done);
       return;
     }
 
-    playSvg(thumbSvg, "thumb", done);
+    overlay.classList.remove("is-leaving");
+    overlay.hidden = false;
+
+    playSvg(svg, kind, function () {
+      overlay.classList.add("is-leaving");
+      window.setTimeout(function () {
+        hideReaction();
+        done();
+      }, 160);
+    });
   }
 
   function initReactions() {
     var data = window.VemLottie;
     if (!data) return;
-    thumbSvg = mountLottie($("#match-thumb"), data.thumb);
+    thumbSvg = mountLottie($("#match-thumb-reaction-lottie"), data.thumb);
     reactionSvg = mountLottie($("#match-reaction-lottie"), data.highfive);
     hideReaction();
   }
@@ -1176,9 +1179,8 @@
     return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }
 
-  /* Conexão (curtida) reutilizável — usada pelo botão fixo, pelo menu radial
-     e pelo perfil da pessoa. `activitySlug` opcional liga o match a uma
-     atividade específica. */
+  /* Conexão (curtida) reutilizável — usada pelo menu radial e pelo perfil da
+     pessoa. `activitySlug` opcional liga a conexão a uma atividade específica. */
   function likePerson(person, activitySlug) {
     if (matchBusy || reacting) return;
     if (!person) return;
@@ -1213,7 +1215,7 @@
 
       if (mutual) {
         toast(
-          "Você e " + person.name + " deram match para treinar " +
+          "Vocês conectaram para treinar " +
           activityEmoji(act) + " " + activityLabel(act) + "!"
         );
       } else if (specific) {
@@ -1222,7 +1224,7 @@
           activityEmoji(act) + " " + activityLabel(act) + " com " + person.name + "."
         );
       } else {
-        toast("Curtida enviada para " + person.name + ".");
+        toast("Conexão enviada para " + person.name + ".");
       }
 
       if (S.match.matched.length === 3) {
@@ -1502,7 +1504,7 @@
       renderFanout();
       matchIndex = 0;
       renderMatch();
-      toast("Match geral reativado.");
+      toast("Conexões gerais reativadas.");
     });
   }
 
@@ -1524,7 +1526,7 @@
       renderMatch();
 
       if (!S.match.geral && !activeSpecifics().length) {
-        toast("Com tudo desligado, você não aparece em nenhum match. Reative pelo menos o geral.", {
+        toast("Com tudo desligado, você não aparece em nenhuma conexão. Reative pelo menos o geral.", {
           label: "Reativar",
           onClick: function () {
             S.match.geral = true;
@@ -1886,7 +1888,7 @@
   function handleOption(action) {
     if (!S.chat) return;
 
-    var name = (personOf(S.chat.personId) || {}).name || "Seu match";
+    var name = (personOf(S.chat.personId) || {}).name || "Sua conexão";
     var activity = activityOf(S.chat.activity);
     var event = eventOf(S.chat.eventId);
 
@@ -1957,7 +1959,7 @@
     pushMessage("me", text);
 
     if (S.chat.state === "declined") {
-      botSay("Essa conversa foi encerrada, mas o match continua aqui. Você pode chamar outra pessoa.", null, 700);
+      botSay("Essa conversa foi encerrada, mas a conexão continua aqui. Você pode chamar outra pessoa.", null, 700);
       return;
     }
 
@@ -2006,7 +2008,7 @@
     if (!S.chat) return;
 
     var html =
-      '<p class="tiny mb-2">Escolha um evento para enviar no chat. Se o match aceitar, ele entra em Meus eventos.</p>' +
+      '<p class="tiny mb-2">Escolha um evento para enviar no chat. Se a conexão aceitar, ele entra em Meus eventos.</p>' +
       '<div class="picker-list">' +
       EVENTS.map(function (event) {
         return (
@@ -2107,7 +2109,7 @@
       '<div class="avatar avatar--ring" style="--ring: ' + person.ring + '"><img src="' + person.avatar + '" alt="Foto de ' + esc(person.name) + '" data-avatar="' + person.id + '"></div>' +
       '<div class="list-row__body">' +
       '<span class="list-row__title">' + esc(person.name) + "</span>" +
-      '<span class="list-row__sub">' + act.emoji + " Match em " + esc(act.label) + " · " + esc(person.distance) + "</span>" +
+      '<span class="list-row__sub">' + act.emoji + " Conexão em " + esc(act.label) + " · " + esc(person.distance) + "</span>" +
       "</div>" +
       '<button class="iconbtn iconbtn--surface" type="button" data-chat="' + person.id + '" aria-label="Conversar com ' + esc(person.name) + '">' +
       '<span data-icon="message"></span>' +
@@ -2141,7 +2143,7 @@
     if (total) total.textContent = ids.length + (ids.length === 1 ? " conexão" : " conexões");
 
     if (!ids.length) {
-      host.innerHTML = emptyState("users", "Nenhuma conexão ainda", "Dê match na aba Match para começar sua turma.", { target: "12", label: "Ver pessoas" });
+      host.innerHTML = emptyState("users", "Nenhuma conexão ainda", "Conecte na aba Conexões para começar sua turma.", { target: "12", label: "Ver pessoas" });
     } else {
       host.innerHTML = '<div class="social__list">' + ids.map(connectionRow).join("") + "</div>";
     }
@@ -2164,7 +2166,7 @@
     if (count) count.textContent = String(visible.length);
 
     if (!visible.length) {
-      host.innerHTML = emptyState("users", "Nenhum grupo por enquanto", "Um grupo aparece quando alguém com quem você deu match já está nele.", { target: "12", label: "Dar match" });
+      host.innerHTML = emptyState("users", "Nenhum grupo por enquanto", "Um grupo aparece quando alguém com quem você se conectou já está nele.", { target: "12", label: "Conectar" });
       if (window.VemIcons) window.VemIcons.hydrate(host);
       return;
     }
@@ -2287,7 +2289,7 @@
       var people = matchedIds();
 
       if (!people.length) {
-        toast("Dê match com alguém antes de compartilhar um evento.");
+        toast("Conecte com alguém antes de compartilhar um evento.");
         return;
       }
 
@@ -2307,7 +2309,7 @@
             return (
               '<button class="picker-row" type="button" data-share-with="' + id + '" data-event="' + eventId + '">' +
               '<span class="picker-row__emoji"><img class="picker-row__avatar" src="' + person.avatar + '" alt=""></span>' +
-              '<span class="picker-row__body"><strong>' + esc(person.name) + "</strong><small>Match em " + esc(activityLabel((S.match.matched.filter(function (m) { return m.id === id; })[0] || {}).activity || person.activities[0])) + "</small></span>" +
+              '<span class="picker-row__body"><strong>' + esc(person.name) + "</strong><small>Conexão em " + esc(activityLabel((S.match.matched.filter(function (m) { return m.id === id; })[0] || {}).activity || person.activities[0])) + "</small></span>" +
               '<span class="picker-row__action">Enviar</span>' +
               "</button>"
             );
@@ -2389,7 +2391,7 @@
     delete S.signals[slug];
     STORE.save("signals");
     renderSignals();
-    toast("Sinal removido. O match deixa de considerar essa atividade.");
+    toast("Sinal removido. As conexões deixam de considerar essa atividade.");
   });
 
   /* -----------------------------------------------------------------------
@@ -2405,7 +2407,7 @@
     }
 
     if (event.target.closest("[data-reset-test]")) {
-      toast("Reiniciar apaga perfil, matches, conversas e eventos deste navegador.", {
+      toast("Reiniciar apaga perfil, conexões, conversas e eventos deste navegador.", {
         label: "Reiniciar",
         onClick: function () {
           STORE.reset();

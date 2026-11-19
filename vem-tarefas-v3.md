@@ -28,7 +28,8 @@ Status: `☐` pendente · `🔨` em andamento · `✅` criado (aguardando superv
 
 ## BLOCO 3 — A grande virada do “Match” (interação e nomenclatura)
 
-- ☐ Substituir a nomenclatura “Match” → “Conexões” em todas as telas.
+- ✅ Substituir a nomenclatura “Match” → “Conexões” em todas as telas (título,
+  aba, rail, hint, leque, badges, toasts e textos de vazio/ajuda).
 - ✅ **[CÓDIGO CRIADO / AGUARDANDO SUPERVISÃO]** Card interativo (menu radial,
   estilo Pinterest):
   - **Toque curto** → abre o perfil da pessoa (sheet com foto, bio, atividades
@@ -37,9 +38,14 @@ Status: `☐` pendente · `🔨` em andamento · `✅` criado (aguardando superv
     **👍 conectar** (direita) e as **atividades da pessoa** em arco no topo.
   - **Arrastar e soltar** sobre uma ação executa; soltar fora cancela.
   - **Fallback acessível**: botão “Abrir ações (menu radial)” sob o card.
-  - Arquivos: `app.html` (markup do radial), `assets/css/screens.css`
-    (`.match-radial*`), `assets/js/social.js` (`likePerson`, `openRadial`,
-    `layoutRadial`, `runRadialAction`, `openPersonProfile`).
+  - **Botões fixos abaixo do card removidos** (comentados no `app.html`): a
+    interação agora acontece toda no card, mantendo-o na zona de alcance do
+    dedão. As reações (joinha/high-five) passaram a ser **overlays sobre o
+    card** (`#match-thumb-reaction` e `#match-reaction`), já que não há mais o
+    botão para hospedar o joinha.
+  - Arquivos: `app.html` (markup do radial + overlays), `assets/css/screens.css`
+    (`.match-radial*`, `.match-reaction*`), `assets/js/social.js` (`likePerson`,
+    `openRadial`, `layoutRadial`, `runRadialAction`, `openPersonProfile`).
 - ☐ **Feedback pós-conexão**: modal “Deu match!” com botão primário
   “Iniciar conversa”.
 - ☐ **Badge no Social**: indicador vermelho na aba Social quando houver nova
@@ -70,7 +76,7 @@ Pontos em aberto para refinar (deixados de propósito para a supervisão):
 - **Acessibilidade**: os botões do radial permanecem no tab order mesmo fechados;
   ideal é `tabindex="-1"`/`inert` quando fechado e `aria-expanded` no gatilho.
 - **Notificação da outra pessoa**: hoje só há `toast` local; falta o texto
-  “Fulano quer dar match para treinar {atividade} com você!” como mensagem.
+  “Fulano quer se conectar para treinar {atividade} com você!” como mensagem.
 - **Galeria do perfil** (toque curto) ainda não existe — o sheet mostra as
   atividades, não as fotos; depende do Bloco 2 (Tela 11).
 - A posição do arco é calculada sobre `clientWidth/clientHeight`; recalcular em

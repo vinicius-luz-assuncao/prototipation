@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>vem — protótipo navegável</title>
-  <meta name="description" content="Protótipo de alta fidelidade do vem, app de fitness e conexões. 23 telas, GenUI, match por atividade e design system Mineral.">
+  <meta name="description" content="Protótipo de alta fidelidade do vem, app de fitness e conexões. 23 telas, GenUI, conexões por atividade e design system Mineral.">
   <link rel="icon" href="assets/img/logo.svg">
   <link rel="stylesheet" href="assets/fonts/fonts.css?v=2">
   <link rel="stylesheet" href="assets/css/tokens.css?v=3">
   <link rel="stylesheet" href="assets/css/base.css?v=4">
   <link rel="stylesheet" href="assets/css/components.css?v=7">
-  <link rel="stylesheet" href="assets/css/screens.css?v=12">
+  <link rel="stylesheet" href="assets/css/screens.css?v=13">
 </head>
 <body class="app-page">
 
@@ -41,7 +41,7 @@
           <p class="rail__label">App</p>
           <button class="rail__item" data-nav="10"><span class="rail__num">10</span>Início</button>
           <button class="rail__item" data-nav="11"><span class="rail__num">11</span>Perfil</button>
-          <button class="rail__item" data-nav="12"><span class="rail__num">12</span>Match</button>
+          <button class="rail__item" data-nav="12"><span class="rail__num">12</span>Conexões</button>
           <button class="rail__item" data-nav="13"><span class="rail__num">13</span>Atividades</button>
           <button class="rail__item" data-nav="14"><span class="rail__num">14</span>Social</button>
           <button class="rail__item" data-nav="15"><span class="rail__num">15</span>Feed</button>
@@ -154,7 +154,7 @@
                 <span>A verificação acontece no seu celular. Nenhuma imagem é compartilhada com outras pessoas.</span>
               </div>
 
-              <p class="tiny mt-2">Sem verificar, você explora o app — mas match, grupos e conversas ficam limitados até concluir.</p>
+              <p class="tiny mt-2">Sem verificar, você explora o app — mas conexões, grupos e conversas ficam limitados até concluir.</p>
             </div>
 
             <footer class="foot">
@@ -186,7 +186,7 @@
                   <span class="circle circle--sage"><span data-icon="verified"></span></span>
                   <div>
                     <p class="h3">Selo verificado</p>
-                    <p class="tiny">Visível no seu perfil e nos seus matches.</p>
+                    <p class="tiny">Visível no seu perfil e nas suas conexões.</p>
                   </div>
                 </div>
               </div>
@@ -206,7 +206,7 @@
                 <ul class="verify-list mt-2">
                   <li><span class="verify-list__mark">✓</span> Explorar pessoas, atividades e eventos</li>
                   <li><span class="verify-list__mark">✓</span> Salvar atividades favoritas</li>
-                  <li><span class="verify-list__mark">🔒</span> Dar match e entrar em grupos</li>
+                  <li><span class="verify-list__mark">🔒</span> Fazer conexões e entrar em grupos</li>
                   <li><span class="verify-list__mark">🔒</span> Iniciar conversas</li>
                 </ul>
               </div>
@@ -395,7 +395,7 @@
 
               <div class="note note--sage mt-3">
                 <span data-icon="star"></span>
-                <span>As <strong>5 primeiras atividades</strong> viram favoritas e aparecem no leque de match.</span>
+                <span>As <strong>5 primeiras atividades</strong> viram favoritas e aparecem no leque de conexões.</span>
               </div>
             </div>
 
@@ -566,7 +566,7 @@
                   <span class="circle circle--32 circle--sky"><span data-icon="shield"></span></span>
                   <span class="verify-banner__body">
                     <strong>Verificação pendente</strong>
-                    <small>Libere match e conversas quando quiser.</small>
+                    <small>Libere conexões e conversas quando quiser.</small>
                   </span>
                   <span data-icon="chevron-right"></span>
                 </button>
@@ -575,7 +575,7 @@
                   <span class="circle circle--32 circle--amber"><span data-icon="user"></span></span>
                   <span class="verify-banner__body">
                     <strong>Seu perfil está vazio</strong>
-                    <small>Adicione nome, foto e bio para aparecer nos matches.</small>
+                    <small>Adicione nome, foto e bio para aparecer nas conexões.</small>
                   </span>
                   <span data-icon="chevron-right"></span>
                 </button>
@@ -778,7 +778,7 @@
                   <button class="profile__stat" data-toast="Você ainda não segue ninguém.">
                     <span class="stat" data-stat="following">0</span><span>Seguindo</span>
                   </button>
-                  <button class="profile__stat" data-toast="Seus matches aparecem aqui.">
+                  <button class="profile__stat" data-toast="Suas conexões aparecem aqui.">
                     <span class="stat" data-stat="friends">0</span><span>Amigos</span>
                   </button>
                 </div>
@@ -811,7 +811,7 @@
                   <h2 class="h3">Sinais de atividade</h2>
                   <span class="tiny">editável</span>
                 </div>
-                <p class="tiny">Curtidas e salvamentos no Feed ajudam o app a sugerir match por atividade.</p>
+                <p class="tiny">Curtidas e salvamentos no Feed ajudam o app a sugerir conexões por atividade.</p>
                 <div class="signal-list mt-2" id="signal-list">
                   <p class="tiny">Nenhum sinal ainda. Explore o Feed.</p>
                 </div>
@@ -829,16 +829,16 @@
           </section>
 
           <!-- ============================================================
-               12 · MATCH
+               12 · CONEXÕES
                ============================================================ -->
-          <section class="screen screen--match screen--nav" data-screen="12" data-title="Match">
+          <section class="screen screen--match screen--nav" data-screen="12" data-title="Conexões">
             <div class="screen__scroll">
               <header class="match__head">
                 <div>
                   <p class="eyebrow">Pessoas perto de você</p>
-                  <h1 class="h1">Matches</h1>
+                  <h1 class="h1">Conexões</h1>
                 </div>
-                <button class="iconbtn" data-toast="Filtros de match: distância, objetivo e nível." aria-label="Filtrar matches">
+                <button class="iconbtn" data-toast="Filtros de conexões: distância, objetivo e nível." aria-label="Filtrar conexões">
                   <span data-icon="filter"></span>
                 </button>
               </header>
@@ -883,17 +883,25 @@
 
                 <div class="match-empty" id="match-empty" hidden>
                   <span class="circle circle--56 circle--sky"><span data-icon="users"></span></span>
-                  <p class="h3 mt-2">Nenhum match com esses filtros</p>
-                  <p class="tiny mt-1">Ligue o match geral ou escolha outra atividade no leque.</p>
-                  <button class="btn btn--secondary btn--sm mt-2" type="button" id="match-empty-reset">Reativar match geral</button>
+                  <p class="h3 mt-2">Nenhuma conexão com esses filtros</p>
+                  <p class="tiny mt-1">Ligue as conexões gerais ou escolha outra atividade no leque.</p>
+                  <button class="btn btn--secondary btn--sm mt-2" type="button" id="match-empty-reset">Reativar conexões gerais</button>
+                </div>
+
+                <div class="match-reaction match-reaction--thumb" id="match-thumb-reaction" hidden aria-hidden="true">
+                  <span class="match-reaction__lottie match-reaction__lottie--thumb" id="match-thumb-reaction-lottie"></span>
+                  <span class="match-reaction__label">Conexão enviada!</span>
                 </div>
 
                 <div class="match-reaction" id="match-reaction" hidden aria-hidden="true">
                   <span class="match-reaction__lottie" id="match-reaction-lottie"></span>
-                  <span class="match-reaction__label" id="match-reaction-label">Deu match!</span>
+                  <span class="match-reaction__label" id="match-reaction-label">Conectaram!</span>
                 </div>
               </div>
 
+              <!-- Botões fixos de passar/conectar removidos por enquanto: a
+                   interação acontece no card (toque curto = perfil, toque
+                   longo = menu radial), mantendo o card na zona do dedão.
               <div class="match__actions">
                 <button class="match-action match-action--pass" id="match-pass" aria-label="Passar" title="Passar">
                   <span data-icon="x"></span>
@@ -902,20 +910,21 @@
                   <span class="match-action__lottie" id="match-thumb" aria-hidden="true"></span>
                 </button>
               </div>
+              -->
 
-              <p class="match__hint" id="match-hint">Toque no card para ver o perfil · segure para abrir as ações. A estrela controla o match por atividade.</p>
+              <p class="match__hint" id="match-hint">Toque no card para ver o perfil · segure para abrir as ações. A estrela controla as conexões por atividade.</p>
 
               <div class="match__footer">
                 <button class="btn btn--text" type="button" id="match-actions-open">Abrir ações (menu radial)</button>
               </div>
             </div>
 
-            <div class="match-fanout" id="match-fanout" hidden aria-label="Filtros de match">
-              <p class="match-fanout__label">Match por atividade</p>
+            <div class="match-fanout" id="match-fanout" hidden aria-label="Filtros de conexões">
+              <p class="match-fanout__label">Conexões por atividade</p>
               <div class="match-fanout__items" id="match-fanout-items"></div>
             </div>
 
-            <button class="match-fab" id="match-fab" type="button" aria-expanded="false" aria-controls="match-fanout" aria-label="Escolher atividades do match">
+            <button class="match-fab" id="match-fab" type="button" aria-expanded="false" aria-controls="match-fanout" aria-label="Escolher atividades das conexões">
               <span data-icon="star"></span>
               <span class="match-fab__badge" id="match-fab-badge" hidden>0</span>
             </button>
@@ -1138,7 +1147,7 @@
 
               <div data-seg-panel="social:groups" hidden>
                 <p class="eyebrow social__section-label">Grupos sugeridos</p>
-                <p class="tiny">Um grupo só aparece quando alguém com quem você deu match já está nele.</p>
+                <p class="tiny">Um grupo só aparece quando alguém com quem você se conectou já está nele.</p>
                 <div id="social-groups" class="mt-2"></div>
               </div>
 
@@ -1341,7 +1350,7 @@
               <div class="premium__body">
                 <ul class="premium__benefits">
                   <li class="benefit"><span data-icon="check-circle"></span> Treinos ilimitados com IA</li>
-                  <li class="benefit"><span data-icon="check-circle"></span> Match e filtros avançados</li>
+                  <li class="benefit"><span data-icon="check-circle"></span> Conexões e filtros avançados</li>
                   <li class="benefit"><span data-icon="check-circle"></span> Grupos privados da sua turma</li>
                   <li class="benefit"><span data-icon="check-circle"></span> Plano adaptado ao seu sono e rotina</li>
                   <li class="benefit"><span data-icon="check-circle"></span> Sem anúncios, sem interrupção</li>
@@ -1589,10 +1598,10 @@
               <div class="card notif__card mt-3">
                 <div class="switch-row">
                   <div class="switch-row__body">
-                    <span class="switch-row__title">Novos matches</span>
+                    <span class="switch-row__title">Novas conexões</span>
                     <span class="switch-row__sub">Quando alguém com interesses parecidos aparecer por perto.</span>
                   </div>
-                  <button class="switch" role="switch" aria-checked="true" aria-label="Novos matches"></button>
+                  <button class="switch" role="switch" aria-checked="true" aria-label="Novas conexões"></button>
                 </div>
 
                 <div class="switch-row">
@@ -1757,7 +1766,7 @@
             <div class="screen__scroll">
               <p class="eyebrow">Sua agenda</p>
               <h1 class="h1 mt-1">Meus eventos</h1>
-              <p class="lede mt-1">Atividades que você confirmou. Compartilhe com um match para não ir sozinho.</p>
+              <p class="lede mt-1">Atividades que você confirmou. Compartilhe com uma conexão para não ir sozinho.</p>
 
               <div class="stack mt-3" id="events-list"></div>
 
@@ -1773,8 +1782,8 @@
             <button class="tab" data-tab="10" aria-label="Início">
               <span data-icon="home"></span><span>Início</span><i class="tab__dot"></i>
             </button>
-            <button class="tab" data-tab="12" aria-label="Match">
-              <span data-icon="heart"></span><span>Match</span><i class="tab__dot"></i>
+            <button class="tab" data-tab="12" aria-label="Conexões">
+              <span data-icon="heart"></span><span>Conexões</span><i class="tab__dot"></i>
             </button>
             <button class="tab" data-tab="14" aria-label="Social">
               <span data-icon="users"></span><span>Social</span><i class="tab__dot"></i>
@@ -1815,7 +1824,7 @@
   <script src="assets/js/store.js?v=2"></script>
   <script src="assets/js/ui.js?v=7"></script>
   <script src="assets/js/lottie.js?v=1"></script>
-  <script src="assets/js/social.js?v=12"></script>
+  <script src="assets/js/social.js?v=13"></script>
   <script src="assets/js/app.js?v=5"></script>
 </body>
 </html>
