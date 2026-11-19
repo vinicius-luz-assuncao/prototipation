@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="assets/css/tokens.css?v=3">
   <link rel="stylesheet" href="assets/css/base.css?v=4">
   <link rel="stylesheet" href="assets/css/components.css?v=7">
-  <link rel="stylesheet" href="assets/css/screens.css?v=11">
+  <link rel="stylesheet" href="assets/css/screens.css?v=12">
 </head>
 <body class="app-page">
 
@@ -869,6 +869,16 @@
                       <span class="tag">Corrida</span><span class="tag">5 km</span><span class="tag">Yoga</span>
                     </div>
                   </div>
+
+                  <div class="match-radial" id="match-radial" hidden aria-hidden="true">
+                    <button class="match-radial__action match-radial__skip" type="button" data-radial-action="skip" aria-label="Passar">
+                      <span data-icon="x"></span>
+                    </button>
+                    <button class="match-radial__action match-radial__connect" type="button" data-radial-action="connect" aria-label="Conectar">
+                      <span class="match-radial__emoji" aria-hidden="true">👍</span>
+                    </button>
+                    <div class="match-radial__chips" id="match-radial-chips"></div>
+                  </div>
                 </article>
 
                 <div class="match-empty" id="match-empty" hidden>
@@ -893,10 +903,10 @@
                 </button>
               </div>
 
-              <p class="match__hint">Arraste ou use os botões. A estrela controla o match por atividade.</p>
+              <p class="match__hint" id="match-hint">Toque no card para ver o perfil · segure para abrir as ações. A estrela controla o match por atividade.</p>
 
               <div class="match__footer">
-                <button class="btn btn--text" data-toast="Perfil completo disponível na versão final.">Ver perfil completo</button>
+                <button class="btn btn--text" type="button" id="match-actions-open">Abrir ações (menu radial)</button>
               </div>
             </div>
 
@@ -1805,7 +1815,7 @@
   <script src="assets/js/store.js?v=2"></script>
   <script src="assets/js/ui.js?v=7"></script>
   <script src="assets/js/lottie.js?v=1"></script>
-  <script src="assets/js/social.js?v=8"></script>
+  <script src="assets/js/social.js?v=12"></script>
   <script src="assets/js/app.js?v=5"></script>
 </body>
 </html>

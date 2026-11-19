@@ -1132,11 +1132,12 @@
     }, 320);
   }
 
-  function registerMatch(person) {
+  function registerMatch(person, activitySlug) {
+    var activity = activitySlug || activityForMatch(person);
     if (!isMatched(person.id)) {
       S.match.matched.push({
         id: person.id,
-        activity: activityForMatch(person),
+        activity: activity,
         at: Date.now()
       });
     }
@@ -1175,50 +1176,73 @@
     return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }
 
+  /* Conexão (curtida) reutilizável — usada pelo botão fixo, pelo menu radial
+     e pelo perfil da pessoa. `activitySlug` opcional liga o match a uma
+     atividade específica. */
+  function likePerson(person, activitySlug) {
+    if (matchBusy || reacting) return;
+    if (!person) return;
+    if (!guardVerified("conectar")) return;
+
+    var specific = activitySlug || null;
+    if (specific) {
+      if (!S.favorites.some(function (fav) { return fav.slug === specific; }) && S.favorites.length < 5) {
+        S.favorites.push({ slug: specific, label: activityLabel(specific), emoji: activityEmoji(specific) });
+      }
+      S.match.specifics[specific] = true;
+    }
+
+    var mutual = !!person.likedYou;
+    reacting = true;
+
+    S.match.likes += 1;
+    registerMatch(person, specific);
+    STORE.log("match:like", {
+      id: person.id,
+      likes: S.match.likes,
+      mutual: mutual,
+      activity: specific || null
+    });
+    if (mutual) STORE.log("match:mutual", person.id);
+    if (specific) STORE.log("match:activity", specific);
+
+    var act = specific || activityForMatch(person);
+
+    function afterReaction() {
+      reacting = false;
+
+      if (mutual) {
+        toast(
+          "Você e " + person.name + " deram match para treinar " +
+          activityEmoji(act) + " " + activityLabel(act) + "!"
+        );
+      } else if (specific) {
+        toast(
+          "Conexão enviada para treinar " +
+          activityEmoji(act) + " " + activityLabel(act) + " com " + person.name + "."
+        );
+      } else {
+        toast("Curtida enviada para " + person.name + ".");
+      }
+
+      if (S.match.matched.length === 3) {
+        armConversation(person);
+      }
+
+      advanceMatch("like");
+    }
+
+    if (reducedMotion()) {
+      afterReaction();
+      return;
+    }
+
+    playReaction(mutual ? "highfive" : "thumb", afterReaction);
+  }
+
   if ($("#match-like")) {
     $("#match-like").addEventListener("click", function () {
-      if (matchBusy || reacting) return;
-      var person = currentPerson();
-      if (!person) return;
-      if (!guardVerified("dar match")) return;
-
-      var mutual = !!person.likedYou;
-      reacting = true;
-
-      S.match.likes += 1;
-      registerMatch(person);
-      STORE.log("match:like", {
-        id: person.id,
-        likes: S.match.likes,
-        mutual: mutual
-      });
-      if (mutual) STORE.log("match:mutual", person.id);
-
-      function afterReaction() {
-        reacting = false;
-
-        if (mutual) {
-          toast(
-            "Você e " + person.name + " deram match! " +
-            activityEmoji(activityForMatch(person)) + " " + activityLabel(activityForMatch(person)) + "."
-          );
-        } else {
-          toast("Curtida enviada para " + person.name + ".");
-        }
-
-        if (S.match.matched.length === 3) {
-          armConversation(person);
-        }
-
-        advanceMatch("like");
-      }
-
-      if (reducedMotion()) {
-        afterReaction();
-        return;
-      }
-
-      playReaction(mutual ? "highfive" : "thumb", afterReaction);
+      likePerson(currentPerson(), null);
     });
   }
 
@@ -1227,6 +1251,232 @@
       advanceMatch("pass");
     });
   }
+
+  /* -----------------------------------------------------------------------
+     Menu radial do card de conexão (estilo Pinterest)
+     Toque curto → perfil da pessoa · toque longo → menu radial com
+     X (passar), conectar (direita) e as atividades da pessoa no arco.
+     ----------------------------------------------------------------------- */
+
+  var radial = $("#match-radial");
+  var radialChips = $("#match-radial-chips");
+  var pressTimer = null;
+  var pressStart = null;
+  var radialOpen = false;
+
+  function closeRadial() {
+    radialOpen = false;
+    if (matchCard) matchCard.classList.remove("is-radial-open");
+    if (radial) radial.hidden = true;
+    clearHover();
+  }
+
+  function clearHover() {
+    if (!radial) return;
+    var h = radial.querySelectorAll(".is-hovered");
+    for (var i = 0; i < h.length; i++) h[i].classList.remove("is-hovered");
+  }
+
+  function radialPerson() {
+    return currentPerson();
+  }
+
+  /* Posiciona as pílulas de atividades ao longo de um arco no topo. */
+  function layoutRadial(person) {
+    if (!radial || !radialChips) return;
+
+    var acts = (person ? person.activities : []).slice(0, 5);
+    radialChips.innerHTML = acts.map(function (slug, i) {
+      return (
+        '<button class="match-radial__action match-radial__chip" type="button" ' +
+        'data-radial-action="activity" data-slug="' + esc(slug) + '" ' +
+        'aria-label="Conectar para ' + esc(activityLabel(slug)) + '">' +
+        '<span class="match-radial__emoji" aria-hidden="true">' + activityEmoji(slug) + "</span>" +
+        esc(activityLabel(slug)) +
+        "</button>"
+      );
+    }).join("");
+
+    if (!acts.length) return;
+
+    var w = matchCard ? matchCard.clientWidth : 360;
+    var h = matchCard ? matchCard.clientHeight : 520;
+
+    /* Arco suave na faixa superior do card: as pílulas se distribuem na
+       horizontal, com as do centro levemente mais altas. */
+    var n = acts.length;
+    var leftX = w * 0.20;
+    var rightX = w * 0.80;
+    var baseY = h * 0.30;
+    var arcRise = h * 0.12;
+
+    var chips = radialChips.querySelectorAll(".match-radial__chip");
+    for (var i = 0; i < chips.length; i++) {
+      var t = n === 1 ? 0.5 : i / (n - 1);
+      var x = leftX + (rightX - leftX) * t;
+      var rise = Math.sin(Math.PI * t) * arcRise;
+      var y = baseY - rise;
+
+      chips[i].style.setProperty("--tx", (x - w / 2).toFixed(1) + "px");
+      chips[i].style.setProperty("--ty", (y - h / 2).toFixed(1) + "px");
+      chips[i].style.transitionDelay = (60 + i * 45) + "ms";
+    }
+  }
+
+  function openRadial() {
+    var person = radialPerson();
+    if (!person || !radial) return;
+    layoutRadial(person);
+    radial.hidden = false;
+    radialOpen = true;
+    if (matchCard) matchCard.classList.add("is-radial-open");
+    if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
+    STORE.log("match:radial-open", person.id);
+  }
+
+  function runRadialAction(el) {
+    if (!el) return;
+    var person = radialPerson();
+    var action = el.getAttribute("data-radial-action");
+    closeRadial();
+
+    if (!person) return;
+
+    if (action === "skip") {
+      STORE.log("match:radial-skip", person.id);
+      advanceMatch("pass");
+    } else if (action === "activity") {
+      var slug = el.getAttribute("data-slug");
+      if (slug) likePerson(person, slug);
+    } else {
+      likePerson(person, null);
+    }
+  }
+
+  function actionAt(clientX, clientY) {
+    var el = document.elementFromPoint(clientX, clientY);
+    if (!el) return null;
+    return el.closest(".match-radial__action");
+  }
+
+  /* Toque longo abre o menu; toque curto abre o perfil da pessoa. */
+  if (matchCard) {
+    matchCard.addEventListener("pointerdown", function (event) {
+      if (event.button != null && event.button !== 0) return;
+      if (event.target.closest(".match-radial")) return;
+      if (matchBusy) return;
+
+      pressStart = { x: event.clientX, y: event.clientY };
+      pressTimer = window.setTimeout(function () {
+        pressTimer = null;
+        openRadial();
+      }, 420);
+    });
+
+    window.addEventListener("pointermove", function (event) {
+      if (!pressTimer && !radialOpen) return;
+
+      if (pressTimer && pressStart) {
+        var dx = event.clientX - pressStart.x;
+        var dy = event.clientY - pressStart.y;
+        if (dx * dx + dy * dy > 100) {
+          window.clearTimeout(pressTimer);
+          pressTimer = null;
+        }
+      }
+
+      if (radialOpen) {
+        clearHover();
+        var el = actionAt(event.clientX, event.clientY);
+        if (el) el.classList.add("is-hovered");
+      }
+    });
+
+    window.addEventListener("pointerup", function (event) {
+      if (pressTimer) {
+        window.clearTimeout(pressTimer);
+        pressTimer = null;
+
+        /* Toque curto: abrir o perfil da pessoa. */
+        if (event.target.closest(".match-card") && !event.target.closest(".match-radial")) {
+          openPersonProfile(currentPerson());
+        }
+        return;
+      }
+
+      if (radialOpen) {
+        var el = actionAt(event.clientX, event.clientY);
+        runRadialAction(el);
+      }
+    });
+
+    /* Clicar fora do card (no botão "Ações" ou no botão direito) fecha/cancela. */
+    document.addEventListener("click", function (event) {
+      if (!radialOpen) return;
+      if (event.target.closest(".match-radial")) return;
+      closeRadial();
+    });
+  }
+
+  if ($("#match-actions-open")) {
+    $("#match-actions-open").addEventListener("click", function (event) {
+      event.stopPropagation();
+      if (radialOpen) closeRadial();
+      else openRadial();
+    });
+  }
+
+  /* Perfil da pessoa (toque curto no card). */
+  function openPersonProfile(person) {
+    if (!person) return;
+
+    var acts = person.activities.map(function (slug) {
+      return (
+        '<button class="picker-item" type="button" data-person-activity="' + esc(slug) + '">' +
+        '<span class="picker-item__emoji" aria-hidden="true">' + activityEmoji(slug) + "</span>" +
+        '<span class="picker-item__label">' + esc(activityLabel(slug)) + "</span>" +
+        "</button>"
+      );
+    }).join("");
+
+    var html =
+      '<div class="person-profile">' +
+      '<img class="person-profile__photo" src="' + esc(person.photo || person.avatar) + '" alt="Foto de ' + esc(person.name) + '">' +
+      '<div class="person-profile__head">' +
+      '<div><p class="h3">' + esc(person.name) + ", " + esc(String(person.age)) + "</p>" +
+      '<p class="tiny mt-1"><span data-icon="pin"></span> ' + esc(person.distance) + " · " + esc(person.area) + "</p></div>" +
+      '<span class="badge">' + esc(String(person.compatibility)) + "% combinam</span>" +
+      "</div>" +
+      '<p class="mb-2">' + esc(person.bio) + "</p>" +
+      '<p class="eyebrow">Atividades</p>' +
+      '<div class="picker-grid">' + acts + "</div>" +
+      '<button class="btn btn--primary btn--block mt-3" type="button" data-person-connect>' +
+      "Conectar" +
+      "</button>" +
+      "</div>";
+
+    openSheet(person.name, html);
+    STORE.log("match:profile-open", person.id);
+  }
+
+  document.addEventListener("click", function (event) {
+    var connectBtn = event.target.closest("[data-person-connect]");
+    if (connectBtn) {
+      var p = currentPerson();
+      closeSheet();
+      if (p) likePerson(p, null);
+      return;
+    }
+
+    var actBtn = event.target.closest("[data-person-activity]");
+    if (actBtn) {
+      var slug = actBtn.getAttribute("data-person-activity");
+      var per = currentPerson();
+      closeSheet();
+      if (per) likePerson(per, slug);
+      return;
+    }
+  });
 
   if ($("#match-fab")) {
     $("#match-fab").addEventListener("click", function (event) {

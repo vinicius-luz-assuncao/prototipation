@@ -1631,6 +1631,174 @@
 }
 
 /* -------------------------------------------------------------------------
+   12b — Menu radial do card de conexão (estilo Pinterest)
+   Toque curto abre o perfil; toque longo abre o menu radial com X (esquerda),
+   conectar (direita) e as atividades da pessoa no arco superior.
+   ------------------------------------------------------------------------- */
+
+.match-card {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.match-radial {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: rgba(48, 36, 55, 0.62);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms var(--ease);
+}
+
+.match-card.is-radial-open .match-radial {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.match-radial[hidden] {
+  display: block;
+}
+
+.match-radial__action {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 0;
+  cursor: pointer;
+  box-shadow: var(--shadow-2);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 260ms cubic-bezier(0.2, 0.9, 0.25, 1.25),
+    background 160ms var(--ease),
+    color 160ms var(--ease),
+    box-shadow 160ms var(--ease);
+}
+
+.match-radial__skip,
+.match-radial__connect {
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+}
+
+.match-card.is-radial-open .match-radial__skip,
+.match-card.is-radial-open .match-radial__connect {
+  transform: translateY(-50%) scale(1);
+}
+
+.match-radial__skip {
+  left: 20px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.match-radial__skip .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.match-radial__connect {
+  right: 20px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--vermilion);
+  color: var(--ink);
+}
+
+.match-radial__emoji {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.match-radial__chips {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.match-radial__chip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) translate(var(--tx, 0px), var(--ty, 0px)) scale(0);
+}
+
+.match-card.is-radial-open .match-radial__chip {
+  transform: translate(-50%, -50%) translate(var(--tx, 0px), var(--ty, 0px)) scale(1);
+}
+
+.match-radial__chip .match-radial__emoji {
+  font-size: 17px;
+}
+
+/* Destaque ao arrastar o ponteiro sobre uma ação. */
+.match-radial__action.is-hovered {
+  box-shadow: 0 0 0 4px rgba(247, 117, 53, 0.55), var(--shadow-2);
+}
+
+.match-radial__skip.is-hovered {
+  background: #ffd7c9;
+}
+
+.match-radial__connect.is-hovered {
+  background: #ef6527;
+}
+
+.match-radial__chip.is-hovered {
+  background: var(--sky);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .match-radial,
+  .match-radial__action,
+  .match-radial__chip {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* Perfil da pessoa aberto por toque curto no card (sheet). */
+.person-profile__photo {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  object-position: center 24%;
+  border-radius: var(--r-md);
+  margin-bottom: var(--s-2);
+}
+
+.person-profile__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-2);
+  margin-bottom: var(--s-2);
+}
+
+.person-profile__head .h3 {
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
    13 — Atividades
    ------------------------------------------------------------------------- */
 
